@@ -10,6 +10,38 @@ namespace Husky.BizModules.Shopping.DataModels
 	{
 		public static void OnUsersModelCreating(this ModelBuilder mb) {
 
+
+			//Product
+			mb.Entity<Product>(product => {
+				product.HasMany(x => x.Pictures).WithOne(x => x.Product).HasForeignKey(x => x.ProductId);
+				product.HasMany(x => x.ChoiseGroups).WithOne().HasForeignKey(x => x.ProductId);
+			});
+			mb.Entity<ProductChoiseGroup>(choiseGroup => {
+				choiseGroup.HasMany(x => x.Choises).WithOne().HasForeignKey(x => x.ChoiseGroupId);
+			});
+			mb.Entity<ProductTagRelation>(tagRelations => {
+				tagRelations.HasOne(x => x.Product).WithMany(x => x.TagRelations).HasForeignKey(x => x.ProductId);
+				tagRelations.HasOne(x => x.ProductTag).WithMany(x => x.ProductRelations).HasForeignKey(x => x.ProductTagId);
+			});
+			mb.Entity<ProductSibling>(sibling => {
+				sibling.HasOne(x => x.Product).WithMany(x => x.Siblings).HasForeignKey(x => x.ProductId).OnDelete(DeleteBehavior.Restrict);
+				sibling.HasOne(x => x.SiblingProduct).WithMany().HasForeignKey(x => x.SiblingProductId).OnDelete(DeleteBehavior.Restrict);
+			});
+
+			//Order
+			mb.Entity<Order>(order => {
+				order.HasOne(x => x.Buyer).WithMany().HasForeignKey(x => x.BuyerId);
+				order.HasOne(x => x.ReceiverAddress).WithOne(x => x.Order).HasForeignKey<OrderReceiverAddress>(x => x.OrderId);
+				order.HasMany(x => x.OrderItems).WithOne(x => x.Order).HasForeignKey(x => x.OrderId);
+				order.HasMany(x => x.OrderLogs).WithOne(x => x.Order).HasForeignKey(x => x.OrderId);
+				order.HasMany(x => x.Payments).WithOne(x => x.Order).HasForeignKey(x => x.OrderId);
+			});
+			mb.Entity<OrderItem>(orderItem => {
+				orderItem.HasOne(x => x.Product).WithMany().HasForeignKey(x => x.ProductId);
+			});
+			mb.Entity<OrderPayment>(orderLog => {
+				orderLog.HasMany(x => x.Refunds).WithOne(x => x.SourcePayment).HasForeignKey(x => x.SourcePaymentId);
+			});
 		}
 	}
 }

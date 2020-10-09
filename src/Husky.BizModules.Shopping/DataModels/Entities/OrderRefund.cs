@@ -10,7 +10,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Key]
 		public int Id { get; set; }
 
-		public int PaymentId { get; set; }
+		public int SourcePaymentId { get; set; }
 
 		[Column(TypeName = "varchar(12)")]
 		public string RequestNo { get; set; } = null!;

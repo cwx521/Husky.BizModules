@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
@@ -41,5 +42,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		[JsonIgnore]
 		public Order Order { get; set; } = null!;
+
+		public List<OrderRefund> Refunds { get; set; } = new List<OrderRefund>();
 	}
 }
