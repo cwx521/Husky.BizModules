@@ -8,6 +8,7 @@ namespace Husky.Principal
 		public string? EmailAddress { get; set; }
 		public string? PhotoUrl { get; set; }
 		public DateTime RegisteredTime { get; set; }
-		public ActionAwait AwaitChangePassword { get; set; }
+
+		public ActionAwait AwaitChangePassword { get; internal set; }
 	}
 }
