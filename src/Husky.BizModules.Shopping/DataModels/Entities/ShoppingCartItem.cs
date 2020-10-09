@@ -12,10 +12,16 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int ProductId { get; set; }
 
-		[MaxLength(500)]
+		[MaxLength(100)]
 		public string? ChoiseExpression { get; set; }
 
+		[MaxLength(500)]
+		public string? ChoiseDescription { get; set; }
+
 		public int Quantity { get; set; }
+
+		[MaxLength(200)]
+		public string? Remarks { get; set; }
 
 		public bool Selected { get; set; }
 

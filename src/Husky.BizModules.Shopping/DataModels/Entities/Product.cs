@@ -44,5 +44,11 @@ namespace Husky.BizModules.Shopping.DataModels
 		public List<ProductSibling> Siblings { get; set; } = new List<ProductSibling>();
 		public List<ProductChoiseGroup> ChoiseGroups { get; set; } = new List<ProductChoiseGroup>();
 		public List<ProductTagRelation> TagRelations { get; set; } = new List<ProductTagRelation>();
+
+
+		// calculation
+
+		public decimal Discounted => ActualPrice / OriginalPrice;
+		public decimal Discount => 1m - Discounted;
 	}
 }

@@ -5,9 +5,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Husky.Principal
 {
-	public sealed partial class UserShoppingCartManager
+	public sealed partial class UserShoppingOrdersManager
 	{
-		internal UserShoppingCartManager(IPrincipalUser principal) {
+		internal UserShoppingOrdersManager(IPrincipalUser principal) {
 			_me = principal;
 			_db = principal.ServiceProvider.GetRequiredService<IShoppingDbContext>();
 			_wechat = principal.ServiceProvider.GetService<WeChatService>();

@@ -14,16 +14,16 @@ namespace Husky.BizModules.Shopping.DataModels
 		public int OrderId { get; set; }
 
 		[Column(TypeName = "varchar(12)")]
-		public string OrderNo { get; set; } = null!;
+		public string PaymentNo { get; set; } = null!;
 
 		[Column(TypeName = "varchar(64)")]
 		public string? ExternalOrderNo { get; set; }
 
 		[Column(TypeName = "varchar(64)")]
-		public string? FromAccountId { get; set; }
+		public string? ExternalUserId { get; set; }
 
 		[Column(TypeName = "varchar(64)")]
-		public string? FromAccountName { get; set; }
+		public string? ExternalUserName { get; set; }
 
 		[Column(TypeName = "decimal(8,2)")]
 		public decimal Amount { get; set; }

@@ -19,7 +19,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		[MaxLength(50)]
 		public string? ConcurrentProductName { get; set; }
 
-		[MaxLength(500)]
+		[MaxLength(100)]
 		public string? ConcurrentChoiseExpression { get; set; }
 
 		[MaxLength(500)]

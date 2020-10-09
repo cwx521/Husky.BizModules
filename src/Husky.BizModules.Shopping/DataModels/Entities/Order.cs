@@ -31,8 +31,8 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public User Buyer { get; set; } = null!;
 		public OrderReceiverAddress? ReceiverAddress { get; set; }
-		public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
-		public List<OrderLog> OrderLogs { get; set; } = new List<OrderLog>();
+		public List<OrderItem> Items { get; set; } = new List<OrderItem>();
+		public List<OrderLog> Logs { get; set; } = new List<OrderLog>();
 		public List<OrderPayment> Payments { get; set; } = new List<OrderPayment>();
 
 

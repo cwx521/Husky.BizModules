@@ -18,6 +18,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Husky.Principal" Version="3.1.1.40917" />
+		<PackageReference Include="Husky.Alipay" Version="3.1.1.40917" />
 	</ItemGroup>
 
 	<ItemGroup>

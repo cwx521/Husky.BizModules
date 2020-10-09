@@ -13,10 +13,13 @@ namespace Husky.BizModules.Shopping.DataModels
 		public int SourcePaymentId { get; set; }
 
 		[Column(TypeName = "varchar(12)")]
-		public string RequestNo { get; set; } = null!;
+		public string RefundNo { get; set; } = null!;
 
 		[Column(TypeName = "varchar(64)")]
 		public string? ExternalOrderNo { get; set; }
+
+		[MaxLength(200)]
+		public string? Reason { get; set; }
 
 		[Column(TypeName = "decimal(8,2)")]
 		public decimal Amount { get; set; }
