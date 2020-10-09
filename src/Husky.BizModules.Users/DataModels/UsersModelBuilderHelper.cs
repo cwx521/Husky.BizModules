@@ -15,6 +15,14 @@ namespace Husky.BizModules.Users.DataModels
 
 			//QueryFilters
 			mb.Entity<UserPassword>().HasQueryFilter(x => !x.IsObsoleted);
+			mb.Entity<UserMessage>().HasQueryFilter(x => x.Status == RowStatus.Active);
+			mb.Entity<UserAddress>().HasQueryFilter(x =>
+				x.Status == RowStatus.Active &&
+				x.City != null &&
+				x.City.Length != 0 &&
+				x.ContactName != null &&
+				x.ContactName.Length != 0);
+
 
 			//User
 			mb.Entity<User>(user => {

@@ -10,6 +10,17 @@ namespace Husky.BizModules.Shopping.DataModels
 	{
 		public static void OnUsersModelCreating(this ModelBuilder mb) {
 
+			//Keys
+			mb.Entity<ProductSibling>().HasKey(x => new { x.ProductId, x.SiblingProductId });
+			mb.Entity<ProductTagRelation>().HasKey(x => new { x.ProductId, x.ProductTagId });
+
+			//Filters
+			mb.Entity<Order>().HasQueryFilter(x => x.OrderStatus != OrderStatus.Deleted);
+			mb.Entity<OrderLog>().HasQueryFilter(x => x.Status == RowStatus.Active);
+			mb.Entity<ProductChoiseGroup>().HasQueryFilter(x => x.Status == RowStatus.Active);
+			mb.Entity<ProductChoise>().HasQueryFilter(x => x.Status == RowStatus.Active);
+			mb.Entity<ProductPicture>().HasQueryFilter(x => x.Status == RowStatus.Active);
+
 
 			//Product
 			mb.Entity<Product>(product => {
@@ -41,6 +52,12 @@ namespace Husky.BizModules.Shopping.DataModels
 			});
 			mb.Entity<OrderPayment>(orderLog => {
 				orderLog.HasMany(x => x.Refunds).WithOne(x => x.SourcePayment).HasForeignKey(x => x.SourcePaymentId);
+			});
+
+			//ShoppingCartItem
+			mb.Entity<ShoppingCartItem>(shoppingCartItem => {
+				shoppingCartItem.HasOne(x => x.Buyer).WithMany().HasForeignKey(x => x.BuyerId);
+				shoppingCartItem.HasOne(x => x.Product).WithMany().HasForeignKey(x => x.ProductId);
 			});
 		}
 	}

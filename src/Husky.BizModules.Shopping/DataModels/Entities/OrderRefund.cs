@@ -33,5 +33,10 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		[JsonIgnore]
 		public OrderPayment SourcePayment { get; set; } = null!;
+
+
+		// calculation
+
+		public bool IsTimeout => RefundStatus == RefundStatus.Await && CreatedTime < DateTime.Now.AddHours(-48);
 	}
 }

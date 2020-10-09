@@ -29,7 +29,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// nav props
 
-		public User? Buyer { get; set; }
+		public User Buyer { get; set; } = null!;
 		public OrderReceiverAddress? ReceiverAddress { get; set; }
 		public List<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 		public List<OrderLog> OrderLogs { get; set; } = new List<OrderLog>();

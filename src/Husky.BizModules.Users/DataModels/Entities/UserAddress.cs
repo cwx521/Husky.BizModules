@@ -38,6 +38,8 @@ namespace Husky.BizModules.Users.DataModels
 
 		public bool IsDefault { get; set; }
 
+		public RowStatus Status { get; set; }
+
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime CreatedTime { get; set; } = DateTime.Now;
 

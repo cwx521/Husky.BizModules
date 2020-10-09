@@ -25,6 +25,8 @@ namespace Husky.BizModules.Shopping.DataModels
 		[MaxLength(24)]
 		public string? ByAdminName { get; set; }
 
+		public RowStatus Status { get; set; }
+
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime CreatedTime { get; set; } = DateTime.Now;
 

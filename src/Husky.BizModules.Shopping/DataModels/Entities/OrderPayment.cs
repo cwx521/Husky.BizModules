@@ -44,5 +44,10 @@ namespace Husky.BizModules.Shopping.DataModels
 		public Order Order { get; set; } = null!;
 
 		public List<OrderRefund> Refunds { get; set; } = new List<OrderRefund>();
+
+
+		// calculation
+
+		public bool IsTimeout => PaymentStatus == PaymentStatus.Await && CreatedTime < DateTime.Now.AddHours(-48);
 	}
 }
