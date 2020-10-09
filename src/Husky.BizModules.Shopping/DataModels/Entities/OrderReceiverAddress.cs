@@ -1,16 +1,14 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
-namespace Husky.BizModules.Users.DataModels
+namespace Husky.BizModules.Shopping.DataModels
 {
-	public class UserAddress
+	public class OrderReceiverAddress
 	{
 		[Key]
-		public int Id { get; set; }
-
-		public int UserId { get; set; }
+		[DatabaseGenerated(DatabaseGeneratedOption.None)]
+		public int OrderId { get; set; }
 
 		[MaxLength(16)]
 		public string Province { get; set; } = null!;
@@ -22,24 +20,19 @@ namespace Husky.BizModules.Users.DataModels
 		public string? District { get; set; }
 
 		[MaxLength(100)]
-		public string? DetailAddress { get; set; }
+		public string DetailAddress { get; set; } = null!;
 
 		[MaxLength(16)]
-		public string? ContactName { get; set; }
+		public string ContactName { get; set; } = null!;
 
 		[MaxLength(11), Phone, Column(TypeName = "varchar(11)")]
-		public string? ContactPhoneNumber { get; set; }
+		public string ContactPhoneNumber { get; set; } = null!;
 
 		[Column(TypeName = "decimal(11, 6)")]
 		public decimal? Lon { get; set; }
 
 		[Column(TypeName = "decimal(11, 6)")]
 		public decimal? Lat { get; set; }
-
-		public bool IsDefault { get; set; }
-
-		[DefaultValueSql("getdate()"), NeverUpdate]
-		public DateTime CreatedTime { get; set; } = DateTime.Now;
 
 
 		// calculation
@@ -48,9 +41,9 @@ namespace Husky.BizModules.Users.DataModels
 		public string FullAddressSplitBySpace => string.Join(" ", Province, City, District, DetailAddress);
 
 
-		// nav props
+		// Order
 
 		[JsonIgnore]
-		public User User { get; set; } = null!;
+		public Order Order { get; set; } = null!;
 	}
 }
