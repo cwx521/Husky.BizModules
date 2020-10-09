@@ -1,5 +1,4 @@
-﻿using Husky.BizModules.Users.DataModels;
-using System;
+﻿using System;
 
 namespace Husky.Principal
 {
@@ -8,8 +7,7 @@ namespace Husky.Principal
 		public string? PhoneNumber { get; set; }
 		public string? EmailAddress { get; set; }
 		public string? PhotoUrl { get; set; }
-		public DateTime RegisteredTime { get; internal set; }
-
+		public DateTime RegisteredTime { get; set; }
 		public ActionAwait AwaitChangePassword { get; set; }
 	}
 }

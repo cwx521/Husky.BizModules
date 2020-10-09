@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Husky.Principal
 {
-	partial class UserChangeManager
+	partial class UserProfileManager
 	{
 		public async Task<Result> UsePhone(string newNumber, string verificationCode) {
 			if ( _me.IsAnonymous ) {

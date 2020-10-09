@@ -14,8 +14,8 @@ namespace Husky.Principal
 			return new UserAuthManager(principal);
 		}
 
-		public static UserChangeManager Change(this IPrincipalUser principal) {
-			return new UserChangeManager(principal);
+		public static UserProfileManager Profile(this IPrincipalUser principal) {
+			return new UserProfileManager(principal);
 		}
 
 		public static UserGroupManager Group(this IPrincipalUser principal) {

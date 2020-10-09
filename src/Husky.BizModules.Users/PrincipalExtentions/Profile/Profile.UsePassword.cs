@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Husky.Principal
 {
-	partial class UserChangeManager
+	partial class UserProfileManager
 	{
 		public async Task<Result> UsePassword(string newPassword, string verificationCode) {
 			if ( _me.IsAnonymous ) {

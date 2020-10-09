@@ -17,6 +17,10 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int Quantity { get; set; }
 
+		public bool Selected { get; set; }
+
+		public bool Removed { get; set; }
+
 
 		// nav props
 

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Husky.Principal
 {
-	partial class UserChangeManager
+	partial class UserProfileManager
 	{
 		public async Task<Result> UseEmail(string newEmailAddress /* , string? verificationCode = null */) {
 			if ( _me.IsAnonymous ) {

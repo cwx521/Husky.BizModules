@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace Husky.Principal
 {
-	partial class UserChangeManager
+	partial class UserProfileManager
 	{
 		public async Task<Result> UseReal(string socialIdNumber, string realName, bool isVerified = false) {
 			if ( _me.IsAnonymous ) {

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace Husky.Principal
 {
-	partial class UserChangeManager
+	partial class UserProfileManager
 	{
 		public async Task<Result> UseDisplayName(string displayName, bool allowDuplication) {
 			if ( _me.IsAnonymous ) {

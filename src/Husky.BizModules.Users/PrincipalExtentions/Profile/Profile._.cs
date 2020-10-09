@@ -3,9 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Husky.Principal
 {
-	public sealed partial class UserChangeManager
+	public sealed partial class UserProfileManager
 	{
-		internal UserChangeManager(IPrincipalUser principal) {
+		internal UserProfileManager(IPrincipalUser principal) {
 			_me = principal;
 			_db = principal.ServiceProvider.GetRequiredService<IUsersDbContext>();
 		}
