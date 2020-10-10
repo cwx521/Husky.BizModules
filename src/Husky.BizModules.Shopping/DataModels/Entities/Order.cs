@@ -33,6 +33,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public OrderReceiverAddress? ReceiverAddress { get; set; }
 		public List<OrderItem> Items { get; set; } = new List<OrderItem>();
+		public List<OrderExpress> Expresses { get; set; } = new List<OrderExpress>();
 		public List<OrderLog> Logs { get; set; } = new List<OrderLog>();
 		public List<OrderPayment> Payments { get; set; } = new List<OrderPayment>();
 

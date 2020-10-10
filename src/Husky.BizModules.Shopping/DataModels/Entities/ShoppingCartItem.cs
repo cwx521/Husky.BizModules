@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Husky.BizModules.Shopping.DataModels
 {
@@ -28,6 +29,9 @@ namespace Husky.BizModules.Shopping.DataModels
 		public bool Selected { get; set; }
 
 		public bool Removed { get; set; }
+
+		[DefaultValueSql("getdate()"), NeverUpdate]
+		public DateTime CreatedTime { get; set; } = DateTime.Now;
 
 
 		// nav props
