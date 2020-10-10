@@ -12,11 +12,11 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int SourcePaymentId { get; set; }
 
-		[Column(TypeName = "varchar(12)")]
-		public string RefundNo { get; set; } = null!;
-
 		[Column(TypeName = "decimal(8,2)")]
 		public decimal Amount { get; set; }
+
+		[Column(TypeName = "varchar(12)")]
+		public string RefundNo { get; set; } = null!;
 
 		public RefundReason Reason { get; set; }
 

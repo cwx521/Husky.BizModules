@@ -54,12 +54,12 @@ namespace Husky.Principal
 			order.Items.AddRange(shoppingCartItems.Select(x => new OrderItem {
 				ProductId = x.ProductId,
 				Quantity = x.Quantity,
-				ConcurrentProductCode = x.Product.ProductCode,
-				ConcurrentProductName = x.Product.ProductName,
-				ConcurrentOriginalPrice = x.Product.OriginalPrice,
-				ConcurrentActualPrice = x.Product.ActualPrice,
-				ConcurrentChoiseExpression = x.ChoiseExpression,
-				ConcurrentChoiseDescription = x.ChoiseDescription,
+				InstantProductCode = x.Product.ProductCode,
+				InstantProductName = x.Product.ProductName,
+				InstantOriginalPrice = x.Product.OriginalPrice,
+				InstantActualPrice = x.Product.ActualPrice,
+				InstantChoiseExpression = x.ChoiseExpression,
+				InstantChoiseDescription = x.ChoiseDescription,
 				Remarks = x.Remarks
 			}));
 

@@ -14,22 +14,22 @@ namespace Husky.BizModules.Shopping.DataModels
 		public int ProductId { get; set; }
 
 		[MaxLength(24), Column(TypeName = "varchar(24)")]
-		public string? ConcurrentProductCode { get; set; }
+		public string? InstantProductCode { get; set; }
 
 		[MaxLength(50)]
-		public string? ConcurrentProductName { get; set; }
+		public string? InstantProductName { get; set; }
 
 		[MaxLength(100)]
-		public string? ConcurrentChoiseExpression { get; set; }
+		public string? InstantChoiseExpression { get; set; }
 
 		[MaxLength(500)]
-		public string? ConcurrentChoiseDescription { get; set; }
+		public string? InstantChoiseDescription { get; set; }
 
 		[Column(TypeName = "decimal(8,2)")]
-		public decimal ConcurrentOriginalPrice { get; set; }
+		public decimal InstantOriginalPrice { get; set; }
 
 		[Column(TypeName = "decimal(8,2)")]
-		public decimal ConcurrentActualPrice { get; set; }
+		public decimal InstantActualPrice { get; set; }
 
 		public int Quantity { get; set; }
 
@@ -49,9 +49,9 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// calculated
 
-		public decimal ConcurrentDiscounted => ConcurrentActualPrice / ConcurrentOriginalPrice;
-		public decimal ConcurrentDiscount => 1m - ConcurrentDiscounted;
-		public decimal QuantitizedOriginalAmount => ConcurrentOriginalPrice * Quantity;
-		public decimal QuantitizedActualAmount => ConcurrentActualPrice * Quantity;
+		public decimal InstantDiscounted => InstantActualPrice / InstantOriginalPrice;
+		public decimal InstantDiscount => 1m - InstantDiscounted;
+		public decimal QuantitizedOriginalAmount => InstantOriginalPrice * Quantity;
+		public decimal QuantitizedActualAmount => InstantActualPrice * Quantity;
 	}
 }

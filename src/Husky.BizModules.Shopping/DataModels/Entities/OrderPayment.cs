@@ -13,6 +13,9 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int OrderId { get; set; }
 
+		[Column(TypeName = "decimal(8,2)")]
+		public decimal Amount { get; set; }
+
 		[Column(TypeName = "varchar(12)")]
 		public string PaymentNo { get; set; } = null!;
 
@@ -28,15 +31,12 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Column(TypeName = "varchar(64)")]
 		public string? AppId { get; set; }
 
-		[Column(TypeName = "decimal(8,2)")]
-		public decimal Amount { get; set; }
+		[MaxLength(50)]
+		public string? Attach { get; set; } = Guid.NewGuid().ToString();
 
 		public PaymentChoise Choise { get; set; }
 
 		public PaymentStatus Status { get; set; }
-
-		[MaxLength(100)]
-		public string? Attach { get; set; } = Guid.NewGuid().ToString();
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime StatusUpdatedTime { get; set; } = DateTime.Now;

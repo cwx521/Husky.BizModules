@@ -1,4 +1,5 @@
-﻿using Husky.Alipay;
+﻿using System;
+using Husky.Alipay;
 using Husky.BizModules.Shopping.DataModels;
 using Husky.WeChatIntegration;
 using Microsoft.AspNetCore.Http;
@@ -8,36 +9,66 @@ namespace Husky.BizModules.Shopping
 	public static class OrderPaymentHelper
 	{
 		public static WeChatPayOrderModel GenerateWeChatPayOrderModel(
-			this Order order,
+			this OrderPayment payment,
 			HttpContext httpContext,
-			string wechatAppId,
-			string wechatUserOpenId,
 			string subject,
-			string notifyUrl,
-			bool allowCreditCard = true,
-			WeChatPayTradeType tradeType = WeChatPayTradeType.JsApi) {
+			string notifyUrl = "~/pay/notify",
+			WeChatPayTradeType tradeType = WeChatPayTradeType.JsApi,
+			bool allowCreditCard = true) {
+
+			if ( payment.AppId == null ) {
+				throw new ArgumentNullException($"{nameof(payment)}.{nameof(OrderPayment.AppId)}");
+			}
+			if ( payment.Attach == null ) {
+				throw new ArgumentNullException($"{nameof(payment)}.{nameof(OrderPayment.Attach)}");
+			}
+			if ( payment.ExternalUserId == null ) {
+				throw new ArgumentNullException($"{nameof(payment)}.{nameof(OrderPayment.ExternalUserId)}");
+			}
+			if ( payment.PaymentNo == null ) {
+				throw new ArgumentNullException($"{nameof(payment)}.{nameof(OrderPayment.PaymentNo)}");
+			}
+			if ( payment.Amount <= 0 ) {
+				throw new ArgumentException($"{nameof(payment)}.{nameof(OrderPayment.Amount)} must be greater than Zero.");
+			}
 
 			return new WeChatPayOrderModel {
-				AppId = wechatAppId,
-				OpenId = wechatUserOpenId,
-				OrderId = order.OrderNo,
-				Amount = order.ActualTotalAmount,
+				AppId = payment.AppId,
+				Attach = payment.Attach,
+				OpenId = payment.ExternalUserId,
+				OrderId = payment.PaymentNo,
+				Amount = payment.Amount,
 				Body = subject,
 				IPAddress = httpContext.Connection.RemoteIpAddress.MapToIPv4().ToString(),
-				NotifyUrl = notifyUrl,
+				NotifyUrl = httpContext.ResolveUrl(notifyUrl),
 				TradeType = tradeType,
 				AllowCreditCard = allowCreditCard
 			};
 		}
 
-		public static AlipayPayment GenerateAlipayOrderModel(this Order order, string subject, string callbackUrl, string notifyUrl) {
+		public static AlipayPayment GenerateAlipayOrderModel(
+			this OrderPayment payment,
+			HttpContext httpContext,
+			string subject,
+			string notifyUrl = "~/pay/notify",
+			string callbackUrl = "~/pay/callback") {
+
+			if ( payment.PaymentNo == null ) {
+				throw new ArgumentNullException($"{nameof(payment)}.{nameof(OrderPayment.PaymentNo)}");
+			}
+			if ( payment.Amount <= 0 ) {
+				throw new ArgumentException($"{nameof(payment)}.{nameof(OrderPayment.Amount)} must be greater than Zero.");
+			}
+
 			return new AlipayPayment {
-				OrderId = order.OrderNo,
-				Amount = order.ActualTotalAmount,
+				OrderId = payment.PaymentNo,
+				Amount = payment.Amount,
 				Subject = subject,
-				CallbackUrl = callbackUrl,
-				NotifyUrl = notifyUrl
+				CallbackUrl = httpContext.ResolveUrl(callbackUrl),
+				NotifyUrl = httpContext.ResolveUrl(notifyUrl),
 			};
 		}
+
+		private static string ResolveUrl(this HttpContext httpContext, string url) => url.StartsWith("~/") ? httpContext.Request.SchemeAndHost() + url.Substring(1) : url;
 	}
 }
