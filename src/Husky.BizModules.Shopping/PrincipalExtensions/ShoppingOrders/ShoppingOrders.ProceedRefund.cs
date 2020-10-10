@@ -26,11 +26,11 @@ namespace Husky.Principal
 				return new Failure($"只能在订单完成后的 {daysToRefundAfterOrderCompleted} 天内进行退款");
 			}
 
-			if ( _wechat == null && order.Payments.Any(x => x.Choise == PaymentChoise.WeChat) ) {
-				throw new ArgumentNullException(nameof(_wechat));
-			}
 			if ( _alipay == null && order.Payments.Any(x => x.Choise == PaymentChoise.Alipay) ) {
 				throw new ArgumentNullException(nameof(_alipay));
+			}
+			if ( _wechat == null && order.Payments.Any(x => x.Choise == PaymentChoise.WeChat) ) {
+				throw new ArgumentNullException(nameof(_wechat));
 			}
 
 			var totalPaid = order.Payments
