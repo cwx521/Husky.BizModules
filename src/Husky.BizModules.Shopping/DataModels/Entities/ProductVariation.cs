@@ -3,18 +3,18 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Husky.BizModules.Shopping.DataModels
 {
-	public class ProductChoise
+	public class ProductVariation
 	{
 		[Key]
 		public int Id { get; set; }
 
-		public int ChoiseGroupId { get; set; }
+		public int GroupId { get; set; }
 
 		[MaxLength(24)]
-		public string ChoiseName { get; set; } = null!;
+		public string VariationName { get; set; } = null!;
 
-		[MaxLength(200), Column(TypeName = "varchar(200)")]
-		public string? ChoiseImageUrl { get; set; }
+		[MaxLength(500), Column(TypeName = "varchar(500)")]
+		public string? VariationImageUrl { get; set; }
 
 		public RowStatus Status { get; set; }
 	}

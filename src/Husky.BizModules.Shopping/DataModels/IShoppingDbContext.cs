@@ -15,8 +15,8 @@ namespace Husky.BizModules.Shopping.DataModels
 		public DbSet<ProductSibling> ProductSiblings { get; set; }
 		public DbSet<ProductTag> ProductTags { get; set; }
 		public DbSet<ProductTagRelation> ProductTagRelations { get; set; }
-		public DbSet<ProductChoiseGroup> ProductChoiseGroups { get; set; }
-		public DbSet<ProductChoise> ProductChoises { get; set; }
+		public DbSet<ProductVariationGroup> ProductVariationGroups { get; set; }
+		public DbSet<ProductVariation> ProductVariations { get; set; }
 
 		public DbSet<Order> Orders { get; set; }
 		public DbSet<OrderReceiverAddress> OrderReceiverAddresss { get; set; }

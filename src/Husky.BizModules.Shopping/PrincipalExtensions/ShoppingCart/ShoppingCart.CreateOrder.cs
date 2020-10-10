@@ -58,8 +58,8 @@ namespace Husky.Principal
 				InstantProductName = x.Product.ProductName,
 				InstantOriginalPrice = x.Product.OriginalPrice,
 				InstantActualPrice = x.Product.ActualPrice,
-				InstantChoiseExpression = x.ChoiseExpression,
-				InstantChoiseDescription = x.ChoiseDescription,
+				InstantVariationExpression = x.VariationExpression,
+				InstantVariationDescription = x.VariationDescription,
 				Remarks = x.Remarks
 			}));
 

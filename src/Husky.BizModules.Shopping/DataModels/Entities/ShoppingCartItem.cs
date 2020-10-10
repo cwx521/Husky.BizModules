@@ -16,10 +16,10 @@ namespace Husky.BizModules.Shopping.DataModels
 		public string BuyerName { get; set; } = null!;
 
 		[MaxLength(100)]
-		public string? ChoiseExpression { get; set; }
+		public string? VariationExpression { get; set; }
 
 		[MaxLength(500)]
-		public string? ChoiseDescription { get; set; }
+		public string? VariationDescription { get; set; }
 
 		public int Quantity { get; set; }
 

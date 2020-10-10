@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Husky.BizModules.Shopping.DataModels
 {
-	public class ProductChoiseGroup
+	public class ProductVariationGroup
 	{
 		[Key]
 		public int Id { get; set; }
@@ -22,6 +22,6 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		//nav props
 
-		public List<ProductChoise> Choises { get; set; } = new List<ProductChoise>();
+		public List<ProductVariation> Variations { get; set; } = new List<ProductVariation>();
 	}
 }

@@ -19,8 +19,8 @@ namespace Husky.BizModules.Shopping.DataModels
 			mb.Entity<OrderLog>().HasQueryFilter(x => x.Status == RowStatus.Active);
 			mb.Entity<OrderExpress>().HasQueryFilter(x => x.Status == RowStatus.Active);
 			mb.Entity<OrderComment>().HasQueryFilter(x => x.Status == RowStatus.Active);
-			mb.Entity<ProductChoiseGroup>().HasQueryFilter(x => x.Status == RowStatus.Active);
-			mb.Entity<ProductChoise>().HasQueryFilter(x => x.Status == RowStatus.Active);
+			mb.Entity<ProductVariationGroup>().HasQueryFilter(x => x.Status == RowStatus.Active);
+			mb.Entity<ProductVariation>().HasQueryFilter(x => x.Status == RowStatus.Active);
 			mb.Entity<ProductPicture>().HasQueryFilter(x => x.Status == RowStatus.Active);
 			mb.Entity<ShoppingCartItem>().HasQueryFilter(x => x.Removed == false);
 
@@ -28,10 +28,10 @@ namespace Husky.BizModules.Shopping.DataModels
 			//Product
 			mb.Entity<Product>(product => {
 				product.HasMany(x => x.Pictures).WithOne(x => x.Product).HasForeignKey(x => x.ProductId);
-				product.HasMany(x => x.ChoiseGroups).WithOne().HasForeignKey(x => x.ProductId);
+				product.HasMany(x => x.VariationGroups).WithOne().HasForeignKey(x => x.ProductId);
 			});
-			mb.Entity<ProductChoiseGroup>(choiseGroup => {
-				choiseGroup.HasMany(x => x.Choises).WithOne().HasForeignKey(x => x.ChoiseGroupId);
+			mb.Entity<ProductVariationGroup>(variationGroup => {
+				variationGroup.HasMany(x => x.Variations).WithOne().HasForeignKey(x => x.GroupId);
 			});
 			mb.Entity<ProductTagRelation>(tagRelations => {
 				tagRelations.HasOne(x => x.Product).WithMany(x => x.TagRelations).HasForeignKey(x => x.ProductId);

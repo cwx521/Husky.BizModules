@@ -20,10 +20,10 @@ namespace Husky.BizModules.Shopping.DataModels
 		public string? InstantProductName { get; set; }
 
 		[MaxLength(100)]
-		public string? InstantChoiseExpression { get; set; }
+		public string? InstantVariationExpression { get; set; }
 
 		[MaxLength(500)]
-		public string? InstantChoiseDescription { get; set; }
+		public string? InstantVariationDescription { get; set; }
 
 		[Column(TypeName = "decimal(8,2)")]
 		public decimal InstantOriginalPrice { get; set; }
