@@ -28,12 +28,11 @@ namespace Husky.Principal
 				BuyerId = _me.Id,
 				OrderNo = OrderIdGen.New(),
 				ActualTotalAmount = shoppingCartItems.Sum(x => x.Quantity * x.Product.ActualPrice),
-				OrderStatus = OrderStatus.AwaitPayment
+				Status = OrderStatus.AwaitPayment
 			};
 
 			//Init the first OrderLog of this order
 			order.Logs.Add(new OrderLog {
-				FromStatus = OrderStatus.AwaitPayment,
 				ChangedIntoStatus = OrderStatus.AwaitPayment,
 				Remarks = "确认下单",
 				IsOpen = true
@@ -68,8 +67,8 @@ namespace Husky.Principal
 			order.Payments.Add(new OrderPayment {
 				PaymentNo = OrderIdGen.New(),
 				Amount = order.ActualTotalAmount,
-				PaymentChoise = paymentChoise,
-				PaymentStatus = PaymentStatus.Await
+				Choise = paymentChoise,
+				Status = PaymentStatus.Await
 			});
 
 			//Update database

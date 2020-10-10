@@ -11,6 +11,9 @@ namespace Husky.BizModules.Shopping.DataModels
 		Checking,
 
 		[Label("已付款", CssClass = "text-success")]
-		Paid
+		Paid,
+
+		[Label("已取消", CssClass = "text-muted")]
+		Cancelled
 	}
 }

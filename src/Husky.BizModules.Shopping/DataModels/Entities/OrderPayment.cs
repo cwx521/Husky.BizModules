@@ -25,14 +25,21 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Column(TypeName = "varchar(64)")]
 		public string? ExternalUserName { get; set; }
 
+		[Column(TypeName = "varchar(64)")]
+		public string? AppId { get; set; }
+
 		[Column(TypeName = "decimal(8,2)")]
 		public decimal Amount { get; set; }
 
-		public PaymentChoise PaymentChoise { get; set; }
+		public PaymentChoise Choise { get; set; }
 
-		public PaymentStatus PaymentStatus { get; set; }
+		public PaymentStatus Status { get; set; }
 
-		public DateTime? ConfirmedTime { get; set; }
+		[MaxLength(100)]
+		public string? Attach { get; set; } = Guid.NewGuid().ToString();
+
+		[DefaultValueSql("getdate()"), NeverUpdate]
+		public DateTime StatusUpdatedTime { get; set; } = DateTime.Now;
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime CreatedTime { get; set; } = DateTime.Now;
@@ -48,6 +55,6 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// calculation
 
-		public bool IsTimeout => PaymentStatus == PaymentStatus.Await && CreatedTime < DateTime.Now.AddHours(-48);
+		public bool IsTimeout => Status == PaymentStatus.Await && CreatedTime < DateTime.Now.AddHours(-48);
 	}
 }

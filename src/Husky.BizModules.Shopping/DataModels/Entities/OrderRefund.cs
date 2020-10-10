@@ -15,18 +15,18 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Column(TypeName = "varchar(12)")]
 		public string RefundNo { get; set; } = null!;
 
-		[Column(TypeName = "varchar(64)")]
-		public string? ExternalOrderNo { get; set; }
-
-		[MaxLength(200)]
-		public string? Reason { get; set; }
-
 		[Column(TypeName = "decimal(8,2)")]
 		public decimal Amount { get; set; }
 
-		public RefundStatus RefundStatus { get; set; }
+		public RefundReason Reason { get; set; }
 
-		public DateTime? ConfirmedTime { get; set; }
+		public RefundStatus Status { get; set; }
+
+		[MaxLength(100)]
+		public string? ResultMessage { get; set; }
+
+		[DefaultValueSql("getdate()"), NeverUpdate]
+		public DateTime StatusUpdatedTime { get; set; } = DateTime.Now;
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime CreatedTime { get; set; } = DateTime.Now;
@@ -40,6 +40,6 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// calculation
 
-		public bool IsTimeout => RefundStatus == RefundStatus.Await && CreatedTime < DateTime.Now.AddHours(-48);
+		public bool IsTimeout => Status == RefundStatus.Await && CreatedTime < DateTime.Now.AddHours(-48);
 	}
 }

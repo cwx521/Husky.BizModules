@@ -15,7 +15,7 @@ namespace Husky.BizModules.Shopping.DataModels
 			mb.Entity<ProductTagRelation>().HasKey(x => new { x.ProductId, x.ProductTagId });
 
 			//Filters
-			mb.Entity<Order>().HasQueryFilter(x => x.OrderStatus != OrderStatus.Deleted);
+			mb.Entity<Order>().HasQueryFilter(x => x.Status != OrderStatus.Deleted);
 			mb.Entity<OrderLog>().HasQueryFilter(x => x.Status == RowStatus.Active);
 			mb.Entity<ProductChoiseGroup>().HasQueryFilter(x => x.Status == RowStatus.Active);
 			mb.Entity<ProductChoise>().HasQueryFilter(x => x.Status == RowStatus.Active);

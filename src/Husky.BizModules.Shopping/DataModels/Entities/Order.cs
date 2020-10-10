@@ -16,7 +16,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Column(TypeName = "varchar(12)")]
 		public string OrderNo { get; set; } = null!;
 
-		public OrderStatus OrderStatus { get; set; }
+		public OrderStatus Status { get; set; }
 
 		[Column(TypeName = "decimal(8,2)")]
 		public decimal ActualTotalAmount { get; set; }
@@ -40,7 +40,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public string StatusColorScheme {
 			get {
-				switch ( OrderStatus ) {
+				switch ( Status ) {
 					default:
 					case OrderStatus.Deleted:
 					case OrderStatus.Cancelled:

@@ -26,7 +26,7 @@
 		[Label("已取消")]
 		Cancelled = 400,
 
-		[Label("已取消")]
+		[Label("未接受")]
 		Rejected = 401,
 
 		[Label("已删除")]

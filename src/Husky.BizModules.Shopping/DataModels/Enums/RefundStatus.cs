@@ -1,6 +1,4 @@
-﻿using Husky;
-
-namespace Husky.BizModules.Shopping.DataModels
+﻿namespace Husky.BizModules.Shopping.DataModels
 {
 	public enum RefundStatus
 	{
@@ -11,6 +9,9 @@ namespace Husky.BizModules.Shopping.DataModels
 		Checking,
 
 		[Label("已退款", CssClass = "text-success")]
-		Refunded
+		Refunded,
+
+		[Label("已取消", CssClass = "text-muted")]
+		Cancelled
 	}
 }
