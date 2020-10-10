@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Husky.BizModules.Users.DataModels;
 
 namespace Husky.BizModules.Shopping.DataModels
 {
@@ -8,9 +7,12 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Key]
 		public int Id { get; set; }
 
+		public int ProductId { get; set; }
+
 		public int BuyerId { get; set; }
 
-		public int ProductId { get; set; }
+		[MaxLength(36)]
+		public string BuyerName { get; set; } = null!;
 
 		[MaxLength(100)]
 		public string? ChoiseExpression { get; set; }
@@ -29,8 +31,6 @@ namespace Husky.BizModules.Shopping.DataModels
 
 
 		// nav props
-
-		public User Buyer { get; set; } = null!;
 
 		public Product Product { get; set; } = null!;
 	}

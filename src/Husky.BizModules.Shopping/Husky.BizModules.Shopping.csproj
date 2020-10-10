@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>netcoreapp3.1</TargetFramework>
@@ -19,10 +19,7 @@
 	<ItemGroup>
 		<PackageReference Include="Husky.Principal" Version="3.1.1.40917" />
 		<PackageReference Include="Husky.Alipay" Version="3.1.1.40917" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\Husky.BizModules.Users\Husky.BizModules.Users.csproj" />
+		<PackageReference Include="Husky.WeChatIntegration" Version="3.1.1.40917" />
 	</ItemGroup>
 
 </Project>

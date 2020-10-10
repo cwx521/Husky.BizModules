@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Husky.BizModules.Users.DataModels;
 
 namespace Husky.BizModules.Shopping.DataModels
 {
@@ -12,6 +11,9 @@ namespace Husky.BizModules.Shopping.DataModels
 		public int Id { get; set; }
 
 		public int BuyerId { get; set; }
+
+		[MaxLength(36)]
+		public string BuyerName { get; set; } = null!;
 
 		[Column(TypeName = "varchar(12)")]
 		public string OrderNo { get; set; } = null!;
@@ -29,7 +31,6 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// nav props
 
-		public User Buyer { get; set; } = null!;
 		public OrderReceiverAddress? ReceiverAddress { get; set; }
 		public List<OrderItem> Items { get; set; } = new List<OrderItem>();
 		public List<OrderLog> Logs { get; set; } = new List<OrderLog>();
