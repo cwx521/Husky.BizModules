@@ -1,31 +1,24 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
 
 namespace Husky.BizModules.Shopping.DataModels
 {
-	public class OrderExpress
+	public class OrderComment
 	{
 		public int Id { get; set; }
 
 		public int OrderId { get; set; }
 
-		public OrderExpressDirection Direction { get; set; }
-
-		[MaxLength(16), Column(TypeName = "varchar(15)")]
-		public string ExpressNo { get; set; } = null!;
-
-		[MaxLength(16)]
-		public string? ExpressCompany { get; set; }
+		public Marking Marking { get; set; }
 
 		[MaxLength(2000)]
-		public string? ExpressQueryResult { get; set; }
+		public string Content { get; set; } = null!;
 
-		[MaxLength(200)]
-		public string? Remarks { get; set; }
+		[MaxLength(2000)]
+		public string? Reply { get; set; }
 
-		public DateTime? ExpressQueryUpdatedTime { get; set; }
+		public DateTime? RepliedTime { get; set; }
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime CreatedTime { get; set; } = DateTime.Now;

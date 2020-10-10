@@ -19,12 +19,13 @@ namespace Husky.BizModules.Shopping.DataModels
 		public DbSet<ProductChoise> ProductChoises { get; set; }
 
 		public DbSet<Order> Orders { get; set; }
+		public DbSet<OrderReceiverAddress> OrderReceiverAddresss { get; set; }
 		public DbSet<OrderItem> OrderItems { get; set; }
 		public DbSet<OrderExpress> OrderExpresses { get; set; }
 		public DbSet<OrderPayment> OrderPayments { get; set; }
 		public DbSet<OrderRefund> OrderRefunds { get; set; }
 		public DbSet<OrderLog> OrderLogs { get; set; }
-		public DbSet<OrderReceiverAddress> OrderReceiverAddresss { get; set; }
+		public DbSet<OrderComment> OrderComments { get; set; }
 
 		public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
 	}

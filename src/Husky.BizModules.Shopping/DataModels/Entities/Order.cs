@@ -36,6 +36,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		public List<OrderExpress> Expresses { get; set; } = new List<OrderExpress>();
 		public List<OrderLog> Logs { get; set; } = new List<OrderLog>();
 		public List<OrderPayment> Payments { get; set; } = new List<OrderPayment>();
+		public List<OrderComment> Comments { get; set; } = new List<OrderComment>();
 
 
 		// calculation

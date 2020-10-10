@@ -17,6 +17,8 @@ namespace Husky.BizModules.Shopping.DataModels
 			//Filters
 			mb.Entity<Order>().HasQueryFilter(x => x.Status != OrderStatus.Deleted);
 			mb.Entity<OrderLog>().HasQueryFilter(x => x.Status == RowStatus.Active);
+			mb.Entity<OrderExpress>().HasQueryFilter(x => x.Status == RowStatus.Active);
+			mb.Entity<OrderComment>().HasQueryFilter(x => x.Status == RowStatus.Active);
 			mb.Entity<ProductChoiseGroup>().HasQueryFilter(x => x.Status == RowStatus.Active);
 			mb.Entity<ProductChoise>().HasQueryFilter(x => x.Status == RowStatus.Active);
 			mb.Entity<ProductPicture>().HasQueryFilter(x => x.Status == RowStatus.Active);
@@ -47,6 +49,7 @@ namespace Husky.BizModules.Shopping.DataModels
 				order.HasMany(x => x.Expresses).WithOne(x => x.Order).HasForeignKey(x => x.OrderId);
 				order.HasMany(x => x.Logs).WithOne(x => x.Order).HasForeignKey(x => x.OrderId);
 				order.HasMany(x => x.Payments).WithOne(x => x.Order).HasForeignKey(x => x.OrderId);
+				order.HasMany(x => x.Comments).WithOne(x => x.Order).HasForeignKey(x => x.OrderId);
 			});
 			mb.Entity<OrderItem>(orderItem => {
 				orderItem.HasOne(x => x.Product).WithMany().HasForeignKey(x => x.ProductId);
