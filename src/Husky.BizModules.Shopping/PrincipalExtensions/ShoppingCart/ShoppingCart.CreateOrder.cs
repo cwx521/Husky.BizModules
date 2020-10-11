@@ -28,12 +28,12 @@ namespace Husky.Principal
 				BuyerId = _me.Id,
 				OrderNo = OrderIdGen.New(),
 				ActualTotalAmount = shoppingCartItems.Sum(x => x.Quantity * x.Product.ActualPrice),
-				Status = OrderStatus.AwaitPayment
+				Status = OrderStatus.AwaitPay
 			};
 
 			//Init the first OrderLog of this order
 			order.Logs.Add(new OrderLog {
-				ChangedIntoStatus = OrderStatus.AwaitPayment,
+				ChangedIntoStatus = OrderStatus.AwaitPay,
 				Remarks = "确认下单",
 				IsOpen = true
 			});

@@ -37,6 +37,11 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int SoldCount { get; set; }
 
+		public int RatingCount { get; set; }
+
+		[Column(TypeName = "decimal(2,1)")]
+		public decimal RatingAverage { get; set; }
+
 		public int DisplayOnTop { get; set; }
 
 		public ProductStatus Status { get; set; }

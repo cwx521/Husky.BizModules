@@ -10,8 +10,6 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int OrderId { get; set; }
 
-		public Marking Marking { get; set; }
-
 		[MaxLength(2000)]
 		public string Content { get; set; } = null!;
 

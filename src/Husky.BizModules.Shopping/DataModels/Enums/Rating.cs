@@ -1,6 +1,6 @@
 ﻿namespace Husky.BizModules.Shopping.DataModels
 {
-	public enum Marking
+	public enum Rating
 	{
 
 		[Label("极好", CssClass = "text-success")]

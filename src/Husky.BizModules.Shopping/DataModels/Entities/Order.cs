@@ -23,7 +23,15 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Column(TypeName = "decimal(8,2)")]
 		public decimal ActualTotalAmount { get; set; }
 
+		public bool HasPayBalance { get; set; }
+
+		public Rating? Rating { get; set; }
+
+		public bool IsFinalized { get; set; }
+
 		public DateTime? CompletedTime { get; set; }
+
+		public DateTime? FinalizedTime { get; set; }
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime CreatedTime { get; set; } = DateTime.Now;
@@ -51,11 +59,11 @@ namespace Husky.BizModules.Shopping.DataModels
 					case OrderStatus.PaidPartial:
 					case OrderStatus.Paid:
 						return "warning";
-					case OrderStatus.AwaitDelivery:
+					case OrderStatus.Delivering:
 					case OrderStatus.Delivered:
 						return "primary";
-					case OrderStatus.AwaitPayment:
-					case OrderStatus.AfterService:
+					case OrderStatus.AwaitPay:
+					case OrderStatus.ServiceCare:
 						return "danger";
 					case OrderStatus.Completed:
 						return "success";
