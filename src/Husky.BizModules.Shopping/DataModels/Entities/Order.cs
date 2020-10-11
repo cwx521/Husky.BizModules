@@ -13,7 +13,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		public int BuyerId { get; set; }
 
 		[MaxLength(36)]
-		public string BuyerName { get; set; } = null!;
+		public string? BuyerName { get; set; }
 
 		[Column(TypeName = "varchar(12)")]
 		public string OrderNo { get; set; } = null!;
@@ -27,11 +27,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public Rating? Rating { get; set; }
 
-		public bool IsFinalized { get; set; }
-
 		public DateTime? CompletedTime { get; set; }
-
-		public DateTime? FinalizedTime { get; set; }
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime CreatedTime { get; set; } = DateTime.Now;
@@ -40,6 +36,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		// nav props
 
 		public OrderReceiverAddress? ReceiverAddress { get; set; }
+		public OrderFinalize? Finalize { get; set; }
 		public List<OrderItem> Items { get; set; } = new List<OrderItem>();
 		public List<OrderExpress> Expresses { get; set; } = new List<OrderExpress>();
 		public List<OrderLog> Logs { get; set; } = new List<OrderLog>();

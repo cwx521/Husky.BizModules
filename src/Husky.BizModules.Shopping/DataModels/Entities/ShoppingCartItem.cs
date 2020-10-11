@@ -13,7 +13,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		public int BuyerId { get; set; }
 
 		[MaxLength(36)]
-		public string BuyerName { get; set; } = null!;
+		public string? BuyerName { get; set; }
 
 		[MaxLength(100)]
 		public string? VariationExpression { get; set; }

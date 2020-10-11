@@ -26,7 +26,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		public string? ResultMessage { get; set; }
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
-		public DateTime StatusUpdatedTime { get; set; } = DateTime.Now;
+		public DateTime StatusChangedTime { get; set; } = DateTime.Now;
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime CreatedTime { get; set; } = DateTime.Now;

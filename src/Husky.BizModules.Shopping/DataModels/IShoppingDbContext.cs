@@ -26,7 +26,10 @@ namespace Husky.BizModules.Shopping.DataModels
 		public DbSet<OrderRefund> OrderRefunds { get; set; }
 		public DbSet<OrderLog> OrderLogs { get; set; }
 		public DbSet<OrderComment> OrderComments { get; set; }
+		public DbSet<OrderFinalize> OrderFinalizes { get; set; }
 
 		public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
+
+		public DbSet<Withdrawal> Withdrawals { get; set; }
 	}
 }

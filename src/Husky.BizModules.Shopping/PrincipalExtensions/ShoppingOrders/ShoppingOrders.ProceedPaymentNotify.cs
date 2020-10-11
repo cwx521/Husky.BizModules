@@ -20,7 +20,7 @@ namespace Husky.Principal
 					told.Choise = PaymentChoise.Alipay;
 					told.Amount = alipayResult.Amount;
 					told.PaymentNo = alipayResult.OrderId;
-					told.ExternalOrderNo = alipayResult.AlipayTradeNo;
+					told.ExternalTransactionId = alipayResult.AlipayTradeNo;
 					told.ExternalUserId = alipayResult.AlipayBuyerId;
 				}
 			}
@@ -34,7 +34,7 @@ namespace Husky.Principal
 					told.Choise = PaymentChoise.WeChat;
 					told.Amount = wechatResult.Amount;
 					told.PaymentNo = wechatResult.OrderId;
-					told.ExternalOrderNo = wechatResult.TransactionId;
+					told.ExternalTransactionId = wechatResult.TransactionId;
 					told.ExternalUserId = wechatResult.OpenId;
 					told.Attach = wechatResult.Attach;
 
@@ -55,7 +55,7 @@ namespace Husky.Principal
 
 				if ( payment != null ) {
 					payment.Status = PaymentStatus.Paid;
-					payment.StatusUpdatedTime = DateTime.Now;
+					payment.StatusChangedTime = DateTime.Now;
 
 					_db.OrderLogs.Add(new OrderLog {
 						OrderId = payment.OrderId,

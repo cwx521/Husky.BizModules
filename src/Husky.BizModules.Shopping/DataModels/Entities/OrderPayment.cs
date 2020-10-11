@@ -20,7 +20,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		public string PaymentNo { get; set; } = null!;
 
 		[Column(TypeName = "varchar(64)")]
-		public string? ExternalOrderNo { get; set; }
+		public string? ExternalTransactionId { get; set; }
 
 		[Column(TypeName = "varchar(64)")]
 		public string? ExternalUserId { get; set; }
@@ -39,7 +39,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		public PaymentStatus Status { get; set; }
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
-		public DateTime StatusUpdatedTime { get; set; } = DateTime.Now;
+		public DateTime StatusChangedTime { get; set; } = DateTime.Now;
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime CreatedTime { get; set; } = DateTime.Now;

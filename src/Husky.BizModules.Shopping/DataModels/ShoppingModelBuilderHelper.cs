@@ -45,6 +45,7 @@ namespace Husky.BizModules.Shopping.DataModels
 			//Order
 			mb.Entity<Order>(order => {
 				order.HasOne(x => x.ReceiverAddress).WithOne(x => x.Order).HasForeignKey<OrderReceiverAddress>(x => x.OrderId);
+				order.HasOne(x => x.Finalize).WithOne(x => x.Order).HasForeignKey<OrderReceiverAddress>(x => x.OrderId);
 				order.HasMany(x => x.Items).WithOne(x => x.Order).HasForeignKey(x => x.OrderId);
 				order.HasMany(x => x.Expresses).WithOne(x => x.Order).HasForeignKey(x => x.OrderId);
 				order.HasMany(x => x.Logs).WithOne(x => x.Order).HasForeignKey(x => x.OrderId);
@@ -61,6 +62,11 @@ namespace Husky.BizModules.Shopping.DataModels
 			//ShoppingCartItem
 			mb.Entity<ShoppingCartItem>(shoppingCartItem => {
 				shoppingCartItem.HasOne(x => x.Product).WithMany().HasForeignKey(x => x.ProductId);
+			});
+
+			//Withdrawal
+			mb.Entity<Withdrawal>(withdrawal => {
+				withdrawal.HasMany(x => x.AssosicatedOrderFinalizes).WithOne(x => x.Withdrawal).HasForeignKey(x => x.WithdrawalId);
 			});
 		}
 	}
