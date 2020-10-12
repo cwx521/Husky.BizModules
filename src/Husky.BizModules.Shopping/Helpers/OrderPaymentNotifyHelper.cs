@@ -1,20 +1,28 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Alipay.AopSdk.AspnetCore;
 using Husky.Alipay;
 using Husky.BizModules.Shopping.DataModels;
+using Husky.WeChatIntegration;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Husky.Principal
+namespace Husky.BizModules.Shopping
 {
-	partial class UserShoppingOrdersManager
+	public static class OrderPaymentNotifyHelper
 	{
-		public async Task<string> ProceedPaymentNotify() {
+		public static async Task<string> ProceedOrderPaymentNotify(this HttpContext httpContext) {
+			var alipay = httpContext.RequestServices.GetService<AlipayService>();
+			var wechat = httpContext.RequestServices.GetService<WeChatService>();
+			var db = httpContext.RequestServices.GetRequiredService<IShoppingDbContext>();
+
 			var told = new OrderPayment();
 			var appointedSuccessResultPlainText = "success";
 
 			//try Alipay
-			if ( _alipay != null ) {
-				var alipayResult = _alipay.ParseNotifyResult(_http.Request);
+			if ( alipay != null ) {
+				var alipayResult = alipay.ParseNotifyResult(httpContext.Request);
 				if ( alipayResult.Ok && alipayResult.OrderId != null ) {
 
 					told.Choise = PaymentChoise.Alipay;
@@ -26,9 +34,9 @@ namespace Husky.Principal
 			}
 
 			//try WeChat
-			if ( _wechat != null ) {
-				var wechatPay = _wechat.PayService();
-				var wechatResult = wechatPay.ParseNotifyResult(_http.Request.Body);
+			if ( wechat != null ) {
+				var wechatPay = wechat.PayService();
+				var wechatResult = wechatPay.ParseNotifyResult(httpContext.Request.Body);
 				if ( wechatResult.Ok && wechatResult.OrderId != null ) {
 
 					told.Choise = PaymentChoise.WeChat;
@@ -46,7 +54,7 @@ namespace Husky.Principal
 			//Then use this to look through the database
 
 			if ( told.Amount != 0 && !string.IsNullOrEmpty(told.PaymentNo) ) {
-				var payment = _db.OrderPayments
+				var payment = db.OrderPayments
 					.Where(x => x.Choise == told.Choise)
 					.Where(x => x.PaymentNo == told.PaymentNo)
 					.Where(x => x.Amount == told.Amount)
@@ -57,13 +65,13 @@ namespace Husky.Principal
 					payment.Status = PaymentStatus.Paid;
 					payment.StatusChangedTime = DateTime.Now;
 
-					_db.OrderLogs.Add(new OrderLog {
+					db.OrderLogs.Add(new OrderLog {
 						OrderId = payment.OrderId,
 						Remarks = $"订单付款到账 {payment.Amount:f2} 元",
 						IsOpen = true,
 					});
 
-					await _db.Normalize().SaveChangesAsync();
+					await db.Normalize().SaveChangesAsync();
 					return appointedSuccessResultPlainText;
 				}
 			}
