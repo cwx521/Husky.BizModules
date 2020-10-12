@@ -26,7 +26,7 @@ namespace Husky.BizModules.Users.DataModels
 		[MaxLength(16)]
 		public string? ContactName { get; set; }
 
-		[MaxLength(11), Phone, Column(TypeName = "varchar(11)")]
+		[MaxLength(11), Column(TypeName = "varchar(11)"), Phone]
 		public string? ContactPhoneNumber { get; set; }
 
 		[Column(TypeName = "decimal(11, 6)")]

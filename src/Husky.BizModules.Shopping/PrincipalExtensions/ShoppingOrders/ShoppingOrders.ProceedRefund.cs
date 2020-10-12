@@ -77,16 +77,14 @@ namespace Husky.Principal
 			}
 
 			order.Logs.Add(new OrderLog {
-				Remarks = $"发生退款 {refundRemained:f2} 元",
-				IsOpen = true
+				Remarks = $"发生退款 {refundRemained:f2} 元"
 			});
 
 			if ( setOrderStatus.HasValue && setOrderStatus != order.Status ) {
 				order.Logs.Add(new OrderLog {
-					FromStatus = order.Status,
-					ChangedIntoStatus = setOrderStatus,
-					Remarks = $"因退款，订单状态发生变化",
-					IsOpen = true
+					StatusFrom = order.Status,
+					StatusChangedTo = setOrderStatus,
+					Remarks = $"因退款，订单状态发生变化"
 				});
 				order.Status = setOrderStatus.Value;
 			}
@@ -98,13 +96,13 @@ namespace Husky.Principal
 			foreach ( var refund in pending ) {
 				Result result = null!;
 
-				switch ( refund.SourcePayment.Choise ) {
+				switch ( refund.OriginalPayment.Choise ) {
 					case PaymentChoise.WeChat:
 						result = _wechat!.PayService().Refund(
-							refund.SourcePayment.AppId!,
-							refund.SourcePayment.PaymentNo,
+							refund.OriginalPayment.AppId!,
+							refund.OriginalPayment.PaymentNo,
 							refund.RefundNo,
-							refund.SourcePayment.Amount,
+							refund.OriginalPayment.Amount,
 							refund.Amount,
 							refund.Reason.ToLabel()
 						);
@@ -112,7 +110,7 @@ namespace Husky.Principal
 
 					case PaymentChoise.Alipay:
 						result = _alipay!.Refund(
-							refund.SourcePayment.PaymentNo,
+							refund.OriginalPayment.PaymentNo,
 							refund.RefundNo,
 							refund.Amount,
 							refund.Reason.ToLabel()
@@ -129,7 +127,7 @@ namespace Husky.Principal
 
 			//返回执行结果
 			if ( pending.Any(x => x.Status != RefundStatus.Refunded) ) {
-				var choises = string.Join("及", pending.Select(x => x.SourcePayment.Choise).Distinct().ToArray());
+				var choises = string.Join("及", pending.Select(x => x.OriginalPayment.Choise).Distinct().ToArray());
 				return new Success($"已提交退款，但{choises}返回信息未成功");
 			}
 			return new Success();

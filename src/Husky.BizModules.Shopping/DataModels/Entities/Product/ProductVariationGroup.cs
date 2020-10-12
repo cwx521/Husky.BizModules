@@ -13,9 +13,11 @@ namespace Husky.BizModules.Shopping.DataModels
 		[MaxLength(16)]
 		public string GroupName { get; set; } = null!;
 
-		public int MinRequired { get; set; }
+		public bool RequireSkuCode { get; set; }
 
-		public int MaxAllowed { get; set; }
+		public int MinSelectionRequired { get; set; }
+
+		public int MaxSelectionAllowed { get; set; }
 
 		public RowStatus Status { get; set; }
 

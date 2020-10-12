@@ -18,12 +18,11 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Column(TypeName = "decimal(8,2)")]
 		public decimal TotalRefunded { get; set; }
 
-		[Column(TypeName = "decimal(8,2)")]
-		public decimal AddtionalTip { get; set; }
+		[Column(TypeName = "decimal(6,2)")]
+		public decimal TotalAdditionalTip { get; set; }
 
-		[Column(TypeName = "decimal(8,2)")]
+		[Column(TypeName = "decimal(6,2)")]
 		public decimal ServiceFee { get; set; }
-
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime FinalizedTime { get; set; } = DateTime.Now;
@@ -37,6 +36,6 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// Calculation
 
-		public decimal WithdrawableAmount => TotalPaid + AddtionalTip + TotalRefunded - ServiceFee;
+		public decimal WithdrawableAmount => TotalPaid + TotalAdditionalTip + TotalRefunded - ServiceFee;
 	}
 }

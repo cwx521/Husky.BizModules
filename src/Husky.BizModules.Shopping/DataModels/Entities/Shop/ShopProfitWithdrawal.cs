@@ -12,10 +12,10 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int ShopId { get; set; }
 
-		[Column(TypeName = "decimal(8,2)")]
+		[Column(TypeName = "decimal(9,2)")]
 		public decimal Amount { get; set; }
 
-		[Column(TypeName = "varchar(64)"), Index(IsUnique = true)]
+		[MaxLength(64), Column(TypeName = "varchar(64)"), Index(IsUnique = true)]
 		public string? ExternalTransactionId { get; set; }
 
 		public PaymentChoise TargetChoise { get; set; }
@@ -24,14 +24,14 @@ namespace Husky.BizModules.Shopping.DataModels
 		public string TargetAccount { get; set; } = null!;
 
 		[MaxLength(50)]
-		public string TargetAccountAlias { get; set; } = null!;
-
-		public WithdrawalStatus Status { get; set; }
+		public string? TargetAccountAlias { get; set; }
 
 		public int? OperatedByAdminId { get; set; }
 
 		[MaxLength(24)]
 		public string? OperatedByAdminName { get; set; }
+
+		public WithdrawalStatus Status { get; set; }
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime StatusChangedTime { get; set; } = DateTime.Now;

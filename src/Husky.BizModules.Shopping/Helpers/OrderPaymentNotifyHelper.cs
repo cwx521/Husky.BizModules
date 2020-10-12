@@ -67,8 +67,7 @@ namespace Husky.BizModules.Shopping
 
 					db.OrderLogs.Add(new OrderLog {
 						OrderId = payment.OrderId,
-						Remarks = $"订单付款到账 {payment.Amount:f2} 元",
-						IsOpen = true,
+						Remarks = $"订单付款到账 {payment.Amount:f2} 元"
 					});
 
 					await db.Normalize().SaveChangesAsync();

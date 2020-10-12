@@ -15,19 +15,19 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Column(TypeName = "decimal(8,2)")]
 		public decimal Amount { get; set; }
 
-		[Column(TypeName = "varchar(12)")]
+		[MaxLength(12), Column(TypeName = "varchar(12)"), Index(IsUnique = true)]
 		public string PaymentNo { get; set; } = null!;
 
-		[Column(TypeName = "varchar(64)")]
+		[MaxLength(64), Column(TypeName = "varchar(64)")]
 		public string? ExternalTransactionId { get; set; }
 
-		[Column(TypeName = "varchar(64)")]
+		[MaxLength(64)]
 		public string? ExternalUserId { get; set; }
 
-		[Column(TypeName = "varchar(64)")]
+		[MaxLength(64)]
 		public string? ExternalUserName { get; set; }
 
-		[Column(TypeName = "varchar(64)")]
+		[MaxLength(64), Column(TypeName = "varchar(64)")]
 		public string? AppId { get; set; }
 
 		[MaxLength(50)]
@@ -48,10 +48,5 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public Order? Order { get; set; }
 		public List<OrderRefund> Refunds { get; set; } = new List<OrderRefund>();
-
-
-		// calculation
-
-		public bool IsTimeout => Status == PaymentStatus.Await && CreatedTime < DateTime.Now.AddHours(-48);
 	}
 }

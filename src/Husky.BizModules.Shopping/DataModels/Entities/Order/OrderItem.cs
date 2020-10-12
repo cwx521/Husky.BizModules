@@ -27,6 +27,9 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Column(TypeName = "decimal(8,2)")]
 		public decimal InstantActualPrice { get; set; }
 
+		[Column(TypeName = "decimal(6,2)")]
+		public decimal? InstantExpectedTip { get; set; }
+
 		public int Quantity { get; set; }
 
 		public int ReturnedQuantity { get; set; }

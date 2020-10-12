@@ -18,13 +18,13 @@ namespace Husky.BizModules.Shopping.DataModels
 		[MaxLength(16)]
 		public string? District { get; set; }
 
-		[MaxLength(100)]
+		[MaxLength(120)]
 		public string DetailAddress { get; set; } = null!;
 
 		[MaxLength(16)]
 		public string ContactName { get; set; } = null!;
 
-		[MaxLength(11), Phone, Column(TypeName = "varchar(11)")]
+		[MaxLength(11), Column(TypeName = "varchar(11)"), Phone]
 		public string ContactPhoneNumber { get; set; } = null!;
 
 		[Column(TypeName = "decimal(11, 6)")]
@@ -34,7 +34,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		public decimal? Lat { get; set; }
 
 
-		// Order
+		// nav props
 
 		public Order? Order { get; set; }
 

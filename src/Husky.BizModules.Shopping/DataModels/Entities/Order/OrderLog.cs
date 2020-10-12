@@ -10,19 +10,19 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int OrderId { get; set; }
 
-		public OrderStatus? FromStatus { get; set; }
+		public OrderStatus? StatusFrom { get; set; }
 
-		public OrderStatus? ChangedIntoStatus { get; set; }
+		public OrderStatus? StatusChangedTo { get; set; }
 
 		[MaxLength(200)]
 		public string? Remarks { get; set; }
 
-		public bool IsOpen { get; set; }
+		public bool IsPrivate { get; set; }
 
-		public int? ByAdminId { get; set; }
+		public int? CreatedByAdminId { get; set; }
 
 		[MaxLength(24)]
-		public string? ByAdminName { get; set; }
+		public string? CreatedByAdminName { get; set; }
 
 		public RowStatus Status { get; set; }
 

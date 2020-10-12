@@ -121,7 +121,7 @@ namespace Husky.Principal
 			if ( product.Status != ProductStatus.Active ) {
 				return new Failure($"商品{product.Status.ToLabel()}，无法购买");
 			}
-			if ( product.OffShelveTime.HasValue && product.OffShelveTime.Value < DateTime.Now ) {
+			if ( product.OffShelveTime < DateTime.Now ) {
 				return new Failure("商品已过期下架");
 			}
 			if ( product.Stock == 0 ) {

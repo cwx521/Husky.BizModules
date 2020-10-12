@@ -15,13 +15,13 @@ namespace Husky.BizModules.Shopping.DataModels
 		[MaxLength(36)]
 		public string? BuyerName { get; set; }
 
-		[Column(TypeName = "varchar(12)")]
+		[MaxLength(12), Column(TypeName = "varchar(12)"), Index(IsUnique = true)]
 		public string OrderNo { get; set; } = null!;
 
 		public OrderStatus Status { get; set; }
 
 		[Column(TypeName = "decimal(8,2)")]
-		public decimal ActualTotalAmount { get; set; }
+		public decimal TotalAmount { get; set; }
 
 		public bool HasPayBalance { get; set; }
 
@@ -46,22 +46,29 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// calculation
 
+		public bool IsTimeOut => Status == OrderStatus.AwaitPay && CreatedTime < DateTime.Now.AddHours(-2);
+
 		public string StatusColorScheme {
 			get {
 				switch ( Status ) {
 					default:
-					case OrderStatus.Deleted:
 					case OrderStatus.Cancelled:
+					case OrderStatus.Closed:
+					case OrderStatus.Deleted:
 						return "secondary";
-					case OrderStatus.PaidPartial:
 					case OrderStatus.Paid:
+					case OrderStatus.PaidPartial:
 						return "warning";
 					case OrderStatus.Delivering:
 					case OrderStatus.Delivered:
 						return "primary";
 					case OrderStatus.AwaitPay:
+					case OrderStatus.AwaitPayBalance:
 					case OrderStatus.ServiceCare:
+					case OrderStatus.Returning:
+					case OrderStatus.Returned:
 						return "danger";
+					case OrderStatus.Received:
 					case OrderStatus.Completed:
 						return "success";
 				}

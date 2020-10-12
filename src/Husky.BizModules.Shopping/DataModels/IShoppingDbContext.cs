@@ -11,6 +11,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		DbContext Normalize();
 
 		public DbSet<Shop> Shops { get; set; }
+		public DbSet<ShopPicture> ShopPictures { get; set; }
 		public DbSet<ShopLimit> ShopLimits { get; set; }
 		public DbSet<ShopProfitWithdrawal> ShopProfitWithdrawals { get; set; }
 

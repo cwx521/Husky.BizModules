@@ -9,12 +9,12 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Key]
 		public int Id { get; set; }
 
-		public int SourcePaymentId { get; set; }
+		public int OriginalPaymentId { get; set; }
 
 		[Column(TypeName = "decimal(8,2)")]
 		public decimal Amount { get; set; }
 
-		[Column(TypeName = "varchar(12)")]
+		[MaxLength(12), Column(TypeName = "varchar(12)"), Index(IsUnique = true)]
 		public string RefundNo { get; set; } = null!;
 
 		public RefundReason Reason { get; set; }
@@ -33,7 +33,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// nav props
 
-		public OrderPayment? SourcePayment { get; set; }
+		public OrderPayment? OriginalPayment { get; set; }
 
 
 		// calculation

@@ -1,21 +1,20 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Husky.BizModules.Shopping.DataModels
 {
-	public class ProductPicture
+	public class ShopPicture
 	{
 		[Key]
 		public int Id { get; set; }
 
-		public int ProductId { get; set; }
+		public int ShopId { get; set; }
 
 		[MaxLength(50)]
 		public string? PictureName { get; set; }
 
-		[MaxLength(500)]
+		[MaxLength(500), Column(TypeName = "varchar(500)")]
 		public string PictureUrl { get; set; } = null!;
-
-		public bool UseInCarousel { get; set; }
 
 		public MediaType Type { get; set; }
 
@@ -24,6 +23,6 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// nav props
 
-		public Product? Product { get; set; }
+		public Shop? Shop { get; set; }
 	}
 }

@@ -11,9 +11,9 @@ namespace Husky.Principal
 	{
 		public async Task<Result> QueryRefund(int refundId) {
 			var refund = _db.OrderRefunds
-				.Include(x => x.SourcePayment)
+				.Include(x => x.OriginalPayment)
 				.Where(x => x.Id == refundId)
-				.Where(x => x.SourcePayment.Order.BuyerId == _me.Id)
+				.Where(x => x.OriginalPayment.Order.BuyerId == _me.Id)
 				.SingleOrDefault();
 
 			if ( refund == null ) {
@@ -24,15 +24,15 @@ namespace Husky.Principal
 			}
 
 			Result result = null!;
-			switch ( refund.SourcePayment.Choise ) {
+			switch ( refund.OriginalPayment.Choise ) {
 				case PaymentChoise.Alipay:
 					_ = _alipay ?? throw new ArgumentNullException(nameof(_alipay));
-					result = _alipay.QueryRefund(refund.SourcePayment.PaymentNo, refund.RefundNo);
+					result = _alipay.QueryRefund(refund.OriginalPayment.PaymentNo, refund.RefundNo);
 					break;
 
 				case PaymentChoise.WeChat:
 					_ = _wechat ?? throw new ArgumentNullException(nameof(_wechat));
-					result = _wechat.PayService().QueryRefund(refund.SourcePayment.AppId!, refund.RefundNo);
+					result = _wechat.PayService().QueryRefund(refund.OriginalPayment.AppId!, refund.RefundNo);
 					break;
 			}
 

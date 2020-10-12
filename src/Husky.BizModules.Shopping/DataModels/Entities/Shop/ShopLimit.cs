@@ -13,6 +13,10 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public decimal MaxSinglePrice { get; set; } = 500;
 
+		public int MaxImageSizeKb { get; set; } = 2048;
+
+		public bool AllowExpectTip { get; set; } = false;
+
 
 		// nav props
 

@@ -28,7 +28,5 @@ namespace Husky.BizModules.Shopping.DataModels
 		// nav props
 
 		public ShopLimit? Limit { get; set; }
-		public List<Product> Products { get; set; } = new List<Product>();
-		public List<ShopProfitWithdrawal> Withdrawals { get; set; } = new List<ShopProfitWithdrawal>();
 	}
 }

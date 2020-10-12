@@ -27,15 +27,14 @@ namespace Husky.Principal
 			var order = new Order {
 				BuyerId = _me.Id,
 				OrderNo = OrderIdGen.New(),
-				ActualTotalAmount = orderCartItems.Sum(x => x.Quantity * x.Product.ActualPrice),
+				TotalAmount = orderCartItems.Sum(x => x.Quantity * x.Product.ActualPrice),
 				Status = OrderStatus.AwaitPay
 			};
 
 			//Init the first OrderLog of this order
 			order.Logs.Add(new OrderLog {
-				ChangedIntoStatus = OrderStatus.AwaitPay,
-				Remarks = "确认下单",
-				IsOpen = true
+				StatusChangedTo = OrderStatus.AwaitPay,
+				Remarks = "确认下单"
 			});
 
 			//Set OrderReceiverAddress
@@ -54,10 +53,11 @@ namespace Husky.Principal
 			order.Items.AddRange(orderCartItems.Select(x => new OrderItem {
 				ProductId = x.ProductId,
 				Quantity = x.Quantity,
-				InstantProductCode = x.Product.ProductCode,
+				InstantProductCode = x.Product!.ProductCode,
 				InstantProductName = x.Product.ProductName,
 				InstantOriginalPrice = x.Product.OriginalPrice,
 				InstantActualPrice = x.Product.ActualPrice,
+				InstantExpectedTip = x.Product.ExpectedTip,
 				InstantVariationJson = x.VariationJson,
 				Remarks = x.Remarks
 			}));
@@ -65,7 +65,7 @@ namespace Husky.Principal
 			//Create default OrderPayment
 			order.Payments.Add(new OrderPayment {
 				PaymentNo = OrderIdGen.New(),
-				Amount = order.ActualTotalAmount,
+				Amount = order.TotalAmount,
 				Choise = paymentChoise,
 				Status = PaymentStatus.Await
 			});

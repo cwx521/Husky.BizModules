@@ -15,12 +15,12 @@ namespace Husky.BizModules.Shopping.DataModels
 		[MaxLength(2000)]
 		public string? Reply { get; set; }
 
+		public RowStatus Status { get; set; }
+
 		public DateTime? RepliedTime { get; set; }
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime CreatedTime { get; set; } = DateTime.Now;
-
-		public RowStatus Status { get; set; }
 
 
 		// nav props

@@ -29,8 +29,12 @@ namespace Husky.BizModules.Shopping.DataModels
 			//Shop
 			mb.Entity<Shop>(shop => {
 				shop.HasOne(x => x.Limit).WithOne(x => x.Shop).HasForeignKey<ShopLimit>(x => x.ShopId);
-				shop.HasMany(x => x.Products).WithOne(x => x.Shop).HasForeignKey(x => x.ShopId);
-				shop.HasMany(x => x.Withdrawals).WithOne(x => x.Shop).HasForeignKey(x => x.ShopId);
+				shop.HasMany<ShopPicture>().WithOne(x => x.Shop).HasForeignKey(x => x.ShopId);
+				shop.HasMany<Product>().WithOne(x => x.Shop).HasForeignKey(x => x.ShopId);
+				shop.HasMany<ShopProfitWithdrawal>().WithOne(x => x.Shop).HasForeignKey(x => x.ShopId).OnDelete(DeleteBehavior.Restrict);
+			});
+			mb.Entity<ShopProfitWithdrawal>(withdrawal => {
+				withdrawal.HasMany(x => x.AssosicatedOrderFinalizes).WithOne(x => x.Withdrawal).HasForeignKey(x => x.WithdrawalId);
 			});
 
 			//Product
@@ -38,8 +42,8 @@ namespace Husky.BizModules.Shopping.DataModels
 				product.HasMany(x => x.Pictures).WithOne(x => x.Product).HasForeignKey(x => x.ProductId);
 				product.HasMany(x => x.VariationGroups).WithOne().HasForeignKey(x => x.ProductId);
 			});
-			mb.Entity<ProductVariationGroup>(variationGroup => {
-				variationGroup.HasMany(x => x.Variations).WithOne().HasForeignKey(x => x.GroupId);
+			mb.Entity<ProductVariation>(variation => {
+				variation.HasOne(x => x.Group).WithMany(x => x.Variations).HasForeignKey(x => x.GroupId);
 			});
 			mb.Entity<ProductTagRelation>(tagRelations => {
 				tagRelations.HasOne(x => x.Product).WithMany(x => x.TagRelations).HasForeignKey(x => x.ProductId);
@@ -60,22 +64,16 @@ namespace Husky.BizModules.Shopping.DataModels
 				order.HasMany(x => x.Payments).WithOne(x => x.Order).HasForeignKey(x => x.OrderId);
 				order.HasMany(x => x.Comments).WithOne(x => x.Order).HasForeignKey(x => x.OrderId);
 			});
+			mb.Entity<OrderCartItem>(orderCartItem => {
+				orderCartItem.HasOne(x => x.Product).WithMany().HasForeignKey(x => x.ProductId);
+			});
 			mb.Entity<OrderItem>(orderItem => {
 				orderItem.HasOne(x => x.Product).WithMany().HasForeignKey(x => x.ProductId);
 			});
 			mb.Entity<OrderPayment>(orderLog => {
-				orderLog.HasMany(x => x.Refunds).WithOne(x => x.SourcePayment).HasForeignKey(x => x.SourcePaymentId);
+				orderLog.HasMany(x => x.Refunds).WithOne(x => x.OriginalPayment).HasForeignKey(x => x.OriginalPaymentId);
 			});
 
-			//OrderCartItem
-			mb.Entity<OrderCartItem>(orderCartItem => {
-				orderCartItem.HasOne(x => x.Product).WithMany().HasForeignKey(x => x.ProductId);
-			});
-
-			//Withdrawal
-			mb.Entity<ShopProfitWithdrawal>(withdrawal => {
-				withdrawal.HasMany(x => x.AssosicatedOrderFinalizes).WithOne(x => x.Withdrawal).HasForeignKey(x => x.WithdrawalId);
-			});
 		}
 	}
 }

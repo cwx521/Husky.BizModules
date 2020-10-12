@@ -12,7 +12,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public OrderExpressDirection Direction { get; set; }
 
-		[MaxLength(16), Column(TypeName = "varchar(15)")]
+		[MaxLength(16), Column(TypeName = "varchar(16)")]
 		public string ExpressNo { get; set; } = null!;
 
 		[MaxLength(16)]
@@ -24,12 +24,12 @@ namespace Husky.BizModules.Shopping.DataModels
 		[MaxLength(200)]
 		public string? Remarks { get; set; }
 
-		public DateTime? ExpressQueryUpdatedTime { get; set; }
+		public RowStatus Status { get; set; }
+
+		public DateTime? ExpressQueriedTime { get; set; }
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime CreatedTime { get; set; } = DateTime.Now;
-
-		public RowStatus Status { get; set; }
 
 
 		// nav props
