@@ -16,7 +16,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Label("暂停供应", CssClass = "text-muted")]
 		Onhold,
 
-		[Label("停止销售", CssClass = "text-danger")]
-		Closed
+		[Label("下架", CssClass = "text-danger")]
+		OffShelve
 	}
 }

@@ -46,6 +46,8 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public ProductStatus Status { get; set; }
 
+		public DateTime? OffShelveTime { get; set; }
+
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime CreatedTime { get; set; } = DateTime.Now;
 

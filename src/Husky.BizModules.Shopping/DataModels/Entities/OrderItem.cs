@@ -19,11 +19,8 @@ namespace Husky.BizModules.Shopping.DataModels
 		[MaxLength(50)]
 		public string? InstantProductName { get; set; }
 
-		[MaxLength(100)]
-		public string? InstantVariationExpression { get; set; }
-
-		[MaxLength(500)]
-		public string? InstantVariationDescription { get; set; }
+		[MaxLength(1000)]
+		public string? InstantVariationJson { get; set; }
 
 		[Column(TypeName = "decimal(8,2)")]
 		public decimal InstantOriginalPrice { get; set; }

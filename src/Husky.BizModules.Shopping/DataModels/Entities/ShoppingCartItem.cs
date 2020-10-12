@@ -15,11 +15,8 @@ namespace Husky.BizModules.Shopping.DataModels
 		[MaxLength(36)]
 		public string? BuyerName { get; set; }
 
-		[MaxLength(100)]
-		public string? VariationExpression { get; set; }
-
-		[MaxLength(500)]
-		public string? VariationDescription { get; set; }
+		[MaxLength(1000)]
+		public string? VariationJson { get; set; }
 
 		public int Quantity { get; set; }
 
