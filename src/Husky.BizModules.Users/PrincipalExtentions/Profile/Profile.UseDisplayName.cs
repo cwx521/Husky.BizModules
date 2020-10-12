@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore.Internal;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Husky.Principal
 {
-	partial class UserProfileManager
+	public partial class UserProfileManager
 	{
 		public async Task<Result> UseDisplayName(string displayName, bool allowDuplication) {
 			if ( _me.IsAnonymous ) {

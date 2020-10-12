@@ -15,11 +15,11 @@ namespace Husky.BizModules.Shopping
 			return JsonConvert.DeserializeObject<List<OrderItemVariationGroup>>(orderItem.InstantVariationJson);
 		}
 
-		public static List<OrderItemVariationGroup>? GetShoppingCartItemVariations(this ShoppingCartItem shoppingCartItem) {
-			if ( shoppingCartItem.VariationJson == null ) {
+		public static List<OrderItemVariationGroup>? GetOrderCartItemVariations(this OrderCartItem orderCartItem) {
+			if ( orderCartItem.VariationJson == null ) {
 				return null;
 			}
-			return JsonConvert.DeserializeObject<List<OrderItemVariationGroup>>(shoppingCartItem.VariationJson);
+			return JsonConvert.DeserializeObject<List<OrderItemVariationGroup>>(orderCartItem.VariationJson);
 		}
 
 		public static string GetDescription(this List<OrderItemVariationGroup> variations) {

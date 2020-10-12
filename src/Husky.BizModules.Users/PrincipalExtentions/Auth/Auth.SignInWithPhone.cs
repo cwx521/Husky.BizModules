@@ -1,11 +1,11 @@
-﻿using Husky.BizModules.Users.DataModels;
-using Husky.TwoFactor;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using Husky.BizModules.Users.DataModels;
+using Husky.TwoFactor;
 
 namespace Husky.Principal
 {
-	partial class UserAuthManager
+	public partial class UserAuthManager
 	{
 		public async Task<LoginResult> SignInWithPhone(string mobileNumber, string verificationCode) {
 			if ( string.IsNullOrEmpty(mobileNumber) || string.IsNullOrEmpty(verificationCode) ) {

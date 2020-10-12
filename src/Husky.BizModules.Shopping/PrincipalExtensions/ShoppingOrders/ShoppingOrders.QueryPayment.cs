@@ -6,7 +6,7 @@ using Husky.BizModules.Shopping.DataModels;
 
 namespace Husky.Principal
 {
-	partial class UserShoppingOrdersManager
+	public partial class UserShoppingOrdersManager
 	{
 		public async Task<Result> QueryPayment(int paymentId) {
 			var payment = _db.OrderPayments

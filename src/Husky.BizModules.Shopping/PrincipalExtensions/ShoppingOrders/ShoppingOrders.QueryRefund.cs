@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Husky.Principal
 {
-	partial class UserShoppingOrdersManager
+	public partial class UserShoppingOrdersManager
 	{
 		public async Task<Result> QueryRefund(int refundId) {
 			var refund = _db.OrderRefunds

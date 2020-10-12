@@ -1,10 +1,10 @@
-﻿using Husky.BizModules.Users.DataModels;
+﻿using System.Linq;
+using Husky.BizModules.Users.DataModels;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace Husky.Principal
 {
-	partial class UserGroupManager
+	public partial class UserGroupManager
 	{
 		public UserGroup[] GetGroups() {
 			if ( _me.IsAnonymous ) {

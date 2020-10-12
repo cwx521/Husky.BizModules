@@ -5,15 +5,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Husky.BizModules.Shopping.DataModels
 {
-	public class Withdrawal
+	public class ShopProfitWithdrawal
 	{
 		[Key]
 		public int Id { get; set; }
 
-		public int UserId { get; set; }
-
-		[MaxLength(50)]
-		public string? UserName { get; set; }
+		public int ShopId { get; set; }
 
 		[Column(TypeName = "decimal(8,2)")]
 		public decimal Amount { get; set; }
@@ -31,10 +28,10 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public WithdrawalStatus Status { get; set; }
 
-		public int? ByAdminId { get; set; }
+		public int? OperatedByAdminId { get; set; }
 
 		[MaxLength(24)]
-		public string? ByAdminName { get; set; }
+		public string? OperatedByAdminName { get; set; }
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime StatusChangedTime { get; set; } = DateTime.Now;
@@ -45,6 +42,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// nav props
 
+		public Shop? Shop { get; set; }
 		public List<OrderFinalize> AssosicatedOrderFinalizes { get; set; } = new List<OrderFinalize>();
 	}
 }

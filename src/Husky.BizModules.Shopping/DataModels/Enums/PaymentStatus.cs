@@ -1,6 +1,4 @@
-﻿using Husky;
-
-namespace Husky.BizModules.Shopping.DataModels
+﻿namespace Husky.BizModules.Shopping.DataModels
 {
 	public enum PaymentStatus
 	{

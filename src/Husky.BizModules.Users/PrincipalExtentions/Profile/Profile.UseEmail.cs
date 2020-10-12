@@ -1,10 +1,10 @@
-﻿using Husky.BizModules.Users.DataModels;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using Husky.BizModules.Users.DataModels;
 
 namespace Husky.Principal
 {
-	partial class UserProfileManager
+	public partial class UserProfileManager
 	{
 		public async Task<Result> UseEmail(string newEmailAddress /* , string? verificationCode = null */) {
 			if ( _me.IsAnonymous ) {

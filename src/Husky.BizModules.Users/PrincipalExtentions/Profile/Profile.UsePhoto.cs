@@ -2,7 +2,7 @@
 
 namespace Husky.Principal
 {
-	partial class UserProfileManager
+	public partial class UserProfileManager
 	{
 		public async Task<Result> UsePhoto(string photoUrl) {
 			if ( _me.IsAnonymous ) {

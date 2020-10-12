@@ -1,9 +1,9 @@
-﻿using Husky.BizModules.Users.DataModels;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Husky.BizModules.Users.DataModels;
 
 namespace Husky.Principal
 {
-	partial class UserAuthManager
+	public partial class UserAuthManager
 	{
 		public async Task<LoginResult> AddLoginRecord(LoginResult result, string inputAccount, int? knownUserId = null, string? sickPassword = null) {
 			var ip = _http.Connection.RemoteIpAddress;

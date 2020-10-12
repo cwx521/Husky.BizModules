@@ -1,9 +1,9 @@
-﻿using Husky.BizModules.Users.DataModels;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Husky.BizModules.Users.DataModels;
 
 namespace Husky.Principal
 {
-	partial class UserGroupManager
+	public partial class UserGroupManager
 	{
 		public async Task<Result> JoinGroup(int groupId) {
 			if ( _me.IsAnonymous ) {

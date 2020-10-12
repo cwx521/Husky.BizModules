@@ -1,9 +1,9 @@
-﻿using Husky.BizModules.Users.DataModels;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Husky.BizModules.Users.DataModels;
 
 namespace Husky.Principal
 {
-	partial class UserProfileManager
+	public partial class UserProfileManager
 	{
 		public async Task<Result> UseReal(string socialIdNumber, string realName, bool isVerified = false) {
 			if ( _me.IsAnonymous ) {

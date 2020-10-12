@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Husky.BizModules.Shopping.DataModels
+﻿namespace Husky.BizModules.Shopping.DataModels
 {
 	public class ProductSibling
 	{
@@ -11,9 +9,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		//nav
 
-		[JsonIgnore]
-		public Product Product { get; set; } = null!;
-
-		public Product SiblingProduct { get; set; } = null!;
+		public Product? Product { get; set; }
+		public Product? SiblingProduct { get; set; }
 	}
 }

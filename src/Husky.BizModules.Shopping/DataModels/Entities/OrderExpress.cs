@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace Husky.BizModules.Shopping.DataModels
 {
@@ -35,7 +34,6 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// nav props
 
-		[JsonIgnore]
-		public Order Order { get; set; } = null!;
+		public Order? Order { get; set; }
 	}
 }

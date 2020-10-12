@@ -10,10 +10,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Key]
 		public int Id { get; set; }
 
-		public int SellerId { get; set; }
-
-		[MaxLength(36)]
-		public string SellerName { get; set; } = null!;
+		public int ShopId { get; set; }
 
 		[MaxLength(50)]
 		public string ProductName { get; set; } = null!;
@@ -54,6 +51,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// nav props
 
+		public Shop? Shop { get; set; }
 		public List<ProductPicture> Pictures { get; set; } = new List<ProductPicture>();
 		public List<ProductSibling> Siblings { get; set; } = new List<ProductSibling>();
 		public List<ProductVariationGroup> VariationGroups { get; set; } = new List<ProductVariationGroup>();

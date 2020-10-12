@@ -1,11 +1,11 @@
-﻿using Husky.BizModules.Users.DataModels;
-using Husky.TwoFactor;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using Husky.BizModules.Users.DataModels;
+using Husky.TwoFactor;
 
 namespace Husky.Principal
 {
-	partial class UserProfileManager
+	public partial class UserProfileManager
 	{
 		public async Task<Result> UsePhone(string newNumber, string verificationCode) {
 			if ( _me.IsAnonymous ) {

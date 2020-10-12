@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace Husky.BizModules.Users.DataModels
 {
@@ -27,7 +26,6 @@ namespace Husky.BizModules.Users.DataModels
 
 		// nav props
 
-		[JsonIgnore]
-		public User User { get; set; } = null!;
+		public User? User { get; set; }
 	}
 }

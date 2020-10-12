@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -41,9 +40,7 @@ namespace Husky.BizModules.Users.DataModels
 
 		// nav props
 
-		[JsonIgnore]
-		public User User { get; set; } = null!;
-
+		public User? User { get; set; }
 		public List<UserWeChatOpenId> OpenIds { get; set; } = new List<UserWeChatOpenId>();
 	}
 }

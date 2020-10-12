@@ -2,7 +2,7 @@
 {
 	public static partial class PrincipalExtensions
 	{
-		public static UserShoppingCartManager ShoppingCart(this IPrincipalUser principal) {
+		public static UserShoppingCartManager OrderCart(this IPrincipalUser principal) {
 			return new UserShoppingCartManager(principal);
 		}
 

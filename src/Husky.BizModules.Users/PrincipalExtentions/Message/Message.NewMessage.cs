@@ -1,9 +1,9 @@
-﻿using Husky.BizModules.Users.DataModels;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Husky.BizModules.Users.DataModels;
 
 namespace Husky.Principal
 {
-	partial class UserMessageManager
+	public partial class UserMessageManager
 	{
 		public async Task NewMessage(string message) {
 			_db.UserMessage.Add(new UserMessage {

@@ -9,13 +9,13 @@ using Newtonsoft.Json;
 
 namespace Husky.Principal
 {
-	partial class UserShoppingCartManager
+	public partial class UserShoppingCartManager
 	{
-		public async Task<Result> Select(int shoppingCartItemId) {
-			var item = _db.ShoppingCartItems
+		public async Task<Result> Select(int orderCartItemId) {
+			var item = _db.OrderCartItems
 				.Where(x => !x.Selected)
 				.Where(x => x.BuyerId == _me.Id)
-				.Where(x => x.Id == shoppingCartItemId)
+				.Where(x => x.Id == orderCartItemId)
 				.SingleOrDefault();
 
 			if ( item != null ) {
@@ -25,11 +25,11 @@ namespace Husky.Principal
 			return new Success();
 		}
 
-		public async Task<Result> Unselect(int shoppingCartItemId) {
-			var item = _db.ShoppingCartItems
+		public async Task<Result> Unselect(int orderCartItemId) {
+			var item = _db.OrderCartItems
 				.Where(x => x.Selected)
 				.Where(x => x.BuyerId == _me.Id)
-				.Where(x => x.Id == shoppingCartItemId)
+				.Where(x => x.Id == orderCartItemId)
 				.SingleOrDefault();
 
 			if ( item != null ) {
@@ -40,7 +40,7 @@ namespace Husky.Principal
 		}
 
 		public async Task<Result> SelectAll() {
-			var items = _db.ShoppingCartItems
+			var items = _db.OrderCartItems
 				.Where(x => !x.Selected)
 				.Where(x => x.BuyerId == _me.Id)
 				.ToList();
@@ -53,7 +53,7 @@ namespace Husky.Principal
 		}
 
 		public async Task<Result> UnselectAll() {
-			var items = _db.ShoppingCartItems
+			var items = _db.OrderCartItems
 				.Where(x => x.Selected)
 				.Where(x => x.BuyerId == _me.Id)
 				.ToList();
@@ -66,10 +66,10 @@ namespace Husky.Principal
 		}
 
 
-		public async Task<Result> Remove(int shoppingCartItemId) {
-			var item = _db.ShoppingCartItems
+		public async Task<Result> Remove(int orderCartItemId) {
+			var item = _db.OrderCartItems
 				.Where(x => x.BuyerId == _me.Id)
-				.Where(x => x.Id == shoppingCartItemId)
+				.Where(x => x.Id == orderCartItemId)
 				.SingleOrDefault();
 
 			if ( item != null ) {
@@ -80,7 +80,7 @@ namespace Husky.Principal
 		}
 
 		public async Task<Result> RemoveAll() {
-			var items = _db.ShoppingCartItems
+			var items = _db.OrderCartItems
 				.Where(x => x.BuyerId == _me.Id)
 				.ToList();
 
@@ -93,20 +93,20 @@ namespace Husky.Principal
 
 		public async Task<Result> AddToCart(int productId, List<OrderItemVariationGroup> orderItemVariations, int quantity = 1) {
 			var variationJson = JsonConvert.SerializeObject(orderItemVariations);
-			var shoppingCartItem = _db.ShoppingCartItems
+			var orderCartItem = _db.OrderCartItems
 				.Where(x => x.BuyerId == _me.Id)
 				.Where(x => x.ProductId == productId)
 				.Where(x => x.VariationJson == variationJson)
 				.FirstOrDefault();
 
-			if ( shoppingCartItem == null ) {
-				shoppingCartItem = new ShoppingCartItem {
+			if ( orderCartItem == null ) {
+				orderCartItem = new OrderCartItem {
 					ProductId = productId,
 					BuyerId = _me.Id,
 					BuyerName = _me.DisplayName,
 					VariationJson = variationJson
 				};
-				_db.ShoppingCartItems.Add(shoppingCartItem);
+				_db.OrderCartItems.Add(orderCartItem);
 			}
 
 			var product = _db.Products
@@ -124,34 +124,34 @@ namespace Husky.Principal
 			if ( product.OffShelveTime.HasValue && product.OffShelveTime.Value < DateTime.Now ) {
 				return new Failure("商品已过期下架");
 			}
-			if ( product.Stock == 0) {
+			if ( product.Stock == 0 ) {
 				return new Failure("商品缺货");
 			}
 
-			shoppingCartItem.Quantity += quantity;
-			shoppingCartItem.Quantity = Math.Min(shoppingCartItem.Quantity, product.Stock);
+			orderCartItem.Quantity += quantity;
+			orderCartItem.Quantity = Math.Min(orderCartItem.Quantity, product.Stock);
 
 			await _db.Normalize().SaveChangesAsync();
 			return new Success();
 		}
 
-		public async Task<Result> SetQuantity(int shoppingCartItemId, int quantity) {
-			var shoppingCartItem = _db.ShoppingCartItems
+		public async Task<Result> SetQuantity(int orderCartItemId, int quantity) {
+			var orderCartItem = _db.OrderCartItems
 				.Where(x => x.BuyerId == _me.Id)
-				.Where(x => x.Id == shoppingCartItemId)
+				.Where(x => x.Id == orderCartItemId)
 				.SingleOrDefault();
 
-			if ( shoppingCartItem != null ) {
-				shoppingCartItem.Quantity = quantity;
+			if ( orderCartItem != null ) {
+				orderCartItem.Quantity = quantity;
 				await _db.Normalize().SaveChangesAsync();
 			}
 			return new Success();
 		}
 
-		public async Task<Result> SetRemarks(int shoppingCartItemId, string remarks) {
-			var shoppingCartItem = _db.ShoppingCartItems
+		public async Task<Result> SetRemarks(int orderCartItemId, string remarks) {
+			var orderCartItem = _db.OrderCartItems
 				.Where(x => x.BuyerId == _me.Id)
-				.Where(x => x.Id == shoppingCartItemId)
+				.Where(x => x.Id == orderCartItemId)
 				.SingleOrDefault();
 
 			const int maxLength = 200;
@@ -159,8 +159,8 @@ namespace Husky.Principal
 				return new Failure($"不能超过{maxLength}个字符");
 			}
 
-			if ( shoppingCartItem != null ) {
-				shoppingCartItem.Remarks = remarks;
+			if ( orderCartItem != null ) {
+				orderCartItem.Remarks = remarks;
 				await _db.Normalize().SaveChangesAsync();
 			}
 			return new Success();

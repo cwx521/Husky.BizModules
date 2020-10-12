@@ -2,7 +2,7 @@
 
 namespace Husky.Principal
 {
-	partial class UserAuthManager
+	public partial class UserAuthManager
 	{
 		public void SignOut() {
 			if ( _me.IsAuthenticated ) {

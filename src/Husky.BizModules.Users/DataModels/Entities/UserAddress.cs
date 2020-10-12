@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text.Json.Serialization;
 
 namespace Husky.BizModules.Users.DataModels
 {
@@ -44,15 +43,14 @@ namespace Husky.BizModules.Users.DataModels
 		public DateTime CreatedTime { get; set; } = DateTime.Now;
 
 
+		// nav props
+
+		public User? User { get; set; }
+
+
 		// calculation
 
 		public string FullAddress => Province + City + District + DetailAddress;
 		public string FullAddressSplitBySpace => string.Join(" ", Province, City, District, DetailAddress);
-
-
-		// nav props
-
-		[JsonIgnore]
-		public User User { get; set; } = null!;
 	}
 }

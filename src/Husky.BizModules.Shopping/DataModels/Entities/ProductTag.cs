@@ -19,7 +19,6 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// nav props
 
-		[JsonIgnore]
 		public List<ProductTagRelation> ProductRelations { get; set; } = new List<ProductTagRelation>();
 	}
 }

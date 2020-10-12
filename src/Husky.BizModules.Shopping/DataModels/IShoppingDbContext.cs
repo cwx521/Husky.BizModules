@@ -10,6 +10,10 @@ namespace Husky.BizModules.Shopping.DataModels
 	{
 		DbContext Normalize();
 
+		public DbSet<Shop> Shops { get; set; }
+		public DbSet<ShopLimit> ShopLimits { get; set; }
+		public DbSet<ShopProfitWithdrawal> ShopProfitWithdrawals { get; set; }
+
 		public DbSet<Product> Products { get; set; }
 		public DbSet<ProductPicture> ProductPictures { get; set; }
 		public DbSet<ProductSibling> ProductSiblings { get; set; }
@@ -20,6 +24,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public DbSet<Order> Orders { get; set; }
 		public DbSet<OrderReceiverAddress> OrderReceiverAddresss { get; set; }
+		public DbSet<OrderCartItem> OrderCartItems { get; set; }
 		public DbSet<OrderItem> OrderItems { get; set; }
 		public DbSet<OrderExpress> OrderExpresses { get; set; }
 		public DbSet<OrderPayment> OrderPayments { get; set; }
@@ -27,9 +32,5 @@ namespace Husky.BizModules.Shopping.DataModels
 		public DbSet<OrderLog> OrderLogs { get; set; }
 		public DbSet<OrderComment> OrderComments { get; set; }
 		public DbSet<OrderFinalize> OrderFinalizes { get; set; }
-
-		public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
-
-		public DbSet<Withdrawal> Withdrawals { get; set; }
 	}
 }

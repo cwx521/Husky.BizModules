@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Husky.BizModules.Shopping.DataModels
 {
-	public class ShoppingCartItem
+	public class OrderCartItem
 	{
 		[Key]
 		public int Id { get; set; }
@@ -33,6 +33,6 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// nav props
 
-		public Product Product { get; set; } = null!;
+		public Product? Product { get; set; }
 	}
 }

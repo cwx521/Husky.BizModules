@@ -15,6 +15,7 @@ namespace Husky.BizModules.Shopping.DataModels
 			mb.Entity<ProductTagRelation>().HasKey(x => new { x.ProductId, x.ProductTagId });
 
 			//Filters
+			mb.Entity<Shop>().HasQueryFilter(x => x.Status == RowStatus.Active);
 			mb.Entity<Order>().HasQueryFilter(x => x.Status != OrderStatus.Deleted);
 			mb.Entity<OrderLog>().HasQueryFilter(x => x.Status == RowStatus.Active);
 			mb.Entity<OrderExpress>().HasQueryFilter(x => x.Status == RowStatus.Active);
@@ -22,8 +23,15 @@ namespace Husky.BizModules.Shopping.DataModels
 			mb.Entity<ProductVariationGroup>().HasQueryFilter(x => x.Status == RowStatus.Active);
 			mb.Entity<ProductVariation>().HasQueryFilter(x => x.Status == RowStatus.Active);
 			mb.Entity<ProductPicture>().HasQueryFilter(x => x.Status == RowStatus.Active);
-			mb.Entity<ShoppingCartItem>().HasQueryFilter(x => x.Removed == false);
+			mb.Entity<OrderCartItem>().HasQueryFilter(x => x.Removed == false);
 
+
+			//Shop
+			mb.Entity<Shop>(shop => {
+				shop.HasOne(x => x.Limit).WithOne(x => x.Shop).HasForeignKey<ShopLimit>(x => x.ShopId);
+				shop.HasMany(x => x.Products).WithOne(x => x.Shop).HasForeignKey(x => x.ShopId);
+				shop.HasMany(x => x.Withdrawals).WithOne(x => x.Shop).HasForeignKey(x => x.ShopId);
+			});
 
 			//Product
 			mb.Entity<Product>(product => {
@@ -59,13 +67,13 @@ namespace Husky.BizModules.Shopping.DataModels
 				orderLog.HasMany(x => x.Refunds).WithOne(x => x.SourcePayment).HasForeignKey(x => x.SourcePaymentId);
 			});
 
-			//ShoppingCartItem
-			mb.Entity<ShoppingCartItem>(shoppingCartItem => {
-				shoppingCartItem.HasOne(x => x.Product).WithMany().HasForeignKey(x => x.ProductId);
+			//OrderCartItem
+			mb.Entity<OrderCartItem>(orderCartItem => {
+				orderCartItem.HasOne(x => x.Product).WithMany().HasForeignKey(x => x.ProductId);
 			});
 
 			//Withdrawal
-			mb.Entity<Withdrawal>(withdrawal => {
+			mb.Entity<ShopProfitWithdrawal>(withdrawal => {
 				withdrawal.HasMany(x => x.AssosicatedOrderFinalizes).WithOne(x => x.Withdrawal).HasForeignKey(x => x.WithdrawalId);
 			});
 		}

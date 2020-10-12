@@ -1,6 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Newtonsoft.Json;
 
 namespace Husky.BizModules.Shopping.DataModels
 {
@@ -35,15 +34,14 @@ namespace Husky.BizModules.Shopping.DataModels
 		public decimal? Lat { get; set; }
 
 
+		// Order
+
+		public Order? Order { get; set; }
+
+
 		// calculation
 
 		public string FullAddress => Province + City + District + DetailAddress;
 		public string FullAddressSplitBySpace => string.Join(" ", Province, City, District, DetailAddress);
-
-
-		// Order
-
-		[JsonIgnore]
-		public Order Order { get; set; } = null!;
 	}
 }

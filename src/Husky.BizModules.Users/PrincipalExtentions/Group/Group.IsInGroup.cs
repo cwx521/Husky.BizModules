@@ -1,9 +1,9 @@
-﻿using Husky.BizModules.Users.DataModels;
-using System.Linq;
+﻿using System.Linq;
+using Husky.BizModules.Users.DataModels;
 
 namespace Husky.Principal
 {
-	partial class UserGroupManager
+	public partial class UserGroupManager
 	{
 		public bool IsInGroup(int groupId) {
 			return _me.IsAuthenticated &&

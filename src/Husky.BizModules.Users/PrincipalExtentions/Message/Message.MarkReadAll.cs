@@ -1,10 +1,10 @@
-﻿using Husky.BizModules.Users.DataModels;
+﻿using System.Threading.Tasks;
+using Husky.BizModules.Users.DataModels;
 using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 
 namespace Husky.Principal
 {
-	partial class UserMessageManager
+	public partial class UserMessageManager
 	{
 		public async Task MarkReadAll() {
 			if ( _me.IsAnonymous ) {

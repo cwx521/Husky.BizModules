@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Husky.Principal
 {
-	partial class UserAuthManager
+	public partial class UserAuthManager
 	{
 		public async Task<LoginResult> SignInWithPassword(string mobileNumber, string password) {
 			if ( string.IsNullOrEmpty(mobileNumber) || string.IsNullOrEmpty(password) ) {
@@ -52,7 +52,7 @@ namespace Husky.Principal
 			return await AddLoginRecord(LoginResult.Success, mobileNumber, user.Id);
 		}
 
-		bool IsNeedToSuspendFurtherLoginAttemptionByFailureRecordsAnalysis(int userId, TimeSpan withinTime, int maxAllowedAttemptionTimes = 5) {
+		private bool IsNeedToSuspendFurtherLoginAttemptionByFailureRecordsAnalysis(int userId, TimeSpan withinTime, int maxAllowedAttemptionTimes = 5) {
 			var list = _db.UserLoginRecords
 				.AsNoTracking()
 				.Where(x => x.UserId == userId)

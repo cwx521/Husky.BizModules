@@ -1,14 +1,14 @@
-﻿using Husky;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using Husky;
 using Husky.BizModules.Users.DataModels;
 using Husky.WeChatIntegration;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Husky.Principal
 {
-	partial class UserAuthManager
+	public partial class UserAuthManager
 	{
 		public async Task<LoginResult> SignInWithWeChat(string wechatCode, WeChatAppIdSecret idSecret) {
 			if ( _wechat == null ) {

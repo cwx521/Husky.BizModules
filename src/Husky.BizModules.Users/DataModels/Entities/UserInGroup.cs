@@ -1,6 +1,4 @@
-﻿using Newtonsoft.Json;
-
-namespace Husky.BizModules.Users.DataModels
+﻿namespace Husky.BizModules.Users.DataModels
 {
 	public class UserInGroup
 	{
@@ -11,6 +9,6 @@ namespace Husky.BizModules.Users.DataModels
 
 		//nav props
 
-		public UserGroup Group { get; set; } = null!;
+		public UserGroup? Group { get; set; }
 	}
 }

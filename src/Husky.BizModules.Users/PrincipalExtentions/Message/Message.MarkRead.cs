@@ -1,10 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Husky.Principal
 {
-	partial class UserMessageManager
+	public partial class UserMessageManager
 	{
 		public async Task MarkRead(params int[] userMessageIdArray) {
 			if ( _me.IsAnonymous ) {

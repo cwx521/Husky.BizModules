@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -19,7 +18,6 @@ namespace Husky.BizModules.Users.DataModels
 
 		// nav props
 
-		[JsonIgnore]
 		public List<UserMessage> UserMessages { get; set; } = new List<UserMessage>();
 	}
 }

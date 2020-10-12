@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
 
 namespace Husky.BizModules.Shopping.DataModels
 {
@@ -25,7 +24,6 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// nav props
 
-		[JsonIgnore]
-		public Product Product { get; set; } = null!;
+		public Product? Product { get; set; }
 	}
 }
