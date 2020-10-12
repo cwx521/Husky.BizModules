@@ -36,7 +36,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// nav props
 
-		public Order? Order { get; set; }
+		public Order Order { get; set; } = null!;
 
 
 		// calculation

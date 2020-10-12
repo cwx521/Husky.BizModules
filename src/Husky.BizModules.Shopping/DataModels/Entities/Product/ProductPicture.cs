@@ -25,6 +25,6 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// nav props
 
-		public Product? Product { get; set; }
+		public Product Product { get; set; } = null!;
 	}
 }

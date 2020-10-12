@@ -9,7 +9,7 @@
 
 		//nav
 
-		public Product? Product { get; set; }
-		public Product? SiblingProduct { get; set; }
+		public Product Product { get; set; } = null!;
+		public Product SiblingProduct { get; set; } = null!;
 	}
 }

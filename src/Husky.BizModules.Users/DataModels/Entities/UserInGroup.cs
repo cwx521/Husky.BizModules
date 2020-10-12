@@ -9,6 +9,6 @@
 
 		//nav props
 
-		public UserGroup? Group { get; set; }
+		public UserGroup Group { get; set; } = null!;
 	}
 }

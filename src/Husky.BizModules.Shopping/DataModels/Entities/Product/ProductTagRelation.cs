@@ -9,7 +9,7 @@
 
 		// nav props
 
-		public Product? Product { get; set; }
-		public ProductTag? ProductTag { get; set; }
+		public Product Product { get; set; } = null!;
+		public ProductTag ProductTag { get; set; } = null!;
 	}
 }

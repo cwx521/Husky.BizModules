@@ -26,6 +26,6 @@ namespace Husky.BizModules.Users.DataModels
 
 		// nav props
 
-		public User? User { get; set; }
+		public User User { get; set; } = null!;
 	}
 }

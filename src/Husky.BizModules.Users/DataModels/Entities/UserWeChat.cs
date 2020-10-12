@@ -40,7 +40,7 @@ namespace Husky.BizModules.Users.DataModels
 
 		// nav props
 
-		public User? User { get; set; }
+		public User User { get; set; } = null!;
 		public List<UserWeChatOpenId> OpenIds { get; set; } = new List<UserWeChatOpenId>();
 	}
 }

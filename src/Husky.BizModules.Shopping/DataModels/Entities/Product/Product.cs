@@ -54,7 +54,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// nav props
 
-		public Shop? Shop { get; set; }
+		public Shop Shop { get; set; } = null!;
 		public List<ProductPicture> Pictures { get; set; } = new List<ProductPicture>();
 		public List<ProductVariationGroup> VariationGroups { get; set; } = new List<ProductVariationGroup>();
 		public List<ProductTagRelation> TagRelations { get; set; } = new List<ProductTagRelation>();

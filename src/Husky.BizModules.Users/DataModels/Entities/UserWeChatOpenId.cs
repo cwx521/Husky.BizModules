@@ -19,6 +19,6 @@ namespace Husky.BizModules.Users.DataModels
 
 		// nav props
 
-		public UserWeChat? WeChat { get; set; }
+		public UserWeChat WeChat { get; set; } = null!;
 	}
 }

@@ -21,9 +21,9 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public RowStatus Status { get; set; }
 
-		
+
 		// nav props
 
-		public ProductVariationGroup? Group { get; set; }
+		public ProductVariationGroup Group { get; set; } = null!;
 	}
 }

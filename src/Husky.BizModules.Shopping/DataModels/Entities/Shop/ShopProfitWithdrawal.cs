@@ -42,7 +42,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// nav props
 
-		public Shop? Shop { get; set; }
+		public Shop Shop { get; set; } = null!;
 		public List<OrderFinalize> AssosicatedOrderFinalizes { get; set; } = new List<OrderFinalize>();
 	}
 }

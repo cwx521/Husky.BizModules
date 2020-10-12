@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Husky.BizModules.Shopping.DataModels
@@ -27,6 +26,6 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// nav props
 
-		public ShopLimit? Limit { get; set; }
+		public ShopLimit Limit { get; set; } = null!;
 	}
 }

@@ -30,7 +30,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// Order
 
-		public Order? Order { get; set; }
+		public Order Order { get; set; } = null!;
 		public ShopProfitWithdrawal? Withdrawal { get; set; }
 
 

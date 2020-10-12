@@ -33,7 +33,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		// nav props
 
-		public OrderPayment? OriginalPayment { get; set; }
+		public OrderPayment OriginalPayment { get; set; } = null!;
 
 
 		// calculation
