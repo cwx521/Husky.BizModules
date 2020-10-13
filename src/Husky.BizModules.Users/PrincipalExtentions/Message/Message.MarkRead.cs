@@ -6,9 +6,9 @@ namespace Husky.Principal
 {
 	public partial class UserMessageManager
 	{
-		public async Task MarkRead(params int[] userMessageIdArray) {
+		public async Task<Result> MarkRead(params int[] userMessageIdArray) {
 			if ( _me.IsAnonymous ) {
-				return;
+				return new Failure("需要先登录");
 			}
 
 			var rows = _db.UserMessage
@@ -19,6 +19,8 @@ namespace Husky.Principal
 
 			rows.ForEach(x => x.IsRead = true);
 			await _db.Normalize().SaveChangesAsync();
+
+			return new Success();
 		}
 	}
 }

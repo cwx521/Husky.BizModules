@@ -6,9 +6,9 @@ namespace Husky.Principal
 {
 	public partial class UserMessageManager
 	{
-		public async Task MarkReadAll() {
+		public async Task<Result> MarkReadAll() {
 			if ( _me.IsAnonymous ) {
-				return;
+				return new Failure("需要先登录");
 			}
 
 			var sql = $"update UserMessages" +
@@ -16,6 +16,7 @@ namespace Husky.Principal
 				$" where {nameof(UserMessage.IsRead)}=0 and {nameof(UserMessage.UserId)}={{0}}";
 
 			await _db.Normalize().Database.ExecuteSqlRawAsync(sql, _me.Id);
+			return new Success();
 		}
 	}
 }

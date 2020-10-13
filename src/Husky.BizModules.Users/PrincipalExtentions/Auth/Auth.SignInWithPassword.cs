@@ -7,12 +7,12 @@ namespace Husky.Principal
 {
 	public partial class UserAuthManager
 	{
-		public async Task<LoginResult> SignInWithPassword(string mobileNumber, string password) {
+		public async Task<Result> SignInWithPassword(string mobileNumber, string password) {
 			if ( string.IsNullOrEmpty(mobileNumber) || string.IsNullOrEmpty(password) ) {
-				return LoginResult.InvalidInput;
+				return new Failure(LoginResult.InvalidInput.ToLabel());
 			}
 			if ( !mobileNumber.IsMainlandMobile() ) {
-				return LoginResult.InvalidInput;
+				return new Failure(LoginResult.InvalidInput.ToLabel());
 			}
 
 			var user = _db.Users

@@ -10,6 +10,7 @@ namespace Husky.Principal
 			if ( _me.IsAnonymous ) {
 				return new Failure("需要先登录");
 			}
+
 			if ( displayName == null ) {
 				return new Failure("不能为空");
 			}

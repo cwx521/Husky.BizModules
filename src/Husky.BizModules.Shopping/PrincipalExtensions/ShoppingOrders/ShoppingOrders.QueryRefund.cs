@@ -11,7 +11,7 @@ namespace Husky.Principal
 	{
 		public async Task<Result> QueryRefund(int refundId) {
 			if ( _me.IsAnonymous ) {
-				return new Failure("请先登录");
+				return new Failure("需要先登录");
 			}
 
 			var refund = _db.OrderRefunds
@@ -43,7 +43,7 @@ namespace Husky.Principal
 			await _db.Normalize().SaveChangesAsync();
 
 			return refund.Status == RefundStatus.Refunded
-				? new Result(true, "已成功付款")
+				? new Result(true, "已成功退款")
 				: new Result(false, result.Message ?? "未查询到退款信息");
 		}
 	}

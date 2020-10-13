@@ -1,9 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Husky.BizModules.Shopping.DataModels;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Internal;
 
 namespace Husky.Principal
@@ -12,7 +10,7 @@ namespace Husky.Principal
 	{
 		public async Task<Result<Shop>> Create(string shopName, string description, RowStatus status = RowStatus.Active) {
 			if ( _me.IsAnonymous ) {
-				return new Failure<Shop>("请先登录");
+				return new Failure<Shop>("需要先登录");
 			}
 
 			var hasAlready = _db.Shops.IgnoreQueryFilters().Any(x => x.OwnerId == _me.Id);

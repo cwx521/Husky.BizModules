@@ -10,12 +10,14 @@ namespace Husky.Principal
 				return new Failure("需要先登录");
 			}
 			if ( socialIdNumber.IsMainlandSocialNumber() ) {
-				return new Failure("身份证号码无效");
+				return new Failure("身份证号码不正确");
 			}
 
 			var userReal = _db.UserReals.Find(_me.Id);
 			if ( userReal == null ) {
-				userReal = new UserReal();
+				userReal = new UserReal {
+					UserId = _me.Id
+				};
 				_db.UserReals.Add(userReal);
 			}
 

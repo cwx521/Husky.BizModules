@@ -91,7 +91,46 @@ namespace Husky.Principal
 			return new Success();
 		}
 
-		public async Task<Result> AddToCart(int productId, List<OrderItemVariationGroup> orderItemVariations, int quantity = 1) {
+		public async Task<Result> SetQuantity(int orderCartItemId, int quantity) {
+			var orderCartItem = _db.OrderCartItems
+				.Where(x => x.BuyerId == _me.Id)
+				.Where(x => x.Id == orderCartItemId)
+				.SingleOrDefault();
+
+			if ( orderCartItem != null ) {
+				orderCartItem.Quantity = quantity;
+				await _db.Normalize().SaveChangesAsync();
+			}
+			return new Success();
+		}
+
+		public async Task<Result> SetRemarks(int orderCartItemId, string? remarks) {
+			var orderCartItem = _db.OrderCartItems
+				.Where(x => x.BuyerId == _me.Id)
+				.Where(x => x.Id == orderCartItemId)
+				.SingleOrDefault();
+
+			const int maxLength = 200;
+			if ( remarks != null && remarks.Length > maxLength ) {
+				return new Failure($"不能超过{maxLength}个字符");
+			}
+
+			if ( orderCartItem != null ) {
+				orderCartItem.Remarks = remarks;
+				await _db.Normalize().SaveChangesAsync();
+			}
+			return new Success();
+		}
+
+		public async Task<Result> ClearRemarks(int orderCartItemId) {
+			return await SetRemarks(orderCartItemId, null);
+		}
+
+		public async Task<Result<OrderCartItem>> AddToCart(int productId, List<OrderItemVariationGroup> orderItemVariations, int quantity = 1) {
+			if ( _me.IsAnonymous ) {
+				return new Failure<OrderCartItem>("需要先登录");
+			}
+
 			var variationJson = JsonConvert.SerializeObject(orderItemVariations);
 			var orderCartItem = _db.OrderCartItems
 				.Where(x => x.BuyerId == _me.Id)
@@ -116,54 +155,23 @@ namespace Husky.Principal
 				.SingleOrDefault();
 
 			if ( product == null ) {
-				return new Failure("商品不存在");
+				return new Failure<OrderCartItem>("商品不存在");
 			}
 			if ( product.Status != ProductStatus.Active ) {
-				return new Failure($"商品{product.Status.ToLabel()}，无法购买");
+				return new Failure<OrderCartItem>($"商品{product.Status.ToLabel()}，无法购买");
 			}
 			if ( product.OffShelveTime < DateTime.Now ) {
-				return new Failure("商品已过期下架");
+				return new Failure<OrderCartItem>("商品已过期下架");
 			}
 			if ( product.Stock == 0 ) {
-				return new Failure("商品缺货");
+				return new Failure<OrderCartItem>("商品缺货");
 			}
 
 			orderCartItem.Quantity += quantity;
 			orderCartItem.Quantity = Math.Min(orderCartItem.Quantity, product.Stock);
 
 			await _db.Normalize().SaveChangesAsync();
-			return new Success();
-		}
-
-		public async Task<Result> SetQuantity(int orderCartItemId, int quantity) {
-			var orderCartItem = _db.OrderCartItems
-				.Where(x => x.BuyerId == _me.Id)
-				.Where(x => x.Id == orderCartItemId)
-				.SingleOrDefault();
-
-			if ( orderCartItem != null ) {
-				orderCartItem.Quantity = quantity;
-				await _db.Normalize().SaveChangesAsync();
-			}
-			return new Success();
-		}
-
-		public async Task<Result> SetRemarks(int orderCartItemId, string remarks) {
-			var orderCartItem = _db.OrderCartItems
-				.Where(x => x.BuyerId == _me.Id)
-				.Where(x => x.Id == orderCartItemId)
-				.SingleOrDefault();
-
-			const int maxLength = 200;
-			if ( remarks.Length > maxLength ) {
-				return new Failure($"不能超过{maxLength}个字符");
-			}
-
-			if ( orderCartItem != null ) {
-				orderCartItem.Remarks = remarks;
-				await _db.Normalize().SaveChangesAsync();
-			}
-			return new Success();
+			return new Success<OrderCartItem>(orderCartItem);
 		}
 	}
 }

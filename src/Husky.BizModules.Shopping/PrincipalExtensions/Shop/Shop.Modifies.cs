@@ -7,7 +7,7 @@ namespace Husky.Principal
 	{
 		public async Task<Result> Rename(int shopId, string newShopName) {
 			if ( _me.IsAnonymous ) {
-				return new Failure("请先登录");
+				return new Failure("需要先登录");
 			}
 
 			var shop = _db.Shops
@@ -24,7 +24,7 @@ namespace Husky.Principal
 
 		public async Task<Result> ChangeDescription(int shopId, string newDescription) {
 			if ( _me.IsAnonymous ) {
-				return new Failure("请先登录");
+				return new Failure("需要先登录");
 			}
 
 			var shop = _db.Shops

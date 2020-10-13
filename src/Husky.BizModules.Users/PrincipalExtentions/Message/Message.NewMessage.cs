@@ -5,12 +5,20 @@ namespace Husky.Principal
 {
 	public partial class UserMessageManager
 	{
-		public async Task NewMessage(string message) {
-			_db.UserMessage.Add(new UserMessage {
+		public async Task<Result<UserMessage>> NewMessage(string message) {
+			if ( _me.IsAnonymous ) {
+				return new Failure<UserMessage>("需要先登录");
+			}
+
+			var userMessage = new UserMessage {
 				UserId = _me.Id,
 				Content = message,
-			});
+			};
+
+			_db.UserMessage.Add(userMessage);
 			await _db.Normalize().SaveChangesAsync();
+
+			return new Success<UserMessage>(userMessage);
 		}
 	}
 }

@@ -9,7 +9,7 @@ namespace Husky.Principal
 	{
 		public async Task<Result<Order>> CreateOrder(PaymentChoise paymentChoise, OrderReceiverAddress addr) {
 			if ( _me.IsAnonymous ) {
-				return new Failure<Order>("请先登录");
+				return new Failure<Order>("需要先登录");
 			}
 
 			var orderCartItems = _db.OrderCartItems

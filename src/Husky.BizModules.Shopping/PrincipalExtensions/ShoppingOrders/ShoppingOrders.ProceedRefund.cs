@@ -10,9 +10,9 @@ namespace Husky.Principal
 {
 	public partial class UserShoppingOrdersManager
 	{
-		public async Task<Result> ProceedRefund(int orderId, RefundReason refundReason, OrderStatus? setOrderStatus = null, decimal? requestRefundAmount = null) {
+		public async Task<Result<List<OrderRefund>>> ProceedRefund(int orderId, RefundReason refundReason, OrderStatus? setOrderStatus = null, decimal? requestRefundAmount = null) {
 			if ( _me.IsAnonymous ) {
-				return new Failure<Order>("请先登录");
+				return new Failure<List<OrderRefund>>("需要先登录");
 			}
 
 			var order = _db.Orders
@@ -22,12 +22,12 @@ namespace Husky.Principal
 				.SingleOrDefault();
 
 			if ( order == null ) {
-				return new Failure("退款失败，未找到订单");
+				return new Failure<List<OrderRefund>>("退款失败，未找到订单");
 			}
 
 			const int daysToRefundAfterOrderCompleted = 30;
 			if ( order.CompletedTime.HasValue && order.CompletedTime < DateTime.Now.AddDays(daysToRefundAfterOrderCompleted) ) {
-				return new Failure($"只能在订单完成后的 {daysToRefundAfterOrderCompleted} 天内进行退款");
+				return new Failure<List<OrderRefund>>($"只能在订单完成后的 {daysToRefundAfterOrderCompleted} 天内进行退款");
 			}
 
 			if ( _alipay == null && order.Payments.Any(x => x.Choise == PaymentChoise.Alipay) ) {
@@ -48,7 +48,7 @@ namespace Husky.Principal
 			var refundMaxAllowed = totalPaid - refundedBefore;
 
 			if ( requestRefundAmount.HasValue && requestRefundAmount.Value > refundMaxAllowed ) {
-				return new Failure("超出总共可退款金额");
+				return new Failure<List<OrderRefund>>("超出总共可退款金额");
 			}
 
 			var refundRemained = requestRefundAmount ?? refundMaxAllowed;
@@ -132,9 +132,9 @@ namespace Husky.Principal
 			//返回执行结果
 			if ( pending.Any(x => x.Status != RefundStatus.Refunded) ) {
 				var choises = string.Join("及", pending.Select(x => x.OriginalPayment.Choise).Distinct().ToArray());
-				return new Success($"已提交退款，但{choises}返回信息未成功");
+				return new Success<List<OrderRefund>>($"已提交退款，但{choises}返回信息未成功", pending);
 			}
-			return new Success();
+			return new Success<List<OrderRefund>>(pending);
 		}
 	}
 }

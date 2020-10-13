@@ -10,7 +10,7 @@ namespace Husky.Principal
 {
 	public partial class UserAuthManager
 	{
-		public async Task<LoginResult> SignInWithWeChat(string wechatCode, WeChatAppIdSecret idSecret) {
+		public async Task<Result> SignInWithWeChat(string wechatCode, WeChatAppIdSecret idSecret) {
 			if ( _wechat == null ) {
 				throw new Exception($"未添加微信服务组件 {typeof(WeChatService).Assembly.GetName()}");
 			}
@@ -22,11 +22,11 @@ namespace Husky.Principal
 
 			var accessToken = wechatUserService.GetUserAccessToken(wechatCode, idSecret);
 			if ( accessToken == null ) {
-				return LoginResult.FailureWeChatRequestToken;
+				return new Failure(LoginResult.FailureWeChatRequestToken.ToLabel());
 			}
 			var wechatUser = wechatUserService.GetUserInfo(accessToken);
 			if ( wechatUser == null ) {
-				return LoginResult.FailureWeChatRequestUserInfo;
+				return new Failure(LoginResult.FailureWeChatRequestUserInfo.ToLabel());
 			}
 
 			//寻找用户，看该微信账号是否已经注册过

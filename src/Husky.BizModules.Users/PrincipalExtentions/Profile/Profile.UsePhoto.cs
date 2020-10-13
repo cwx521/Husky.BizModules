@@ -10,7 +10,7 @@ namespace Husky.Principal
 			}
 
 			var user = _db.Users.Find(_me.Id);
-			user.PhotoUrl = photoUrl.Left(500);
+			user.PhotoUrl = photoUrl;
 
 			await _db.Normalize().SaveChangesAsync();
 			return new Success();

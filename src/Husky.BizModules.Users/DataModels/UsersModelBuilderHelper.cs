@@ -23,7 +23,6 @@ namespace Husky.BizModules.Users.DataModels
 				x.ContactName != null &&
 				x.ContactName.Length != 0);
 
-
 			//User
 			mb.Entity<User>(user => {
 				user.HasOne(x => x.Phone).WithOne(x => x.User).HasForeignKey<UserPhone>(x => x.UserId);

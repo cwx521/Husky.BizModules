@@ -5,7 +5,7 @@ namespace Husky.Principal
 {
 	public partial class UserAuthManager
 	{
-		public async Task<LoginResult> AddLoginRecord(LoginResult result, string inputAccount, int? knownUserId = null, string? sickPassword = null) {
+		public async Task<Result> AddLoginRecord(LoginResult loginResult, string inputAccount, int? knownUserId = null, string? sickPassword = null) {
 			var ip = _http.Connection.RemoteIpAddress;
 			var ipString = ip.MapToIPv4().ToString();
 
@@ -16,7 +16,7 @@ namespace Husky.Principal
 					: Crypto.Encrypt(sickPassword, iv: inputAccount);
 
 			_db.UserLoginRecords.Add(new UserLoginRecord {
-				LoginResult = result,
+				LoginResult = loginResult,
 				UserId = knownUserId,
 				AttemptedAccount = inputAccount ?? "",
 				SickPassword = encryptedSickPassword,
@@ -26,10 +26,11 @@ namespace Husky.Principal
 
 			await _db.Normalize().SaveChangesAsync();
 
-			if ( result != LoginResult.Success ) {
+			if ( loginResult != LoginResult.Success ) {
 				SignOut();
+				return new Failure(loginResult.ToLabel());
 			}
-			return result;
+			return new Success();
 		}
 	}
 }

@@ -10,7 +10,7 @@ namespace Husky.Principal
 	{
 		public async Task<Result> QueryPayment(int paymentId) {
 			if ( _me.IsAnonymous ) {
-				return new Failure("请先登录");
+				return new Failure("需要先登录");
 			}
 
 			var payment = _db.OrderPayments
