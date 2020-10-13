@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Husky.Principal
 {
-	public partial class UserShopProductManager
+	public partial class UserSellingManager
 	{
 		public async Task<Result<Product>> CreateProduct(string productName, int stock, decimal actualPrice, decimal? originalPrice = null) {
 			if ( _me.IsAnonymous ) {

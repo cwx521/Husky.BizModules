@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Husky.Principal
 {
-	public partial class UserShopProductManager
+	public partial class UserSellingManager
 	{
 		public async Task<Result> ChangeStatus(int productId, ProductStatus status) {
 			if ( _me.IsAnonymous ) {
@@ -39,9 +39,23 @@ namespace Husky.Principal
 			return new Success();
 		}
 
-		private async Task<Result> ChangePropValue<T>(int productId, string propertyName, T propertyValue) {
+		public async Task<Result> ChangePropValue<T>(int productId, string productPropertyName, T propertyValue) {
 			if ( _me.IsAnonymous ) {
-				return new Failure<Product>("需要先登录");
+				return new Failure("需要先登录");
+			}
+
+			var allowedPropertyNames = new[] {
+				nameof(Product.ProductName),
+				nameof(Product.ProductCode),
+				nameof(Product.Description),
+				nameof(Product.PrimaryPictureUrl),
+				nameof(Product.ActualPrice),
+				nameof(Product.OriginalPrice),
+				nameof(Product.Stock),
+				nameof(Product.InShopDisplayOnTop),
+			};
+			if ( !allowedPropertyNames.Contains(productPropertyName) ) {
+				return new Failure("不允许修改该字段内容");
 			}
 
 			var product = _db.Products
@@ -50,7 +64,7 @@ namespace Husky.Principal
 				.SingleOrDefault();
 
 			if ( product != null ) {
-				typeof(Product).GetProperty(propertyName)!.SetValue(product, propertyValue);
+				typeof(Product).GetProperty(productPropertyName)!.SetValue(product, propertyValue);
 				await _db.Normalize().SaveChangesAsync();
 			}
 			return new Success();

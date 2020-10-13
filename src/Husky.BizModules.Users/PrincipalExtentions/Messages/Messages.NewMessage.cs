@@ -3,7 +3,7 @@ using Husky.BizModules.Users.DataModels;
 
 namespace Husky.Principal
 {
-	public partial class UserMessageManager
+	public partial class UserMessagesManager
 	{
 		public async Task<Result<UserMessage>> NewMessage(string message) {
 			if ( _me.IsAnonymous ) {

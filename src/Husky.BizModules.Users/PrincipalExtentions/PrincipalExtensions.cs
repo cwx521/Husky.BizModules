@@ -18,12 +18,12 @@ namespace Husky.Principal
 			return new UserProfileManager(principal);
 		}
 
-		public static UserGroupManager Group(this IPrincipalUser principal) {
-			return new UserGroupManager(principal);
+		public static UserGroupsManager Group(this IPrincipalUser principal) {
+			return new UserGroupsManager(principal);
 		}
 
-		public static UserMessageManager Message(this IPrincipalUser principal) {
-			return new UserMessageManager(principal);
+		public static UserMessagesManager Message(this IPrincipalUser principal) {
+			return new UserMessagesManager(principal);
 		}
 
 		public static UserQuickView QuickView(this IPrincipalUser principal) {

@@ -64,8 +64,8 @@ namespace Husky.BizModules.Shopping.DataModels
 				order.HasMany(x => x.Payments).WithOne(x => x.Order).HasForeignKey(x => x.OrderId);
 				order.HasMany(x => x.Comments).WithOne(x => x.Order).HasForeignKey(x => x.OrderId);
 			});
-			mb.Entity<OrderCartItem>(orderCartItem => {
-				orderCartItem.HasOne(x => x.Product).WithMany().HasForeignKey(x => x.ProductId);
+			mb.Entity<OrderCartItem>(cartItem => {
+				cartItem.HasOne(x => x.Product).WithMany().HasForeignKey(x => x.ProductId);
 			});
 			mb.Entity<OrderItem>(orderItem => {
 				orderItem.HasOne(x => x.Product).WithMany().HasForeignKey(x => x.ProductId);

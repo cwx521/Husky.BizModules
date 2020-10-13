@@ -6,7 +6,7 @@ using Husky.BizModules.Shopping.DataModels;
 
 namespace Husky.Principal
 {
-	public partial class UserShoppingOrdersManager
+	public partial class UserOrdersManager
 	{
 		public async Task<Result> QueryPayment(int paymentId) {
 			if ( _me.IsAnonymous ) {

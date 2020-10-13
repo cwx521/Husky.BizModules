@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Husky.Principal
 {
-	public partial class UserShoppingOrdersManager
+	public partial class UserOrdersManager
 	{
 		public async Task<Result<List<OrderRefund>>> ProceedRefund(int orderId, RefundReason refundReason, OrderStatus? setOrderStatus = null, decimal? requestRefundAmount = null) {
 			if ( _me.IsAnonymous ) {

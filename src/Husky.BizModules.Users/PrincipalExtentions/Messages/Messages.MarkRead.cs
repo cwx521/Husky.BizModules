@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Husky.Principal
 {
-	public partial class UserMessageManager
+	public partial class UserMessagesManager
 	{
 		public async Task<Result> MarkRead(params int[] userMessageIdArray) {
 			if ( _me.IsAnonymous ) {

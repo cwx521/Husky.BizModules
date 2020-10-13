@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Husky.Principal
 {
-	public partial class UserGroupManager
+	public partial class UserGroupsManager
 	{
 		public UserGroup[] GetGroups() {
 			if ( _me.IsAnonymous ) {

@@ -3,7 +3,7 @@ using Husky.BizModules.Users.DataModels;
 
 namespace Husky.Principal
 {
-	public partial class UserGroupManager
+	public partial class UserGroupsManager
 	{
 		public bool IsInGroup(int groupId) {
 			return _me.IsAuthenticated &&

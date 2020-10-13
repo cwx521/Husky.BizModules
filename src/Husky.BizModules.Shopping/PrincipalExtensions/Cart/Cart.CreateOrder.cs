@@ -5,24 +5,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Husky.Principal
 {
-	public partial class UserShoppingCartManager
+	public partial class UserCartManager
 	{
 		public async Task<Result<Order>> CreateOrder(PaymentChoise paymentChoise, OrderReceiverAddress addr) {
 			if ( _me.IsAnonymous ) {
 				return new Failure<Order>("需要先登录");
 			}
 
-			var orderCartItems = _db.OrderCartItems
+			var cartItems = _db.OrderCartItems
 				.Include(x => x.Product)
 				.Where(x => x.Selected)
 				.Where(x => x.BuyerId == _me.Id)
 				.ToList();
 
-			if ( orderCartItems.Count == 0 ) {
+			if ( cartItems.Count == 0 ) {
 				return new Failure<Order>("没有选中待结算的商品");
 			}
 
-			var outOfStock = orderCartItems.FirstOrDefault(x => x.Product.Stock <= x.Quantity);
+			var outOfStock = cartItems.FirstOrDefault(x => x.Product.Stock <= x.Quantity);
 			if ( outOfStock != null ) {
 				return new Failure<Order>("有商品缺货，不足购买数量，请返回购物车查看");
 			}
@@ -31,7 +31,7 @@ namespace Husky.Principal
 			var order = new Order {
 				BuyerId = _me.Id,
 				OrderNo = OrderIdGen.New(),
-				TotalAmount = orderCartItems.Sum(x => x.Quantity * x.Product.ActualPrice),
+				TotalAmount = cartItems.Sum(x => x.Quantity * x.Product.ActualPrice),
 				Status = OrderStatus.AwaitPay
 			};
 
@@ -54,7 +54,7 @@ namespace Husky.Principal
 			};
 
 			//Move OrderCartItems to OrderItems
-			order.Items.AddRange(orderCartItems.Select(x => new OrderItem {
+			order.Items.AddRange(cartItems.Select(x => new OrderItem {
 				ProductId = x.ProductId,
 				Quantity = x.Quantity,
 				InstantProductCode = x.Product!.ProductCode,
@@ -76,7 +76,7 @@ namespace Husky.Principal
 
 			//Update database
 			_db.Orders.Add(order);
-			_db.OrderCartItems.RemoveRange(orderCartItems);
+			_db.OrderCartItems.RemoveRange(cartItems);
 
 			//Save & return
 			await _db.Normalize().SaveChangesAsync();

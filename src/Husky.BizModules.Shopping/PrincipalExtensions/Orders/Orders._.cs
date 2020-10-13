@@ -6,9 +6,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Husky.Principal
 {
-	public sealed partial class UserShoppingOrdersManager
+	public sealed partial class UserOrdersManager
 	{
-		internal UserShoppingOrdersManager(IPrincipalUser principal) {
+		internal UserOrdersManager(IPrincipalUser principal) {
 			_me = principal;
 			_db = principal.ServiceProvider.GetRequiredService<IShoppingDbContext>();
 			_http = principal.ServiceProvider.GetRequiredService<IHttpContextAccessor>().HttpContext;
