@@ -9,7 +9,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		[DatabaseGenerated(DatabaseGeneratedOption.None)]
 		public int ShopId { get; set; }
 
-		public int MaxProductCount { get; set; } = 20;
+		public int MaxShelveCount { get; set; } = 20;
 
 		public decimal MaxSinglePrice { get; set; } = 500;
 
