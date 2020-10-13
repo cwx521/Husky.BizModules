@@ -16,7 +16,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		public string ShopName { get; set; } = null!;
 
 		[MaxLength(500)]
-		public string? ShopDescription { get; set; }
+		public string? Description { get; set; }
 
 		public RowStatus Status { get; set; }
 

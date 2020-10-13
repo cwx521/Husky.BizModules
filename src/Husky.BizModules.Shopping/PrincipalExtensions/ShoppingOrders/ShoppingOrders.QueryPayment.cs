@@ -9,6 +9,10 @@ namespace Husky.Principal
 	public partial class UserShoppingOrdersManager
 	{
 		public async Task<Result> QueryPayment(int paymentId) {
+			if ( _me.IsAnonymous ) {
+				return new Failure("请先登录");
+			}
+
 			var payment = _db.OrderPayments
 				.Where(x => x.Id == paymentId)
 				.Where(x => x.Order.BuyerId == _me.Id)

@@ -11,7 +11,9 @@ namespace Husky.Principal
 	public partial class UserShoppingOrdersManager
 	{
 		public async Task<Result> ProceedRefund(int orderId, RefundReason refundReason, OrderStatus? setOrderStatus = null, decimal? requestRefundAmount = null) {
-			const int daysToRefundAfterOrderCompleted = 30;
+			if ( _me.IsAnonymous ) {
+				return new Failure<Order>("请先登录");
+			}
 
 			var order = _db.Orders
 				.Include(x => x.Payments).ThenInclude(x => x.Refunds)
@@ -22,6 +24,8 @@ namespace Husky.Principal
 			if ( order == null ) {
 				return new Failure("退款失败，未找到订单");
 			}
+
+			const int daysToRefundAfterOrderCompleted = 30;
 			if ( order.CompletedTime.HasValue && order.CompletedTime < DateTime.Now.AddDays(daysToRefundAfterOrderCompleted) ) {
 				return new Failure($"只能在订单完成后的 {daysToRefundAfterOrderCompleted} 天内进行退款");
 			}

@@ -8,6 +8,10 @@ namespace Husky.Principal
 	public partial class UserShoppingCartManager
 	{
 		public async Task<Result<Order>> CreateOrder(PaymentChoise paymentChoise, OrderReceiverAddress addr) {
+			if ( _me.IsAnonymous ) {
+				return new Failure<Order>("请先登录");
+			}
+
 			var orderCartItems = _db.OrderCartItems
 				.Include(x => x.Product)
 				.Where(x => x.Selected)

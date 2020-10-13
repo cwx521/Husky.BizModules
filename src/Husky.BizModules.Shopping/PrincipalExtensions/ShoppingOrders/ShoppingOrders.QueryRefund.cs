@@ -10,6 +10,10 @@ namespace Husky.Principal
 	public partial class UserShoppingOrdersManager
 	{
 		public async Task<Result> QueryRefund(int refundId) {
+			if ( _me.IsAnonymous ) {
+				return new Failure("请先登录");
+			}
+
 			var refund = _db.OrderRefunds
 				.Include(x => x.OriginalPayment)
 				.Where(x => x.Id == refundId)
