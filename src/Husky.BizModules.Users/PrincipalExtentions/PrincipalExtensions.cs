@@ -26,24 +26,21 @@ namespace Husky.Principal
 			return new UserMessagesManager(principal);
 		}
 
-		public static UserQuickView QuickView(this IPrincipalUser principal) {
+		public static UserInfoViewModel UserInfo(this IPrincipalUser principal) {
 			var sessionData = principal.SessionData();
-			if ( sessionData == null ) {
-				return new UserQuickView();
+			if ( principal.Id == 0 || sessionData == null ) {
+				principal.Auth().SignOut();
+				return new UserInfoViewModel();
 			}
-			return (UserQuickView)sessionData.GetOrAdd(nameof(UserQuickView), key => {
-				if ( principal.Id == 0 ) {
-					principal.Auth().SignOut();
-					return new UserQuickView();
-				}
 
+			return (UserInfoViewModel)sessionData.GetOrAdd(nameof(UserInfoViewModel), key => {
 				using var scope = principal.ServiceProvider.CreateScope();
 				var db = scope.ServiceProvider.GetRequiredService<IUsersDbContext>();
 
 				var quickView = db.Users
 					.AsNoTracking()
 					.Where(x => x.Id == principal.Id)
-					.Select(x => new UserQuickView {
+					.Select(x => new UserInfoViewModel {
 						PhotoUrl = x.PhotoUrl ?? (x.WeChat == null ? null : x.WeChat.HeadImageUrl),
 						PhoneNumber = x.Phone == null ? null : x.Phone.Number,
 						EmailAddress = x.Email == null ? null : x.Email.EmailAddress,
@@ -55,7 +52,7 @@ namespace Husky.Principal
 				if ( quickView == null ) {
 					principal.Auth().SignOut();
 				}
-				return quickView ?? new UserQuickView();
+				return quickView ?? new UserInfoViewModel();
 			});
 		}
 

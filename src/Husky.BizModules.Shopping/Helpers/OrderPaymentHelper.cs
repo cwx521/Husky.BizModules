@@ -36,7 +36,7 @@ namespace Husky.BizModules.Shopping
 				AppId = payment.AppId,
 				Attach = payment.Attach,
 				OpenId = payment.ExternalUserId,
-				OrderId = payment.PaymentNo,
+				OrderNo = payment.PaymentNo,
 				Amount = payment.Amount,
 				Body = subject,
 				IPAddress = httpContext.Connection.RemoteIpAddress.MapToIPv4().ToString(),
@@ -46,7 +46,7 @@ namespace Husky.BizModules.Shopping
 			};
 		}
 
-		public static AlipayPayment GenerateAlipayOrderModel(
+		public static AlipayOrderModel GenerateAlipayOrderModel(
 			this OrderPayment payment,
 			HttpContext httpContext,
 			string subject,
@@ -60,8 +60,8 @@ namespace Husky.BizModules.Shopping
 				throw new ArgumentException($"{nameof(payment)}.{nameof(OrderPayment.Amount)} must be greater than Zero.");
 			}
 
-			return new AlipayPayment {
-				OrderId = payment.PaymentNo,
+			return new AlipayOrderModel {
+				OrderNo = payment.PaymentNo,
 				Amount = payment.Amount,
 				Subject = subject,
 				CallbackUrl = httpContext.ResolveUrl(callbackUrl),

@@ -31,7 +31,7 @@ namespace Husky.Principal
 						throw new ArgumentNullException(nameof(_alipay));
 					}
 					var alipayResult = _alipay.QueryOrder(payment.PaymentNo);
-					if ( alipayResult.Ok && alipayResult.TotalAmount == payment.Amount ) {
+					if ( alipayResult.Ok && alipayResult.Amount == payment.Amount ) {
 						payment.Status = PaymentStatus.Paid;
 						payment.ExternalUserName = alipayResult.AlipayBuyerUserId;
 					}

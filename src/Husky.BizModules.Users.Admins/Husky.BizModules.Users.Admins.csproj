@@ -20,4 +20,8 @@
     <ProjectReference Include="..\Husky.BizModules.Users\Husky.BizModules.Users.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ViewModels\" />
+  </ItemGroup>
+
 </Project>

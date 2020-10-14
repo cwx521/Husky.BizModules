@@ -11,6 +11,7 @@ namespace Husky.BizModules.Users.Admins.DataModels
 		public static void OnUsersModelCreating(this ModelBuilder mb) {
 
 			mb.Entity<Admin>(admin => {
+				admin.HasQueryFilter(x => x.Status == RowStatus.Active);
 				// Many-Many
 			});
 		}

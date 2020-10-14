@@ -11,9 +11,7 @@ namespace Husky.BizModules.Users.Admins.DataModels
 		[DatabaseGenerated(DatabaseGeneratedOption.None)]
 		public int UserId { get; }
 
-		public string DisplayName { get; set; } = null!;
-
-		public bool IsCreator { get; set; }
+		public bool IsInitializer { get; set; }
 
 		public RowStatus Status { get; set; }
 

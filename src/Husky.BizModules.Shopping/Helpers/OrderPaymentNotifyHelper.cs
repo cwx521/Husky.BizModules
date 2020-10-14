@@ -23,11 +23,11 @@ namespace Husky.BizModules.Shopping
 			//try Alipay
 			if ( alipay != null ) {
 				var alipayResult = alipay.ParseNotifyResult(httpContext.Request);
-				if ( alipayResult.Ok && alipayResult.OrderId != null ) {
+				if ( alipayResult.Ok && alipayResult.OrderNo != null ) {
 
 					told.Choise = PaymentChoise.Alipay;
 					told.Amount = alipayResult.Amount;
-					told.PaymentNo = alipayResult.OrderId;
+					told.PaymentNo = alipayResult.OrderNo;
 					told.ExternalTransactionId = alipayResult.AlipayTradeNo;
 					told.ExternalUserId = alipayResult.AlipayBuyerId;
 				}
@@ -37,11 +37,11 @@ namespace Husky.BizModules.Shopping
 			if ( wechat != null ) {
 				var wechatPay = wechat.PayService();
 				var wechatResult = wechatPay.ParseNotifyResult(httpContext.Request.Body);
-				if ( wechatResult.Ok && wechatResult.OrderId != null ) {
+				if ( wechatResult.Ok && wechatResult.OrderNo != null ) {
 
 					told.Choise = PaymentChoise.WeChat;
 					told.Amount = wechatResult.Amount;
-					told.PaymentNo = wechatResult.OrderId;
+					told.PaymentNo = wechatResult.OrderNo;
 					told.ExternalTransactionId = wechatResult.TransactionId;
 					told.ExternalUserId = wechatResult.OpenId;
 					told.Attach = wechatResult.Attach;

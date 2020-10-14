@@ -19,6 +19,6 @@ namespace Husky.BizModules.Users.Admins.DataModels
 
 		// calculation
 
-		public T EnumPowers<T>() where T : Enum => (T)(object)Powers;
+		public T MapPowers<T>() where T : Enum => (T)(object)Powers;
 	}
 }
