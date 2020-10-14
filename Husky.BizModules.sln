@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Husky.BizModules.Users", "src\Husky.BizModules.Users\Husky.BizModules.Users.csproj", "{F2FC5D15-C0AF-420C-BAAC-09150F63DA55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Husky.BizModules.Shopping", "src\Husky.BizModules.Shopping\Husky.BizModules.Shopping.csproj", "{3EF8F661-C0E3-4D92-826C-BC759A061335}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Husky.BizModules.Shopping", "src\Husky.BizModules.Shopping\Husky.BizModules.Shopping.csproj", "{3EF8F661-C0E3-4D92-826C-BC759A061335}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Husky.BizModules.Users.Admins", "src\Husky.BizModules.Users.Admins\Husky.BizModules.Users.Admins.csproj", "{D5C4BB02-DC9D-4F51-A6A6-7E8388C07E7F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{3EF8F661-C0E3-4D92-826C-BC759A061335}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EF8F661-C0E3-4D92-826C-BC759A061335}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3EF8F661-C0E3-4D92-826C-BC759A061335}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5C4BB02-DC9D-4F51-A6A6-7E8388C07E7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5C4BB02-DC9D-4F51-A6A6-7E8388C07E7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5C4BB02-DC9D-4F51-A6A6-7E8388C07E7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5C4BB02-DC9D-4F51-A6A6-7E8388C07E7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
