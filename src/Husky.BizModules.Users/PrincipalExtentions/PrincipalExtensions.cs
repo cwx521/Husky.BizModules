@@ -27,8 +27,7 @@ namespace Husky.Principal
 		}
 
 		public static UserInfoViewModel UserInfo(this IPrincipalUser principal) {
-			var sessionData = principal.SessionData();
-			if ( principal.Id == 0 || sessionData == null ) {
+			if ( principal.Id == 0 || !(principal.SessionData() is SessionDataContainer sessionData) ) {
 				principal.Auth().SignOut();
 				return new UserInfoViewModel();
 			}
