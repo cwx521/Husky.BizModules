@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Husky.BizModules.Users.Admins.DataModels
@@ -12,6 +13,8 @@ namespace Husky.BizModules.Users.Admins.DataModels
 		public string RoleName { get; set; } = null!;
 
 		public long Powers { get; set; }
+
+		public RowStatus Status { get; set; }
 
 
 		// nav props

@@ -14,6 +14,10 @@ namespace Husky.BizModules.Users.Admins.DataModels
 				admin.HasQueryFilter(x => x.Status != RowStatus.DeletedByAdmin && x.Status != RowStatus.DeletedByUser);
 				//admin.HasMany(x => x.Roles).WithMany(x => x.Admins);
 			});
+
+			mb.Entity<AdminRole>(adminRole => {
+				adminRole.HasQueryFilter(x => x.Status == RowStatus.Active);
+			});
 		}
 	}
 }

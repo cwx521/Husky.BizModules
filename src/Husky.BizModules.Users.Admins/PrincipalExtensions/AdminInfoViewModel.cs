@@ -9,5 +9,6 @@ namespace Husky.BizModules.Users.Admins.PrincipalExtentions
 		public long Powers { get; set; }
 
 		public TEnum MapPowers<TEnum>() where TEnum : Enum => (TEnum)(object)Powers;
+		public bool Allow<TEnum>(TEnum power) where TEnum : Enum => MapPowers<TEnum>().HasFlag(power);
 	}
 }

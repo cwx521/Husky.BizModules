@@ -9,7 +9,7 @@ namespace Husky.BizModules.Users.Admins.DataModels
 	{
 		[Key]
 		[DatabaseGenerated(DatabaseGeneratedOption.None)]
-		public int UserId { get; }
+		public int UserId { get; set; }
 
 		public bool IsInitializer { get; set; }
 
