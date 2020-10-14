@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace Husky.Principal
+namespace Husky.BizModules.Users.PrincipalExtentions
 {
 	public partial class UserAuthManager
 	{

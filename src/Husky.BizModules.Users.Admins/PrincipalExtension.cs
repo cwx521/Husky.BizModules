@@ -1,13 +1,14 @@
 ﻿using System.Linq;
 using Husky;
 using Husky.BizModules.Users.Admins.DataModels;
+using Husky.BizModules.Users.Admins.PrincipalExtentions;
 using Husky.Principal.SessionData;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Husky.Principal
 {
-	public static partial class PrincipalExtensions
+	public static partial class PrincipalExtension
 	{
 		public static AdminInfoViewModel AdminInfo(this IPrincipalAdmin principal) {
 			if ( principal.Id == 0 || !(principal.SessionData() is SessionDataContainer sessionData) ) {

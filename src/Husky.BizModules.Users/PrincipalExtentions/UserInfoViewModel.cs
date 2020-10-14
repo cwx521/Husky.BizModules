@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Husky.Principal
+namespace Husky.BizModules.Users.PrincipalExtentions
 {
 	public class UserInfoViewModel
 	{

@@ -1,9 +1,10 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using Husky.BizModules.Users.DataModels;
+using Husky.Principal;
 using Husky.TwoFactor;
 
-namespace Husky.Principal
+namespace Husky.BizModules.Users.PrincipalExtentions
 {
 	public partial class UserAuthManager
 	{

@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Husky.BizModules.Users.DataModels;
 
-namespace Husky.Principal
+namespace Husky.BizModules.Users.PrincipalExtentions
 {
 	public partial class UserProfileManager
 	{

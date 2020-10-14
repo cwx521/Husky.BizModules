@@ -1,11 +1,12 @@
 ﻿using Husky.BizModules.Users.DataModels;
+using Husky.Principal;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Husky.Principal
+namespace Husky.BizModules.Users.PrincipalExtentions
 {
-	public sealed partial class UserProfileManager
+	public sealed partial class UserGroupsManager
 	{
-		internal UserProfileManager(IPrincipalUser principal) {
+		internal UserGroupsManager(IPrincipalUser principal) {
 			_me = principal;
 			_db = principal.ServiceProvider.GetRequiredService<IUsersDbContext>();
 		}

@@ -1,4 +1,5 @@
 ﻿using System;
+using Husky.BizModules.Users.PrincipalExtentions;
 using Husky.Principal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -27,12 +28,14 @@ namespace Husky.BizModules.Users.Filters
 			// Within milliseconds 
 			const int ms = 300;
 
-			if ( principal.AntiViolenceTimer().AddMilliseconds(ms) < DateTime.Now ) {
-				principal.SetAntiViolenceTimer();
+			var antiViolence = principal.AntiViolence();
+
+			if ( antiViolence.GetTimer().AddMilliseconds(ms) < DateTime.Now ) {
+				antiViolence.ClearTimer();
 			}
 			else {
-				principal.SetAntiViolenceTimer(DateTime.Now.AddMilliseconds(ms));
-				context.Result = new ViewResult { ViewName = "_AntiViolence" };
+				antiViolence.SetTimer(DateTime.Now.AddMilliseconds(ms));
+				context.Result = new ViewResult { ViewName = AntiViolenceTimerManager.ViewName };
 			}
 		}
 	}

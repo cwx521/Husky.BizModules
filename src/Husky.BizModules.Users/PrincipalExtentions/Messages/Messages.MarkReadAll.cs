@@ -2,7 +2,7 @@
 using Husky.BizModules.Users.DataModels;
 using Microsoft.EntityFrameworkCore;
 
-namespace Husky.Principal
+namespace Husky.BizModules.Users.PrincipalExtentions
 {
 	public partial class UserMessagesManager
 	{

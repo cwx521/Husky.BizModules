@@ -1,7 +1,8 @@
 ﻿using Husky.BizModules.Users.DataModels;
+using Husky.Principal;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Husky.Principal
+namespace Husky.BizModules.Users.PrincipalExtentions
 {
 	public sealed partial class UserMessagesManager
 	{

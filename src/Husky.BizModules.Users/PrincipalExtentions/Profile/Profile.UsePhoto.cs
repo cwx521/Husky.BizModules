@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Husky.Principal
+namespace Husky.BizModules.Users.PrincipalExtentions
 {
 	public partial class UserProfileManager
 	{

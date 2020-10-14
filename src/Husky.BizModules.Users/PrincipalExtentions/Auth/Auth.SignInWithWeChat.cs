@@ -6,7 +6,7 @@ using Husky.BizModules.Users.DataModels;
 using Husky.WeChatIntegration;
 using Microsoft.EntityFrameworkCore;
 
-namespace Husky.Principal
+namespace Husky.BizModules.Users.PrincipalExtentions
 {
 	public partial class UserAuthManager
 	{

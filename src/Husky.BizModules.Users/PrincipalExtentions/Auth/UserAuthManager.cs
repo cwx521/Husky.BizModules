@@ -1,9 +1,10 @@
 ﻿using Husky.BizModules.Users.DataModels;
+using Husky.Principal;
 using Husky.WeChatIntegration;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Husky.Principal
+namespace Husky.BizModules.Users.PrincipalExtentions
 {
 	public sealed partial class UserAuthManager
 	{
