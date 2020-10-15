@@ -12,16 +12,16 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int ShopId { get; set; }
 
-		[MaxLength(100)]
+		[StringLength(100)]
 		public string ProductName { get; set; } = null!;
 
-		[MaxLength(24), Column(TypeName = "varchar(24)")]
+		[StringLength(24), Column(TypeName = "varchar(24)")]
 		public string? ProductCode { get; set; }
 
-		[MaxLength(200), Column(TypeName = "varchar(200)")]
+		[StringLength(200), Column(TypeName = "varchar(200)")]
 		public string? PrimaryPictureUrl { get; set; }
 
-		[MaxLength(2000)]
+		[StringLength(2000)]
 		public string? Description { get; set; }
 
 		[Column(TypeName = "decimal(8,2)")]

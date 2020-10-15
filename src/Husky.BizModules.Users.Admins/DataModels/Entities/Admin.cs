@@ -21,6 +21,6 @@ namespace Husky.BizModules.Users.Admins.DataModels
 
 		// nav props
 
-		public List<AdminRole> Roles { get; set; } = new List<AdminRole>();
+		public List<AdminInRole> InRoles { get; set; } = new List<AdminInRole>();
 	}
 }

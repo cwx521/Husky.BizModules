@@ -10,13 +10,13 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int GroupId { get; set; }
 
-		[MaxLength(12), Column(TypeName = "varchar(12)")]
+		[StringLength(12), Column(TypeName = "varchar(12)")]
 		public string? SkuCode { get; set; }
 
-		[MaxLength(24)]
+		[StringLength(24)]
 		public string VariationName { get; set; } = null!;
 
-		[MaxLength(500), Column(TypeName = "varchar(500)")]
+		[StringLength(500), Column(TypeName = "varchar(500)")]
 		public string? VariationPictureUrl { get; set; }
 
 		public RowStatus Status { get; set; }

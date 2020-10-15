@@ -15,20 +15,20 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Column(TypeName = "decimal(9,2)")]
 		public decimal Amount { get; set; }
 
-		[MaxLength(64), Column(TypeName = "varchar(64)"), Index(IsUnique = true)]
+		[StringLength(64), Column(TypeName = "varchar(64)"), Index(IsUnique = true)]
 		public string? ExternalTransactionId { get; set; }
 
 		public PaymentChoise TargetChoise { get; set; }
 
-		[MaxLength(50)]
+		[StringLength(50)]
 		public string TargetAccount { get; set; } = null!;
 
-		[MaxLength(50)]
+		[StringLength(50)]
 		public string? TargetAccountAlias { get; set; }
 
 		public int? OperatedByAdminId { get; set; }
 
-		[MaxLength(24)]
+		[StringLength(24)]
 		public string? OperatedByAdminName { get; set; }
 
 		public WithdrawalStatus Status { get; set; }

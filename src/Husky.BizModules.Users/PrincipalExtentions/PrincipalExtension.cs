@@ -28,7 +28,8 @@ namespace Husky.Principal
 						PhoneNumber = x.Phone == null ? null : x.Phone.Number,
 						EmailAddress = x.Email == null ? null : x.Email.EmailAddress,
 						RegisteredTime = x.RegisteredTime,
-						AwaitChangePassword = ActionAwait.NoNeed
+						AwaitChangePassword = ActionAwait.NoNeed,
+						IsTwoFactorValidated = false
 					})
 					.SingleOrDefault();
 

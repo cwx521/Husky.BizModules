@@ -10,7 +10,7 @@ namespace Husky.BizModules.Users.DataModels
 		[DatabaseGenerated(DatabaseGeneratedOption.None)]
 		public int UserId { get; set; }
 
-		[MaxLength(50), Column(TypeName = "varchar(50)"), Index(IsUnique = true)]
+		[StringLength(50), Column(TypeName = "varchar(50)"), Index(IsUnique = true)]
 		public string EmailAddress { get; set; } = null!;
 
 		public bool IsVerified { get; set; }

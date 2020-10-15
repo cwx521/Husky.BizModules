@@ -10,7 +10,7 @@ namespace Husky.BizModules.Users.Admins.PrincipalExtensions
 	{
 		public async Task<Result<AdminRole>> CreateRole(string roleName, long powers) {
 			if ( _me.IsAnonymous || !_me.AdminInfo().IsAdmin ) {
-				return new Failure<AdminRole>("没有权限");
+				return new Failure<AdminRole>("只允许管理员操作");
 			}
 			if ( _db.AdminRoles.Any(x => x.RoleName == roleName) ) {
 				return new Failure<AdminRole>($"管理角色组名“{roleName}”已存在");
@@ -25,9 +25,22 @@ namespace Husky.BizModules.Users.Admins.PrincipalExtensions
 			return new Success<AdminRole>(adminRole);
 		}
 
+		public async Task<Result> DeleteRole(int roleId) {
+			if ( _me.IsAnonymous || !_me.AdminInfo().IsAdmin ) {
+				return new Failure<AdminRole>("只允许管理员操作");
+			}
+
+			var adminRole = _db.AdminRoles.Find(roleId);
+			if ( adminRole != null ) {
+				_db.AdminRoles.Remove(adminRole);
+			}
+			await _db.Normalize().SaveChangesAsync();
+			return new Success();
+		}
+
 		public async Task<Result> ChangeRolePropValue<T>(int roleId, string adminRolePropertyName, T propertyValue) {
 			if ( _me.IsAnonymous || !_me.AdminInfo().IsAdmin ) {
-				return new Failure("没有权限");
+				return new Failure("只允许管理员操作");
 			}
 
 			var allowedPropertyNames = new[] {
@@ -48,6 +61,5 @@ namespace Husky.BizModules.Users.Admins.PrincipalExtensions
 
 		public async Task<Result> ChangeRoleName(int roleId, string roleName) => await ChangeRolePropValue(roleId, nameof(AdminRole.RoleName), roleName);
 		public async Task<Result> ChangeRolePowersAssignment(int roleId, long powers) => await ChangeRolePropValue(roleId, nameof(AdminRole.Powers), powers);
-		public async Task<Result> DeleteRole(int roleId) => await ChangeRolePropValue(roleId, nameof(AdminRole.Status), RowStatus.DeletedByAdmin);
 	}
 }

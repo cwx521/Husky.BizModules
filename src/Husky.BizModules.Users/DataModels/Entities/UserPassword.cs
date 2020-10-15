@@ -10,7 +10,7 @@ namespace Husky.BizModules.Users.DataModels
 
 		public int UserId { get; set; }
 
-		[MaxLength(40), Column(TypeName = "varchar(40)")]
+		[StringLength(40), Column(TypeName = "varchar(40)")]
 		public string Password { get; set; } = null!;
 
 		public bool IsObsoleted { get; set; }

@@ -11,27 +11,27 @@ namespace Husky.BizModules.Users.DataModels
 		[DatabaseGenerated(DatabaseGeneratedOption.None)]
 		public int UserId { get; set; }
 
-		[MaxLength(32), Column(TypeName = "varchar(32)"), Index(IsUnique = true)]
+		[StringLength(32), Column(TypeName = "varchar(32)"), Index(IsUnique = true)]
 		public string? PrivateId { get; set; }
 
-		[MaxLength(32), Column(TypeName = "varchar(32)"), Index(IsUnique = true)]
+		[StringLength(32), Column(TypeName = "varchar(32)"), Index(IsUnique = true)]
 		public string? UnionId { get; set; }
 
-		[MaxLength(36)]
+		[StringLength(36)]
 		public string NickName { get; set; } = null!;
 
 		public Sex Sex { get; set; }
 
-		[MaxLength(500), Column(TypeName = "varchar(500)")]
+		[StringLength(500), Column(TypeName = "varchar(500)")]
 		public string HeadImageUrl { get; set; } = null!;
 
-		[MaxLength(24)]
+		[StringLength(24)]
 		public string? Province { get; set; }
 
-		[MaxLength(24)]
+		[StringLength(24)]
 		public string? City { get; set; }
 
-		[MaxLength(24)]
+		[StringLength(24)]
 		public string? Country { get; set; }
 
 		[DefaultValueSql("getdate()"), NeverUpdate]

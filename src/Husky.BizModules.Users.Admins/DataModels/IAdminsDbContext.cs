@@ -12,5 +12,6 @@ namespace Husky.BizModules.Users.Admins.DataModels
 
 		DbSet<Admin> Admins { get; set; }
 		DbSet<AdminRole> AdminRoles { get; set; }
+		DbSet<AdminInRole> AdminInRoles { get; set; }
 	}
 }

@@ -12,13 +12,13 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int ProductId { get; set; }
 
-		[MaxLength(24), Column(TypeName = "varchar(24)")]
+		[StringLength(24), Column(TypeName = "varchar(24)")]
 		public string? InstantProductCode { get; set; }
 
-		[MaxLength(50)]
+		[StringLength(50)]
 		public string? InstantProductName { get; set; }
 
-		[MaxLength(1000)]
+		[StringLength(1000)]
 		public string? InstantVariationJson { get; set; }
 
 		[Column(TypeName = "decimal(8,2)")]
@@ -34,7 +34,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int ReturnedQuantity { get; set; }
 
-		[MaxLength(200)]
+		[StringLength(200)]
 		public string? Remarks { get; set; }
 
 

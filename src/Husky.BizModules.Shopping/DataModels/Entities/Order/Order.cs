@@ -12,10 +12,10 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int BuyerId { get; set; }
 
-		[MaxLength(36)]
+		[StringLength(36)]
 		public string? BuyerName { get; set; }
 
-		[MaxLength(12), Column(TypeName = "varchar(12)"), Index(IsUnique = true)]
+		[StringLength(12), Column(TypeName = "varchar(12)"), Index(IsUnique = true)]
 		public string OrderNo { get; set; } = null!;
 
 		public OrderStatus Status { get; set; }

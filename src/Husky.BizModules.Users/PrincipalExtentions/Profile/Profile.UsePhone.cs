@@ -11,15 +11,26 @@ namespace Husky.BizModules.Users.PrincipalExtentions
 			if ( _me.IsAnonymous ) {
 				return new Failure("需要先登录");
 			}
+
+			if ( newNumber.StartsWith('+') ) {
+				newNumber = newNumber.Substring(1);
+			}
+			if ( newNumber.StartsWith("86") ) {
+				newNumber = newNumber.Substring(2);
+			}
+
+			if ( !newNumber.IsMainlandMobile() ) {
+				return new Failure("格式错误");
+			}
 			if ( _db.UserPhones.Any(x => x.UserId != _me.Id && x.Number == newNumber) ) {
 				return new Failure($"{newNumber.Mask()} 已被其它帐号使用");
 			}
 
-			var validationModel = new TwoFactorModel { SendTo = newNumber, Code = verificationCode };
-			var validationResult = await _me.TwoFactor().VerifyTwoFactorCode(validationModel, true);
+			var verifyModel = new TwoFactorModel { SendTo = newNumber, Code = verificationCode };
+			var verifyResult = await _me.TwoFactor().VerifyTwoFactorCode(verifyModel, true);
 
-			if ( !validationResult.Ok ) {
-				return validationResult;
+			if ( !verifyResult.Ok ) {
+				return verifyResult;
 			}
 
 			var userPhone = _db.UserPhones.Find(_me.Id);

@@ -12,7 +12,7 @@ namespace Husky.BizModules.Users.DataModels
 
 		public int? PublicContentId { get; set; }
 
-		[MaxLength(4000)]
+		[StringLength(4000)]
 		public string? Content { get; set; }
 
 		public bool IsRead { get; set; }

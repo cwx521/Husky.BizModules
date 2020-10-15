@@ -11,22 +11,22 @@ namespace Husky.BizModules.Users.DataModels
 
 		public int UserId { get; set; }
 
-		[MaxLength(16)]
+		[StringLength(16)]
 		public string Province { get; set; } = null!;
 
-		[MaxLength(16)]
+		[StringLength(16)]
 		public string City { get; set; } = null!;
 
-		[MaxLength(16)]
+		[StringLength(16)]
 		public string? District { get; set; }
 
-		[MaxLength(100)]
+		[StringLength(100)]
 		public string? DetailAddress { get; set; }
 
-		[MaxLength(16)]
+		[StringLength(16)]
 		public string? ContactName { get; set; }
 
-		[MaxLength(11), Column(TypeName = "varchar(11)"), Phone]
+		[StringLength(11), Column(TypeName = "varchar(11)"), Phone]
 		public string? ContactPhoneNumber { get; set; }
 
 		[Column(TypeName = "decimal(11, 6)")]

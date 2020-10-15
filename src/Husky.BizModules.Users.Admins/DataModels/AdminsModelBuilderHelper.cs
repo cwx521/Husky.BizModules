@@ -10,13 +10,16 @@ namespace Husky.BizModules.Users.Admins.DataModels
 	{
 		public static void OnUsersModelCreating(this ModelBuilder mb) {
 
-			mb.Entity<Admin>(admin => {
-				admin.HasQueryFilter(x => x.Status != RowStatus.DeletedByAdmin && x.Status != RowStatus.DeletedByUser);
-				//admin.HasMany(x => x.Roles).WithMany(x => x.Admins);
-			});
+			//Indexes
+			mb.Entity<AdminInRole>().HasKey(x => new { x.AdminId, x.RoleId });
 
-			mb.Entity<AdminRole>(adminRole => {
-				adminRole.HasQueryFilter(x => x.Status == RowStatus.Active);
+			//QueryFilters
+			mb.Entity<Admin>().HasQueryFilter(x => x.Status != RowStatus.DeletedByAdmin && x.Status != RowStatus.DeletedByUser);
+
+			//Relationships
+			mb.Entity<AdminInRole>(adminInRole => {
+				adminInRole.HasOne(x => x.Admin).WithMany(x => x.InRoles).HasForeignKey(x => x.AdminId);
+				adminInRole.HasOne(x => x.Role).WithMany(x => x.GrantedToAdmins).HasForeignKey(x => x.RoleId);
 			});
 		}
 	}

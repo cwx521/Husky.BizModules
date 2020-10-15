@@ -10,10 +10,10 @@ namespace Husky.BizModules.Users.DataModels
 		[Key]
 		public int Id { get; set; }
 
-		[MaxLength(36)]
+		[StringLength(36)]
 		public string? DisplayName { get; set; }
 
-		[MaxLength(500), Column(TypeName = "varchar(500)")]
+		[StringLength(500), Column(TypeName = "varchar(500)")]
 		public string? PhotoUrl { get; set; }
 
 		public RowStatus Status { get; set; } = RowStatus.Active;

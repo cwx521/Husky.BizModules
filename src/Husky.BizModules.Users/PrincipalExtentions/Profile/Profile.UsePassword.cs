@@ -7,23 +7,10 @@ namespace Husky.BizModules.Users.PrincipalExtentions
 {
 	public partial class UserProfileManager
 	{
-		public async Task<Result> UsePassword(string newPassword, string verificationCode) {
+		public async Task<Result> UseNewPassword(string newPassword) {
 			if ( _me.IsAnonymous ) {
 				return new Failure("需要先登录");
 			}
-
-			var userPhone = _db.UserPhones.Find(_me.Id);
-			if ( userPhone == null ) {
-				return new Failure("需要先绑定手机才能设置密码");
-			}
-
-			var validationModel = new TwoFactorModel { SendTo = userPhone.Number, Code = verificationCode };
-			var validationResult = await _me.TwoFactor().VerifyTwoFactorCode(validationModel, true);
-
-			if ( !validationResult.Ok ) {
-				return validationResult;
-			}
-			userPhone.IsVerified = true;
 
 			var oldPasswords = _db.UserPasswords.Where(x => !x.IsObsoleted).Where(x => x.UserId == _me.Id).ToList();
 			oldPasswords.ForEach(x => x.IsObsoleted = true);
@@ -35,6 +22,23 @@ namespace Husky.BizModules.Users.PrincipalExtentions
 
 			await _db.Normalize().SaveChangesAsync();
 			return new Success();
+		}
+
+		public async Task<Result> UseNewPasswordWithPhoneValidation(string newPassword, string verificationCode) {
+			var userPhone = _db.UserPhones.Find(_me.Id);
+			if ( userPhone == null ) {
+				return new Failure("需要先绑定手机");
+			}
+
+			var verifyModel = new TwoFactorModel { SendTo = userPhone.Number, Code = verificationCode };
+			var verifyResult = await _me.TwoFactor().VerifyTwoFactorCode(verifyModel, true);
+
+			if ( !verifyResult.Ok ) {
+				return verifyResult;
+			}
+			userPhone.IsVerified = true;
+
+			return await UseNewPassword(newPassword);
 		}
 	}
 }

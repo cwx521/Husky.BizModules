@@ -10,6 +10,9 @@ namespace Husky.BizModules.Users.PrincipalExtentions
 			if ( _me.IsAnonymous ) {
 				return new Failure("需要先登录");
 			}
+			if ( !newEmailAddress.IsEmail() ) {
+				return new Failure("格式错误");
+			}
 			if ( _db.UserEmails.Any(x => x.UserId != _me.Id && x.EmailAddress == newEmailAddress) ) {
 				return new Failure($"{newEmailAddress.Mask()} 已被其它帐号使用");
 			}

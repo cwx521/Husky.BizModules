@@ -14,14 +14,14 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Column(TypeName = "decimal(8,2)")]
 		public decimal Amount { get; set; }
 
-		[MaxLength(12), Column(TypeName = "varchar(12)"), Index(IsUnique = true)]
+		[StringLength(12), Column(TypeName = "varchar(12)"), Index(IsUnique = true)]
 		public string RefundNo { get; set; } = null!;
 
 		public RefundReason Reason { get; set; }
 
 		public RefundStatus Status { get; set; }
 
-		[MaxLength(100)]
+		[StringLength(100)]
 		public string? ResultMessage { get; set; }
 
 		[DefaultValueSql("getdate()"), NeverUpdate]

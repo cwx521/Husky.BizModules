@@ -9,13 +9,13 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int OwnerId { get; set; }
 
-		[MaxLength(36)]
+		[StringLength(36)]
 		public string? OwnerName { get; set; }
 
-		[MaxLength(50)]
+		[StringLength(50)]
 		public string ShopName { get; set; } = null!;
 
-		[MaxLength(500)]
+		[StringLength(500)]
 		public string? Description { get; set; }
 
 		public RowStatus Status { get; set; }

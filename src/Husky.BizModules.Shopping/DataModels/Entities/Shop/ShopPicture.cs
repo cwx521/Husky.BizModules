@@ -10,10 +10,10 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int ShopId { get; set; }
 
-		[MaxLength(50)]
+		[StringLength(50)]
 		public string? PictureName { get; set; }
 
-		[MaxLength(500), Column(TypeName = "varchar(500)")]
+		[StringLength(500), Column(TypeName = "varchar(500)")]
 		public string PictureUrl { get; set; } = null!;
 
 		public MediaType Type { get; set; }

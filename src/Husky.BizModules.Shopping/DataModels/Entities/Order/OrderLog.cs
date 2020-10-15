@@ -14,14 +14,14 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public OrderStatus? StatusChangedTo { get; set; }
 
-		[MaxLength(200)]
+		[StringLength(200)]
 		public string? Remarks { get; set; }
 
 		public bool IsPrivate { get; set; }
 
 		public int? CreatedByAdminId { get; set; }
 
-		[MaxLength(24)]
+		[StringLength(24)]
 		public string? CreatedByAdminName { get; set; }
 
 		public RowStatus Status { get; set; }

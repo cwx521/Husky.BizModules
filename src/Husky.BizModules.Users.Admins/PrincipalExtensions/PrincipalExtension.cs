@@ -23,11 +23,19 @@ namespace Husky.Principal
 				using var scope = principal.ServiceProvider.CreateScope();
 				var db = scope.ServiceProvider.GetRequiredService<IAdminsDbContext>();
 
+				//var roles = db.AdminRoles
+				//	.AsNoTracking()
+				//	.Where(x => x.GrantedToAdmins.Any(y => 
+				//		y.Admin.UserId == principal.Id &&
+				//		y.Admin.Status == RowStatus.Active))
+				//	.ToList();
+
 				var roles = db.Admins
 					.AsNoTracking()
 					.Where(x => x.UserId == principal.Id)
 					.Where(x => x.Status == RowStatus.Active)
-					.SelectMany(x => x.Roles)
+					.SelectMany(x => x.InRoles)
+					.Select(x => x.Role)
 					.ToList();
 
 				return new AdminInfoViewModel {

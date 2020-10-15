@@ -11,18 +11,18 @@ namespace Husky.BizModules.Users.DataModels
 
 		public int? UserId { get; set; }
 
-		[MaxLength(50)]
+		[StringLength(50)]
 		public string AttemptedAccount { get; set; } = null!;
 
-		[MaxLength(88), Column(TypeName = "varchar(88)")]
+		[StringLength(88), Column(TypeName = "varchar(88)")]
 		public string? SickPassword { get; set; }
 
 		public LoginResult LoginResult { get; set; }
 
-		[MaxLength(500)]
+		[StringLength(500)]
 		public string? UserAgent { get; set; }
 
-		[MaxLength(39), Column(TypeName = "varchar(39)")]
+		[StringLength(39), Column(TypeName = "varchar(39)")]
 		public string? Ip { get; set; }
 
 		[DefaultValueSql("getdate()"), NeverUpdate]

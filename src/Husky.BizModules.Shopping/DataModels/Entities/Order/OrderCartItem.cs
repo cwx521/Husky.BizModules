@@ -12,15 +12,15 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int BuyerId { get; set; }
 
-		[MaxLength(36)]
+		[StringLength(36)]
 		public string? BuyerName { get; set; }
 
-		[MaxLength(1000)]
+		[StringLength(1000)]
 		public string? VariationJson { get; set; }
 
 		public int Quantity { get; set; }
 
-		[MaxLength(200)]
+		[StringLength(200)]
 		public string? Remarks { get; set; }
 
 		public bool Selected { get; set; }

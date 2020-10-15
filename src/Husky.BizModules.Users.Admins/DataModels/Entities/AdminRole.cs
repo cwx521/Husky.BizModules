@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Husky.BizModules.Users.Admins.DataModels
@@ -14,11 +13,9 @@ namespace Husky.BizModules.Users.Admins.DataModels
 
 		public long Powers { get; set; }
 
-		public RowStatus Status { get; set; }
-
 
 		// nav props
 
-		public List<Admin> Admins { get; set; } = new List<Admin>();
+		public List<AdminInRole> GrantedToAdmins { get; set; } = new List<AdminInRole>();
 	}
 }
