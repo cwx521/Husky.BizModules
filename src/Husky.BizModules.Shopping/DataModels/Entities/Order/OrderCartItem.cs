@@ -25,7 +25,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public bool Selected { get; set; }
 
-		public bool Removed { get; set; }
+		public bool Deleted { get; set; }
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime CreatedTime { get; set; } = DateTime.Now;

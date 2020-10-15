@@ -17,12 +17,12 @@ namespace Husky.BizModules.Shopping.DataModels
 		[StringLength(12), Column(TypeName = "varchar(12)"), Required, Unique]
 		public string RefundNo { get; set; } = null!;
 
+		[StringLength(100)]
+		public string? ResultMessage { get; set; }
+
 		public RefundReason Reason { get; set; }
 
 		public RefundStatus Status { get; set; }
-
-		[StringLength(100)]
-		public string? ResultMessage { get; set; }
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime StatusChangedTime { get; set; } = DateTime.Now;

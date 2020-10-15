@@ -18,14 +18,14 @@ namespace Husky.BizModules.Shopping.DataModels
 		[StringLength(12), Column(TypeName = "varchar(12)"), Required, Unique]
 		public string OrderNo { get; set; } = null!;
 
-		public OrderStatus Status { get; set; }
-
 		[Column(TypeName = "decimal(8,2)")]
 		public decimal TotalAmount { get; set; }
 
 		public bool HasPayBalance { get; set; }
 
 		public Rating? Rating { get; set; }
+
+		public OrderStatus Status { get; set; }
 
 		public DateTime? CompletedTime { get; set; }
 

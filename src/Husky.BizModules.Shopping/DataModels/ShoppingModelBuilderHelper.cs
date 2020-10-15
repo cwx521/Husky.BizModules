@@ -23,7 +23,7 @@ namespace Husky.BizModules.Shopping.DataModels
 			mb.Entity<ProductVariationGroup>().HasQueryFilter(x => x.Status == RowStatus.Active);
 			mb.Entity<ProductVariation>().HasQueryFilter(x => x.Status == RowStatus.Active);
 			mb.Entity<ProductPicture>().HasQueryFilter(x => x.Status == RowStatus.Active);
-			mb.Entity<OrderCartItem>().HasQueryFilter(x => x.Removed == false);
+			mb.Entity<OrderCartItem>().HasQueryFilter(x => x.Deleted == false);
 
 
 			//Shop

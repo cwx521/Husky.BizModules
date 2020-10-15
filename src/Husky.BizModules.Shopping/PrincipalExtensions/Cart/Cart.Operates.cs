@@ -18,7 +18,7 @@ namespace Husky.Principal
 
 			var allowedPropertyNames = new[] {
 				nameof(OrderCartItem.Selected),
-				nameof(OrderCartItem.Removed),
+				nameof(OrderCartItem.Deleted),
 				nameof(OrderCartItem.Remarks),
 				nameof(OrderCartItem.Quantity),
 				nameof(OrderCartItem.VariationJson),
@@ -46,7 +46,7 @@ namespace Husky.Principal
 
 			var allowedPropertyNames = new[] {
 				nameof(OrderCartItem.Selected),
-				nameof(OrderCartItem.Removed),
+				nameof(OrderCartItem.Deleted),
 			};
 			if ( !allowedPropertyNames.Contains(cartItemPropertyName) ) {
 				return new Failure("不允许修改该字段内容");
@@ -76,11 +76,11 @@ namespace Husky.Principal
 
 		public async Task<Result> Select(int cartItemId) => await ChangePropValue(cartItemId, nameof(OrderCartItem.Selected), true);
 		public async Task<Result> Unselect(int cartItemId) => await ChangePropValue(cartItemId, nameof(OrderCartItem.Selected), false);
-		public async Task<Result> Remove(int cartItemId) => await ChangePropValue(cartItemId, nameof(OrderCartItem.Removed), true);
+		public async Task<Result> Remove(int cartItemId) => await ChangePropValue(cartItemId, nameof(OrderCartItem.Deleted), true);
 
 
 		public async Task<Result> SelectAll() => await ChangePropValueForAll(nameof(OrderCartItem.Selected), true);
 		public async Task<Result> UnselectAll() => await ChangePropValueForAll(nameof(OrderCartItem.Selected), false);
-		public async Task<Result> RemoveAll() => await ChangePropValueForAll(nameof(OrderCartItem.Removed), true);
+		public async Task<Result> RemoveAll() => await ChangePropValueForAll(nameof(OrderCartItem.Deleted), true);
 	}
 }
