@@ -15,7 +15,7 @@ namespace Husky.BizModules.Users.DataModels
 
 			//QueryFilters
 			mb.Entity<UserPassword>().HasQueryFilter(x => !x.IsObsoleted);
-			mb.Entity<UserMessage>().HasQueryFilter(x => x.Status == RowStatus.Active);
+			mb.Entity<UserMessage>().HasQueryFilter(x => !x.IsDeleted);
 			mb.Entity<UserAddress>().HasQueryFilter(x =>
 				x.Status == RowStatus.Active &&
 				x.City != null &&
@@ -30,7 +30,7 @@ namespace Husky.BizModules.Users.DataModels
 				user.HasOne(x => x.WeChat).WithOne(x => x.User).HasForeignKey<UserWeChat>(x => x.UserId);
 				user.HasOne(x => x.Real).WithOne(x => x.User).HasForeignKey<UserReal>(x => x.UserId);
 				user.HasMany(x => x.Passwords).WithOne(x => x.User).HasForeignKey(x => x.UserId);
-				user.HasMany(x => x.InGroups).WithOne().HasForeignKey(x => x.UserId);
+				user.HasMany(x => x.InGroups).WithOne(x => x.User).HasForeignKey(x => x.UserId);
 				user.HasMany<UserAddress>().WithOne(x => x.User).HasForeignKey(x => x.UserId);
 				user.HasMany<UserMessage>().WithOne(x => x.User).HasForeignKey(x => x.UserId);
 				user.HasMany<UserLoginRecord>().WithOne(x => x.User).HasForeignKey(x => x.UserId);

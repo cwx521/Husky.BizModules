@@ -17,7 +17,7 @@ namespace Husky.BizModules.Users.DataModels
 
 		public bool IsRead { get; set; }
 
-		public RowStatus Status { get; set; } = RowStatus.Active;
+		public bool IsDeleted { get; set; }
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
 		public DateTime CreatedTime { get; set; } = DateTime.Now;

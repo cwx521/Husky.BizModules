@@ -12,7 +12,7 @@ namespace Husky.BizModules.Users.PrincipalExtentions
 	{
 		public async Task<Result> SignInWithWeChat(string wechatCode, WeChatAppIdSecret idSecret) {
 			if ( _wechat == null ) {
-				throw new Exception($"未添加微信服务组件 {typeof(WeChatService).Assembly.GetName()}");
+				throw new Exception($"缺少微信服务组件 {typeof(WeChatService).Assembly.GetName()}");
 			}
 			if ( idSecret.Type == null ) {
 				throw new ArgumentException($"未指明 {nameof(WeChatAppIdSecret)}.{nameof(WeChatAppIdSecret.Type)}");
@@ -48,14 +48,26 @@ namespace Husky.BizModules.Users.PrincipalExtentions
 				user = new User();
 				_db.Users.Add(user);
 			}
-
-			user.WeChat ??= new UserWeChat();
+			else {
+				//用户记录是异常状态时，阻止获得登录身份
+				if ( user.Status == RowStatus.Suspended ) {
+					return await AddLoginRecord(LoginResult.RejectedAccountSuspended, "WeChatApi", user.Id);
+				}
+				if ( user.Status == RowStatus.DeletedByAdmin || user.Status == RowStatus.DeletedByUser ) {
+					return await AddLoginRecord(LoginResult.RejectedAccountDeleted, "WeChatApi", user.Id);
+				}
+				if ( user.Status != RowStatus.Active ) {
+					return await AddLoginRecord(LoginResult.RejectedAccountInactive, "WeChatApi", user.Id);
+				}
+			}
 
 			//更新 User 表字段
 			user.DisplayName ??= wechatUser.NickName.Left(36);
 			user.PhotoUrl ??= wechatUser.HeadImageUrl;
 
 			//更新 UserWeChat 表字段
+			user.WeChat ??= new UserWeChat();
+
 			if ( !user.WeChat.OpenIds.Any(x => x.OpenIdValue == wechatUser.OpenId) ) {
 				user.WeChat.OpenIds.Add(new UserWeChatOpenId {
 					OpenIdType = (WeChatOpenIdType)(int)idSecret.Type,
@@ -69,17 +81,6 @@ namespace Husky.BizModules.Users.PrincipalExtentions
 			user.WeChat.Province = wechatUser.Province?.Left(24);
 			user.WeChat.City = wechatUser.City?.Left(24);
 			user.WeChat.Country = wechatUser.Country?.Left(24);
-
-			//用户记录是异常状态时，阻止获得登录身份
-			if ( user.Status == RowStatus.Suspended ) {
-				return await AddLoginRecord(LoginResult.RejectedAccountSuspended, "WeChatApi", user.Id);
-			}
-			if ( user.Status == RowStatus.DeletedByAdmin || user.Status == RowStatus.DeletedByUser ) {
-				return await AddLoginRecord(LoginResult.RejectedAccountDeleted, "WeChatApi", user.Id);
-			}
-			if ( user.Status != RowStatus.Active ) {
-				return await AddLoginRecord(LoginResult.RejectedAccountInactive, "WeChatApi", user.Id);
-			}
 
 			await _db.Normalize().SaveChangesAsync();
 

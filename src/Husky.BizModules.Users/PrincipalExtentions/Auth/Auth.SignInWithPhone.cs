@@ -19,11 +19,11 @@ namespace Husky.BizModules.Users.PrincipalExtentions
 			//读取用户记录
 			var user = _db.Users.SingleOrDefault(x => x.Phone != null && x.Phone.Number == mobileNumber);
 
-			var validationModel = new TwoFactorModel { SendTo = mobileNumber, Code = verificationCode };
-			var validationResult = await _me.TwoFactor().VerifyTwoFactorCode(validationModel, true);
+			var verifyModel = new TwoFactorModel { SendTo = mobileNumber, Code = verificationCode };
+			var verifyResult = await _me.TwoFactor().VerifyTwoFactorCode(verifyModel, true);
 
 			//验证码不通过
-			if ( !validationResult.Ok ) {
+			if ( !verifyResult.Ok ) {
 				return await AddLoginRecord(LoginResult.ErrorTwoFactorCode, mobileNumber, user?.Id);
 			}
 

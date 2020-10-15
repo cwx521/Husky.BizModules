@@ -9,6 +9,7 @@
 
 		//nav props
 
+		public User User { get; set; } = null!;
 		public UserGroup Group { get; set; } = null!;
 	}
 }

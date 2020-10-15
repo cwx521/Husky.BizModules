@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using Husky;
 using Husky.BizModules.Users.Admins.DataModels;
+using Husky.BizModules.Users.Admins.PrincipalExtensions;
 using Husky.BizModules.Users.Admins.PrincipalExtentions;
 using Husky.Principal.SessionData;
 using Microsoft.EntityFrameworkCore;
@@ -12,7 +13,6 @@ namespace Husky.Principal
 	{
 		public static AdminInfoViewModel AdminInfo(this IPrincipalAdmin principal) {
 			if ( principal.Id == 0 || !(principal.SessionData() is SessionDataContainer sessionData) ) {
-				principal.Auth().SignOut();
 				return new AdminInfoViewModel {
 					IsAdmin = false,
 					Roles = new string[0]
@@ -23,19 +23,11 @@ namespace Husky.Principal
 				using var scope = principal.ServiceProvider.CreateScope();
 				var db = scope.ServiceProvider.GetRequiredService<IAdminsDbContext>();
 
-				//var roles = db.AdminRoles
-				//	.AsNoTracking()
-				//	.Where(x => x.GrantedToAdmins.Any(y => 
-				//		y.Admin.UserId == principal.Id &&
-				//		y.Admin.Status == RowStatus.Active))
-				//	.ToList();
-
-				var roles = db.Admins
+				var roles = db.AdminRoles
 					.AsNoTracking()
-					.Where(x => x.UserId == principal.Id)
-					.Where(x => x.Status == RowStatus.Active)
-					.SelectMany(x => x.InRoles)
-					.Select(x => x.Role)
+					.Where(x => x.GrantedToAdmins.Any(y =>
+						y.Admin.UserId == principal.Id &&
+						y.Admin.Status == RowStatus.Active))
 					.ToList();
 
 				return new AdminInfoViewModel {
@@ -45,5 +37,7 @@ namespace Husky.Principal
 				};
 			});
 		}
+
+		public static AdminsManager Groups(this IPrincipalAdmin principal) => new AdminsManager(principal);
 	}
 }

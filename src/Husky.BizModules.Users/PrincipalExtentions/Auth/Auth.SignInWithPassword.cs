@@ -7,8 +7,8 @@ namespace Husky.BizModules.Users.PrincipalExtentions
 {
 	public partial class UserAuthManager
 	{
-		public async Task<Result> SignInWithPassword(string mobileNumber, string password) {
-			if ( string.IsNullOrEmpty(mobileNumber) || string.IsNullOrEmpty(password) ) {
+		public async Task<Result> SignInWithPassword(string mobileNumber, string passwordClearText) {
+			if ( string.IsNullOrEmpty(mobileNumber) || string.IsNullOrEmpty(passwordClearText) ) {
 				return new Failure(LoginResult.InvalidInput.ToLabel());
 			}
 			if ( !mobileNumber.IsMainlandMobile() ) {
@@ -21,17 +21,17 @@ namespace Husky.BizModules.Users.PrincipalExtentions
 				.SingleOrDefault();
 
 			if ( user == null ) {
-				return await AddLoginRecord(LoginResult.AccountNotFound, mobileNumber, null, password);
+				return await AddLoginRecord(LoginResult.AccountNotFound, mobileNumber, null, passwordClearText);
 			}
 
 			const int withinMinutes = 10;
 			const int allowAttemptTimes = 5;
-			if ( IsNeedToSuspendFurtherLoginAttemptionByFailureRecordsAnalysis(user.Id, TimeSpan.FromMinutes(withinMinutes), allowAttemptTimes) ) {
+			if ( IsNeedToSuspendFurtherLoginAttemption(user.Id, TimeSpan.FromMinutes(withinMinutes), allowAttemptTimes) ) {
 				return await AddLoginRecord(LoginResult.RejectedContinuousAttemption, mobileNumber, user.Id);
 			}
 
-			if ( user.Passwords.All(x => x.IsObsoleted || x.Password != Crypto.SHA1(password)) ) {
-				return await AddLoginRecord(LoginResult.ErrorPassword, mobileNumber, user.Id, password);
+			if ( user.Passwords.Count == 0 || user.Passwords.All(x => x.IsObsoleted || x.Password != Crypto.SHA1(passwordClearText)) ) {
+				return await AddLoginRecord(LoginResult.ErrorPassword, mobileNumber, user.Id, passwordClearText);
 			}
 			if ( user.Status == RowStatus.Suspended ) {
 				return await AddLoginRecord(LoginResult.RejectedAccountSuspended, mobileNumber, user.Id);
@@ -52,7 +52,7 @@ namespace Husky.BizModules.Users.PrincipalExtentions
 			return await AddLoginRecord(LoginResult.Success, mobileNumber, user.Id);
 		}
 
-		private bool IsNeedToSuspendFurtherLoginAttemptionByFailureRecordsAnalysis(int userId, TimeSpan withinTime, int maxAllowedAttemptionTimes = 5) {
+		private bool IsNeedToSuspendFurtherLoginAttemption(int userId, TimeSpan withinTime, int maxAllowedAttemptionTimes = 5) {
 			var list = _db.UserLoginRecords
 				.AsNoTracking()
 				.Where(x => x.UserId == userId)

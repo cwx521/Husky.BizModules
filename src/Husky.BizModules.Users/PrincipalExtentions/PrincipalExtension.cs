@@ -12,7 +12,6 @@ namespace Husky.Principal
 	{
 		public static UserInfoViewModel UserInfo(this IPrincipalUser principal) {
 			if ( principal.Id == 0 || !(principal.SessionData() is SessionDataContainer sessionData) ) {
-				principal.Auth().SignOut();
 				return new UserInfoViewModel();
 			}
 
@@ -20,7 +19,7 @@ namespace Husky.Principal
 				using var scope = principal.ServiceProvider.CreateScope();
 				var db = scope.ServiceProvider.GetRequiredService<IUsersDbContext>();
 
-				var quickView = db.Users
+				var userInfo = db.Users
 					.AsNoTracking()
 					.Where(x => x.Id == principal.Id)
 					.Select(x => new UserInfoViewModel {
@@ -33,17 +32,17 @@ namespace Husky.Principal
 					})
 					.SingleOrDefault();
 
-				if ( quickView == null ) {
+				if ( userInfo == null ) {
 					principal.Auth().SignOut();
 				}
-				return quickView ?? new UserInfoViewModel();
+				return userInfo ?? new UserInfoViewModel();
 			});
 		}
 
 		public static UserAuthManager Auth(this IPrincipalUser principal) => new UserAuthManager(principal);
 		public static UserProfileManager Profile(this IPrincipalUser principal) => new UserProfileManager(principal);
-		public static UserGroupsManager Group(this IPrincipalUser principal) => new UserGroupsManager(principal);
-		public static UserMessagesManager Message(this IPrincipalUser principal) => new UserMessagesManager(principal);
+		public static UserGroupsManager Groups(this IPrincipalUser principal) => new UserGroupsManager(principal);
+		public static UserMessagesManager Messages(this IPrincipalUser principal) => new UserMessagesManager(principal);
 		public static AntiViolenceTimerManager AntiViolence(this IPrincipalUser principal) => new AntiViolenceTimerManager(principal);
 	}
 }

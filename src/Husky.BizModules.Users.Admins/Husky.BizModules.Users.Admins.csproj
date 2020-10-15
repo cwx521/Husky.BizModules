@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -17,7 +17,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Husky.BizModules.Users\Husky.BizModules.Users.csproj" />
-  </ItemGroup>
+    <PackageReference Include="Husky.Helpers" Version="3.1.2.41015" />
+    <PackageReference Include="Husky.Principal.SessionData" Version="3.1.1.41009" />
+  </ItemGroup> 
 
 </Project>

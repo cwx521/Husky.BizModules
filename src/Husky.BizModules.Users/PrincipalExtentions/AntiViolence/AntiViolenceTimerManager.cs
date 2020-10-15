@@ -16,11 +16,9 @@ namespace Husky.BizModules.Users.PrincipalExtentions
 		public const string ViewName = "_AntiViolence";
 
 		public DateTime GetTimer() {
-			var sessionData = _me.SessionData();
-			if ( sessionData == null ) {
-				return DateTime.MinValue;
-			}
-			return (DateTime)sessionData.GetOrAdd(_timerKey, key => DateTime.Now.AddDays(-1));
+			return _me.Id != 0 && _me.SessionData() is SessionDataContainer sessionData
+				? (DateTime)sessionData.GetOrAdd(_timerKey, key => DateTime.Now.AddDays(-1))
+				: DateTime.MinValue;
 		}
 
 		public void SetTimer(DateTime? time = null) {

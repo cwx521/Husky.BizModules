@@ -14,6 +14,7 @@ namespace Husky.BizModules.Users.PrincipalExtentions
 				UserId = _me.Id,
 				GroupId = groupId
 			});
+
 			await _db.Normalize().SaveChangesAsync();
 			return new Success();
 		}

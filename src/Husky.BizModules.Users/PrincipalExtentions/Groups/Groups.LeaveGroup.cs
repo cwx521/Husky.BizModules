@@ -14,6 +14,7 @@ namespace Husky.BizModules.Users.PrincipalExtentions
 			if ( row != null ) {
 				_db.UserInGroups.Remove(row);
 			}
+
 			await _db.Normalize().SaveChangesAsync();
 			return new Success();
 		}
