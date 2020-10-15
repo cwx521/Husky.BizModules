@@ -10,7 +10,7 @@ namespace Husky.Principal
 {
 	public static partial class PrincipalExtension
 	{
-		public static UserInfoViewModel UserInfo(this IPrincipalUser principal) {
+		public static UserInfoViewModel User(this IPrincipalUser principal) {
 			if ( principal.Id == 0 || !(principal.SessionData() is SessionDataContainer sessionData) ) {
 				return new UserInfoViewModel();
 			}
@@ -43,6 +43,5 @@ namespace Husky.Principal
 		public static UserProfileManager Profile(this IPrincipalUser principal) => new UserProfileManager(principal);
 		public static UserGroupsManager Groups(this IPrincipalUser principal) => new UserGroupsManager(principal);
 		public static UserMessagesManager Messages(this IPrincipalUser principal) => new UserMessagesManager(principal);
-		public static AntiViolenceTimerManager AntiViolence(this IPrincipalUser principal) => new AntiViolenceTimerManager(principal);
 	}
 }

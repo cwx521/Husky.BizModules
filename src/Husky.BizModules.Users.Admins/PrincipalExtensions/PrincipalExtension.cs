@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using Husky;
 using Husky.BizModules.Users.Admins.DataModels;
-using Husky.BizModules.Users.Admins.PrincipalExtensions;
 using Husky.BizModules.Users.Admins.PrincipalExtentions;
 using Husky.Principal.SessionData;
 using Microsoft.EntityFrameworkCore;
@@ -11,7 +10,7 @@ namespace Husky.Principal
 {
 	public static partial class PrincipalExtension
 	{
-		public static AdminInfoViewModel AdminInfo(this IPrincipalAdmin principal) {
+		public static AdminInfoViewModel Admin(this IPrincipalUser principal) {
 			if ( principal.Id == 0 || !(principal.SessionData() is SessionDataContainer sessionData) ) {
 				return new AdminInfoViewModel {
 					IsAdmin = false,
@@ -37,7 +36,5 @@ namespace Husky.Principal
 				};
 			});
 		}
-
-		public static AdminsManager Groups(this IPrincipalAdmin principal) => new AdminsManager(principal);
 	}
 }

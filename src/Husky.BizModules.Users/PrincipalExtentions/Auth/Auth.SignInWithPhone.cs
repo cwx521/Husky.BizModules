@@ -63,7 +63,7 @@ namespace Husky.BizModules.Users.PrincipalExtentions
 			_me.Id = user.Id;
 			_me.DisplayName = user.DisplayName ?? mobileNumber.Mask()!;
 			_me.IdentityManager.SaveIdentity(_me);
-			_me.UserInfo().IsTwoFactorValidated = true;
+			_me.User().IsTwoFactorValidated = true;
 
 			return await AddLoginRecord(LoginResult.Success, mobileNumber, user.Id);
 		}
