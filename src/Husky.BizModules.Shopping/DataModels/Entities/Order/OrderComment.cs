@@ -9,7 +9,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int OrderId { get; set; }
 
-		[StringLength(2000)]
+		[StringLength(2000), Required]
 		public string Content { get; set; } = null!;
 
 		[StringLength(2000)]

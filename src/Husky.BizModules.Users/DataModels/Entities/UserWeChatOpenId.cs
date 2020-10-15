@@ -13,7 +13,7 @@ namespace Husky.BizModules.Users.DataModels
 
 		public WeChatOpenIdType OpenIdType { get; set; }
 
-		[StringLength(32), Column(TypeName = "varchar(32)"), Index(IsUnique = true)]
+		[StringLength(32), Column(TypeName = "varchar(32)"), Required, Unique]
 		public string OpenIdValue { get; set; } = null!;
 
 

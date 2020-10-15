@@ -15,12 +15,12 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Column(TypeName = "decimal(9,2)")]
 		public decimal Amount { get; set; }
 
-		[StringLength(64), Column(TypeName = "varchar(64)"), Index(IsUnique = true)]
+		[StringLength(64), Column(TypeName = "varchar(64)"), Unique]
 		public string? ExternalTransactionId { get; set; }
 
 		public PaymentChoise TargetChoise { get; set; }
 
-		[StringLength(50)]
+		[StringLength(50), Required]
 		public string TargetAccount { get; set; } = null!;
 
 		[StringLength(50)]

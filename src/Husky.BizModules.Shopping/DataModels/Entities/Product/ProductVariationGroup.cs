@@ -10,7 +10,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int ProductId { get; set; }
 
-		[StringLength(16)]
+		[StringLength(16), Required]
 		public string GroupName { get; set; } = null!;
 
 		public bool RequireSkuCode { get; set; }

@@ -11,7 +11,7 @@ namespace Husky.BizModules.Users.DataModels
 
 		public int? UserId { get; set; }
 
-		[StringLength(50)]
+		[StringLength(50), Required]
 		public string AttemptedAccount { get; set; } = null!;
 
 		[StringLength(88), Column(TypeName = "varchar(88)")]

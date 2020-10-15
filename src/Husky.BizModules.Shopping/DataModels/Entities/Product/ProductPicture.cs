@@ -10,11 +10,11 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int ProductId { get; set; }
 
+		[StringLength(500), Column(TypeName = "varchar(500)"), Required]
+		public string PictureUrl { get; set; } = null!;
+
 		[StringLength(50)]
 		public string? PictureName { get; set; }
-
-		[StringLength(500), Column(TypeName = "varchar(500)")]
-		public string PictureUrl { get; set; } = null!;
 
 		public bool UseInCarousel { get; set; }
 

@@ -8,7 +8,7 @@ namespace Husky.BizModules.Users.Admins.DataModels
 		[Key]
 		public int Id { get; set; }
 
-		[Unique]
+		[StringLength(24), Required, Unique]
 		public string RoleName { get; set; } = null!;
 
 		public long Powers { get; set; }

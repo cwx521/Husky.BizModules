@@ -15,7 +15,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Column(TypeName = "decimal(8,2)")]
 		public decimal Amount { get; set; }
 
-		[StringLength(12), Column(TypeName = "varchar(12)"), Index(IsUnique = true)]
+		[StringLength(12), Column(TypeName = "varchar(12)"), Required, Unique]
 		public string PaymentNo { get; set; } = null!;
 
 		[StringLength(64), Column(TypeName = "varchar(64)")]

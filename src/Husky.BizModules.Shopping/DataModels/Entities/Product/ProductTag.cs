@@ -9,7 +9,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Key]
 		public int Id { get; set; }
 
-		[Required, MaxLength(24)]
+		[StringLength(24), Required]
 		public string TagName { get; set; } = null!;
 
 		public int DisplayOnTop { get; set; }

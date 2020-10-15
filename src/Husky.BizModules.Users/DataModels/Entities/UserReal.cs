@@ -10,10 +10,10 @@ namespace Husky.BizModules.Users.DataModels
 		[DatabaseGenerated(DatabaseGeneratedOption.None)]
 		public int UserId { get; set; }
 
-		[StringLength(18), Column(TypeName = "varchar(18)"), Index(IsUnique = true)]
+		[StringLength(18, MinimumLength = 18), Column(TypeName = "varchar(18)"), Unique]
 		public string? SocialIdNumber { get; set; }
 
-		[Required, MaxLength(24)]
+		[StringLength(24)]
 		public string? RealName { get; set; }
 
 		public Sex? Sex { get; set; }

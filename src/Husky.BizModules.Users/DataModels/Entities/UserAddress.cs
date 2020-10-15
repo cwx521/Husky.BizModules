@@ -11,10 +11,10 @@ namespace Husky.BizModules.Users.DataModels
 
 		public int UserId { get; set; }
 
-		[StringLength(16)]
+		[StringLength(16), Required]
 		public string Province { get; set; } = null!;
 
-		[StringLength(16)]
+		[StringLength(16), Required]
 		public string City { get; set; } = null!;
 
 		[StringLength(16)]

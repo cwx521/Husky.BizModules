@@ -10,7 +10,7 @@ namespace Husky.BizModules.Users.DataModels
 		[DatabaseGenerated(DatabaseGeneratedOption.None)]
 		public int UserId { get; set; }
 
-		[StringLength(11), Column(TypeName = "varchar(11)"), Index(IsUnique = true)]
+		[StringLength(11), Column(TypeName = "varchar(11)"), Required, Phone, Unique]
 		public string Number { get; set; } = null!;
 
 		public bool IsVerified { get; set; }

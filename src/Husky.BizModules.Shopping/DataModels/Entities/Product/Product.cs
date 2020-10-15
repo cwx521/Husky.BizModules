@@ -12,7 +12,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int ShopId { get; set; }
 
-		[StringLength(100)]
+		[StringLength(100), Required]
 		public string ProductName { get; set; } = null!;
 
 		[StringLength(24), Column(TypeName = "varchar(24)")]
@@ -42,9 +42,9 @@ namespace Husky.BizModules.Shopping.DataModels
 		[Column(TypeName = "decimal(2,1)")]
 		public decimal RatedAverage { get; set; }
 
-		public int OverallDisplayOnTop { get; set; }
+		public int DisplayOnTopOverall { get; set; }
 
-		public int InShopDisplayOnTop { get; set; }
+		public int DisplayOnTopInShop { get; set; }
 
 		public ProductStatus Status { get; set; }
 

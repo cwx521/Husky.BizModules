@@ -12,7 +12,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		[StringLength(36)]
 		public string? OwnerName { get; set; }
 
-		[StringLength(50)]
+		[StringLength(50), Required]
 		public string ShopName { get; set; } = null!;
 
 		[StringLength(500)]

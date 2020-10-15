@@ -52,7 +52,7 @@ namespace Husky.Principal
 				nameof(Product.ActualPrice),
 				nameof(Product.OriginalPrice),
 				nameof(Product.Stock),
-				nameof(Product.InShopDisplayOnTop),
+				nameof(Product.DisplayOnTopInShop),
 			};
 			if ( !allowedPropertyNames.Contains(productPropertyName) ) {
 				return new Failure("不允许修改该字段内容");
@@ -77,7 +77,7 @@ namespace Husky.Principal
 		public async Task<Result> ChangeActualPrice(int productId, decimal actualPrice) => await ChangePropValue(productId, nameof(Product.ActualPrice), actualPrice);
 		public async Task<Result> ChangeOriginalPrice(int productId, decimal originalPrice) => await ChangePropValue(productId, nameof(Product.OriginalPrice), originalPrice);
 		public async Task<Result> ChangeStock(int productId, int stock) => await ChangePropValue(productId, nameof(Product.Stock), stock);
-		public async Task<Result> ChangeDisplayOnTop(int productId, int displayOnTop) => await ChangePropValue(productId, nameof(Product.InShopDisplayOnTop), displayOnTop);
+		public async Task<Result> ChangeDisplayOnTop(int productId, int displayOnTop) => await ChangePropValue(productId, nameof(Product.DisplayOnTopInShop), displayOnTop);
 
 
 	}

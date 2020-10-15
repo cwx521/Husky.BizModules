@@ -10,7 +10,7 @@ namespace Husky.BizModules.Users.DataModels
 		[Key]
 		public int Id { get; set; }
 
-		[StringLength(36)]
+		[StringLength(36), Required]
 		public string? DisplayName { get; set; }
 
 		[StringLength(500), Column(TypeName = "varchar(500)")]

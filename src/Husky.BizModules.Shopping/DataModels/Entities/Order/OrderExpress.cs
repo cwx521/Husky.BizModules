@@ -12,7 +12,7 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public OrderExpressDirection Direction { get; set; }
 
-		[StringLength(16), Column(TypeName = "varchar(16)")]
+		[StringLength(16), Column(TypeName = "varchar(16)"), Required]
 		public string ExpressNo { get; set; } = null!;
 
 		[StringLength(16)]

@@ -11,18 +11,18 @@ namespace Husky.BizModules.Users.DataModels
 		[DatabaseGenerated(DatabaseGeneratedOption.None)]
 		public int UserId { get; set; }
 
-		[StringLength(32), Column(TypeName = "varchar(32)"), Index(IsUnique = true)]
+		[StringLength(32), Column(TypeName = "varchar(32)"), Unique]
 		public string? PrivateId { get; set; }
 
-		[StringLength(32), Column(TypeName = "varchar(32)"), Index(IsUnique = true)]
+		[StringLength(32), Column(TypeName = "varchar(32)"), Unique]
 		public string? UnionId { get; set; }
 
-		[StringLength(36)]
+		[StringLength(36), Required]
 		public string NickName { get; set; } = null!;
 
 		public Sex Sex { get; set; }
 
-		[StringLength(500), Column(TypeName = "varchar(500)")]
+		[StringLength(500), Column(TypeName = "varchar(500)"), Required]
 		public string HeadImageUrl { get; set; } = null!;
 
 		[StringLength(24)]

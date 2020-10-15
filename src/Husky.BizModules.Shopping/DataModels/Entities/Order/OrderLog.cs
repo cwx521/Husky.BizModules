@@ -10,12 +10,12 @@ namespace Husky.BizModules.Shopping.DataModels
 
 		public int OrderId { get; set; }
 
+		[StringLength(200), Required]
+		public string Remarks { get; set; } = null!;
+
 		public OrderStatus? StatusFrom { get; set; }
 
 		public OrderStatus? StatusChangedTo { get; set; }
-
-		[StringLength(200)]
-		public string? Remarks { get; set; }
 
 		public bool IsPrivate { get; set; }
 

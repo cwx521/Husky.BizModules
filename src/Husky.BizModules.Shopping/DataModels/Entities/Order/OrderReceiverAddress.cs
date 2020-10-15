@@ -9,22 +9,22 @@ namespace Husky.BizModules.Shopping.DataModels
 		[DatabaseGenerated(DatabaseGeneratedOption.None)]
 		public int OrderId { get; set; }
 
-		[StringLength(16)]
+		[StringLength(16), Required]
 		public string Province { get; set; } = null!;
 
-		[StringLength(16)]
+		[StringLength(16), Required]
 		public string City { get; set; } = null!;
 
 		[StringLength(16)]
 		public string? District { get; set; }
 
-		[StringLength(120)]
+		[StringLength(120), Required]
 		public string DetailAddress { get; set; } = null!;
 
-		[StringLength(16)]
+		[StringLength(16), Required]
 		public string ContactName { get; set; } = null!;
 
-		[StringLength(11), Column(TypeName = "varchar(11)"), Phone]
+		[StringLength(11), Column(TypeName = "varchar(11)"), Required, Phone]
 		public string ContactPhoneNumber { get; set; } = null!;
 
 		[Column(TypeName = "decimal(11, 6)")]

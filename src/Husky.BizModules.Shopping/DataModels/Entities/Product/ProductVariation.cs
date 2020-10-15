@@ -13,7 +13,7 @@ namespace Husky.BizModules.Shopping.DataModels
 		[StringLength(12), Column(TypeName = "varchar(12)")]
 		public string? SkuCode { get; set; }
 
-		[StringLength(24)]
+		[StringLength(24), Required]
 		public string VariationName { get; set; } = null!;
 
 		[StringLength(500), Column(TypeName = "varchar(500)")]

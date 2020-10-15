@@ -9,7 +9,7 @@ namespace Husky.BizModules.Users.DataModels
 		[Key]
 		public int Id { get; set; }
 
-		[StringLength(4000)]
+		[StringLength(4000), Required]
 		public string Content { get; set; } = null!;
 
 		[DefaultValueSql("getdate()"), NeverUpdate]
