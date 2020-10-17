@@ -17,8 +17,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-    <PackageReference Include="Husky.Helpers" Version="3.1.2.41015" />
-		<PackageReference Include="Husky.Principal.SessionData" Version="3.1.1.41009" />
+    <PackageReference Include="Husky.Principal.SessionData" Version="3.1.3.41016" />
 		<PackageReference Include="Husky.TwoFactor" Version="3.1.1.41009" />
 		<PackageReference Include="Husky.WeChatIntegration" Version="3.1.1.41009" />
 	</ItemGroup>
